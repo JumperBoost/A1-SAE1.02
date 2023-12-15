@@ -8,6 +8,16 @@
  */
 public class Carte  {
 
+    //VARIABLES D'INSTANCE
+    private Figure figure;
+    private int nbFigures;
+    private Couleur couleur;
+    private Texture texture;
+
+    //VARIABLES DE CLASSE
+
+
+
     /**
      * Pre-requis : nbFigures > 0
      * Action : Construit une carte contenant nbFigures "figures" qui possèdent une "texture" et une "couleur"
@@ -15,7 +25,10 @@ public class Carte  {
      */
 
     public Carte(Couleur couleur, int nbFigures, Figure figure, Texture texture) {
-
+        this.figure = figure;
+        this.nbFigures = nbFigures;
+        this.figure = figure;
+        this.texture = texture;
     }
 
     /**
@@ -23,7 +36,7 @@ public class Carte  {
      */
 
     public int getNbFigures() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        return this.nbFigures;
     }
 
     /**
@@ -31,7 +44,7 @@ public class Carte  {
      */
 
     public Figure getFigure() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        return this.figure;
     }
 
     /**
@@ -39,7 +52,7 @@ public class Carte  {
      */
 
     public Couleur getCouleur() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        return this.couleur;
     }
 
     /**
@@ -47,7 +60,7 @@ public class Carte  {
      */
 
     public Texture getTexture() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        return this.texture;
     }
 
     /**
@@ -70,7 +83,98 @@ public class Carte  {
      */
 
     public int compareTo(Carte carte) {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        int res;
+        res = this.compareCouleurTo(carte);
+        if (res == 0) {
+            res = this.compareNbFiguresTo(carte);
+            if (res == 0) {
+                res = this.compareFigureTo(carte);
+                if (res == 0) {
+                    res = this.compareTextureTo(carte);
+                } 
+            }
+        }
+        return res;
+    }
+
+    /**
+     * Action : compare la Couleur de this et de carte
+     * @param carte une carte
+     * @return 
+     *  0 si "this.couleur" égal à "carte.couleur"
+     * -1 si "this.couleur" inférieur à "carte.couleur"*
+     *  1 si "this.couleur" supérieur à "carte.couleur"*
+     */
+    private int compareCouleurTo(Carte carte) {
+        if (this.couleur.ordinal() < carte.couleur.ordinal()) {
+            return -1;
+        }
+        else if (this.couleur.ordinal() > this.couleur.ordinal()) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
+     * Action : compare le nbFigures de this et de carte
+     * @param carte une carte
+     * @return 
+     *  0 si "this.nbFigures" égal à "carte.nbFigures"
+     * -1 si "this.nbFigures" inférieur à "carte.nbFigures"*
+     *  1 si "this.nbFigures" supérieur à "carte.nbFigures"*
+     */
+    private int compareNbFiguresTo(Carte carte) {
+        if (this.nbFigures < carte.nbFigures) {
+            return -1;
+        }
+        else if (this.nbFigures > this.nbFigures) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
+     * Action : compare la Figure de this et de carte
+     * @param carte une carte
+     * @return 
+     *  0 si "this.figure" égal à "carte.figure"
+     * -1 si "this.figure" inférieur à "carte.figure"*
+     *  1 si "this.figure" supérieur à "carte.figure"*
+     */
+    private int compareFigureTo(Carte carte) {
+        if (this.figure.ordinal() < carte.figure.ordinal()) {
+            return -1;
+        }
+        else if (this.figure.ordinal() > this.figure.ordinal()) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    /**
+     * Action : compare la Texture de this et de carte
+     * @param carte une carte
+     * @return 
+     *  0 si "this.texture" égal à "carte.texture"
+     * -1 si "this.texture" inférieur à "carte.texture"*
+     *  1 si "this.texture" supérieur à "carte.texture"*
+     */
+    private int compareTextureTo(Carte carte) {
+        if (this.texture.ordinal() < carte.texture.ordinal()) {
+            return -1;
+        }
+        else if (this.texture.ordinal() > this.texture.ordinal()) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }
 
     /**
