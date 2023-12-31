@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * La classe Paquet représente un paquet de cartes.
  * Les cartes sont stockées dans un tableau fixe et un indice (entier) permet de connaître le nombre de cartes
@@ -9,6 +11,19 @@
  * - Le nombre de cartes restantes dans le paquet.
  */
 public class Paquet {
+
+
+    //VARIABLE D'INSTANCES
+    public Carte[] cartes;
+    private Couleur[] couleurs;
+    private int nbFiguresMax;
+    private Figure[] figures;
+    private Texture[] textures;
+    public int nbCartesLeft;
+    //initialisation au nombre max de cartes créer
+
+    //VARIABLES DE CLASSE
+
 
     /**
      * Pre-requis : figures.length > 0, couleurs.length > 0, textures.length > 0, nbFiguresMax > 0
@@ -26,7 +41,25 @@ public class Paquet {
      */
 
     public Paquet(Couleur[] couleurs, int nbFiguresMax, Figure[] figures, Texture[] textures) {
+        this.couleurs = couleurs;
+        this.nbFiguresMax = nbFiguresMax;
+        this.figures = figures;
+        this.textures = textures;
 
+        this.nbCartesLeft = 0;
+        this.cartes = new Carte[getNombreCartesAGenerer(couleurs, nbFiguresMax, figures, textures)];
+
+        for (Couleur coul : couleurs) {
+            for (int i = 1; i <= nbFiguresMax; i++) {
+                for (Figure fig : figures) {
+                    for (Texture text : textures) {
+                        this.cartes[this.nbCartesLeft] = new Carte(coul, i, fig, text);
+                        this.nbCartesLeft++;
+                    }
+                }
+            }
+        }
+        this.melanger();
     }
 
     /**
@@ -46,7 +79,8 @@ public class Paquet {
      */
 
     public static int getNombreCartesAGenerer(Couleur[] couleurs, int nbFiguresMax, Figure[] figures, Texture[] textures) {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+
+        return couleurs.length * nbFiguresMax * figures.length * textures.length; 
     }
 
     /**
@@ -55,7 +89,18 @@ public class Paquet {
      */
 
     public void melanger() {
-
+        Random r = new Random();
+        int nbSwap = getNombreCartesAGenerer(this.couleurs, this.nbFiguresMax, this.figures, this.textures) * 2;
+        int choix1;
+        int choix2;
+        Carte temp;
+        for (int i = 0; i < nbSwap; i++) {
+            choix1 = r.nextInt(this.nbCartesLeft);
+            choix2 = r.nextInt(this.nbCartesLeft);
+            temp = this.cartes[choix1];
+            this.cartes[choix1] = this.cartes[choix2];
+            this.cartes[choix2] = temp;            
+        }
     }
 
     /**

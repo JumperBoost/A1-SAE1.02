@@ -25,7 +25,7 @@ public class Carte  {
      */
 
     public Carte(Couleur couleur, int nbFigures, Figure figure, Texture texture) {
-        this.figure = figure;
+        this.couleur = couleur;
         this.nbFigures = nbFigures;
         this.figure = figure;
         this.texture = texture;
@@ -187,7 +187,11 @@ public class Carte  {
 
     @Override
     public String toString() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        String str = getCouleur().getCouleurText() + getNbFigures()
+                    + "  \t" + getFigure() + "     \t" + getTexture() + 
+                    Couleur.getReset();
+        
+        return str;
     }
 
 }
