@@ -250,11 +250,11 @@ public class Ut {
         }
     }
 
-    public static long getTempsExecution(Runnable methodeSansArguments) {
-        long startTime = System.nanoTime();
+    public static double getTempsExecution(Runnable methodeSansArguments) {
+        double startTime = System.nanoTime();
         methodeSansArguments.run();
-        long endTime = System.nanoTime();
-        return ((endTime - startTime) / 1000000);
+        double endTime = System.nanoTime();
+        return ((endTime - startTime) * 1e-6);
     }
 
 } // end class

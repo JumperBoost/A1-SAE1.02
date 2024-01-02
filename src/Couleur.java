@@ -8,7 +8,7 @@ public enum Couleur {
 
     BLEU("blue", "\033[0;34m", "\033[44m"),
     BLANC("white", "\033[0;37m", "\033[47m"),
-    ROUGE("rouge", "\033[0;31m", "\033[41m");
+    ROUGE("red", "\033[0;31m", "\033[41m");
 
     private String traduction;
     private String codeCouleurText;

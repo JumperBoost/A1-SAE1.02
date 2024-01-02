@@ -54,5 +54,18 @@ public class Test {
 
         //TestTris
         Paquet.testTris();
+
+        // //piocher()
+        // System.out.println(paq);
+        // Carte[] cartesP = paq.piocher(3);
+        // System.out.println(paq);
+        // for (Carte carte : cartesP) {
+        //     System.out.println(carte);
+        // }
+        // //peutPiocher()
+        // System.out.println(paq.peutPicoher(81));
+        // System.out.println(paq.peutPicoher(78));
+        // System.out.println(paq.peutPicoher(0));
+        // System.out.println(paq.peutPicoher(-9999));
     }
 }
