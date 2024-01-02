@@ -14,15 +14,17 @@ public class Paquet {
 
 
     //VARIABLE D'INSTANCES
-    public Carte[] cartes;
+    private Carte[] cartes;
     private Couleur[] couleurs;
     private int nbFiguresMax;
     private Figure[] figures;
     private Texture[] textures;
-    public int nbCartesLeft;
+    private int nbCartesLeft;
+    private int idPaquet;
     //initialisation au nombre max de cartes créer
 
     //VARIABLES DE CLASSE
+    private static int nbPaquets = 0;
 
 
     /**
@@ -60,6 +62,8 @@ public class Paquet {
             }
         }
         this.melanger();
+        nbPaquets++;
+        this.idPaquet = nbPaquets;
     }
 
     /**
@@ -67,7 +71,20 @@ public class Paquet {
      */
 
     public Paquet(Paquet paquet) {
+        this.couleurs = paquet.couleurs;
+        this.nbFiguresMax = paquet.nbFiguresMax;
+        this.figures = paquet.figures;
+        this.textures = paquet.textures;
 
+        this.nbCartesLeft = paquet.nbCartesLeft;
+        this.cartes = new Carte[paquet.cartes.length];
+
+        for (int i = 0; i < cartes.length; i++) {
+            this.cartes[i] = paquet.cartes[i];
+        }
+
+        nbPaquets++;
+        this.idPaquet = nbPaquets;
     }
 
 
@@ -93,13 +110,10 @@ public class Paquet {
         int nbSwap = getNombreCartesAGenerer(this.couleurs, this.nbFiguresMax, this.figures, this.textures) * 2;
         int choix1;
         int choix2;
-        Carte temp;
         for (int i = 0; i < nbSwap; i++) {
             choix1 = r.nextInt(this.nbCartesLeft);
             choix2 = r.nextInt(this.nbCartesLeft);
-            temp = this.cartes[choix1];
-            this.cartes[choix1] = this.cartes[choix2];
-            this.cartes[choix2] = temp;            
+            this.swap2Cartes(choix1, choix2);          
         }
     }
 
@@ -113,7 +127,26 @@ public class Paquet {
      */
 
     public Paquet trierSelection() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        //STRAT
+        //create copy
+        //ignore cartes piochées
+        //select current first from left
+        //compare from first on right
+            //if inf than actual swap places and inf becomes current
+        //repeat until end of table and put current in current
+
+        Paquet paqTri = new Paquet(this);
+        // si vide ne fait rien
+
+        for (int i = 0; i < paqTri.nbCartesLeft - 1; i++) {
+            for (int j = i + 1; j < paqTri.nbCartesLeft; j++) {
+                if (paqTri.cartes[j].compareTo(paqTri.cartes[i]) < 0) {
+                    paqTri.swap2Cartes(i, j);
+                }
+            }
+        }
+        
+        return paqTri;
     }
 
     /**
@@ -127,7 +160,25 @@ public class Paquet {
      */
 
     public Paquet trierBulles() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        //STRAT
+        //create copy
+        //parcourir tout le paquet
+        //comparer par paire croissant 0-1 puis 1-2 etc.
+            //si carte(indiceSup) infereieur à carte(indiceInf) alors swap
+        //repeter tant que tout n'est pas en ordre (bool)
+        //note : max nombre de repet = pour deplacer la plus petite carte située en derniere position = this.nbCartesLeft - 1
+        Paquet paqTri = new Paquet(this);
+        boolean inOrder = false;
+        while (!inOrder) {
+            inOrder = true;
+            for (int i = 0; i < paqTri.nbCartesLeft - 1; i++) {
+                if (paqTri.cartes[i+1].compareTo(paqTri.cartes[i]) < 0) {
+                    paqTri.swap2Cartes(i+1, i);
+                    inOrder = false;
+                }
+            }
+        }
+        return paqTri;
     }
 
     /**
@@ -140,7 +191,26 @@ public class Paquet {
      */
 
     public Paquet trierInsertion() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        //STRAT
+        //create copy
+        //parcourir UNE FOIS tout le paquet de 1 à nbCartesLeft(exclus)
+        //tant que carte current inferieur à carte de gauche OU pas au bord gauche
+            //swap et stocker nouvel indice current-1
+        Paquet paqTri = new Paquet(this);
+        for (int i = 1; i < paqTri.nbCartesLeft; i++) {
+            boolean inPlace = false;
+            int j = i;
+            while (!inPlace && j!=0) {
+                if (paqTri.cartes[j].compareTo(paqTri.cartes[j-1]) < 0) {
+                    paqTri.swap2Cartes(j, j-1);
+                    j--;
+                }
+                else {
+                    inPlace = true;
+                }  
+            }
+        }
+        return paqTri;
     }
 
     /**
@@ -150,8 +220,104 @@ public class Paquet {
      * La méthode est "static" et ne s'effectue donc pas sur la paquet courant "this".
      */
     public static void testTris() {
+        //generer paquet mélangé
+        //trier ce paquet selon les differentes methodes P1, P2, P3
+        //verifier que P1, P2, P3 sont triés
+        //bonus verifier P1 = P2 = P3
+        // si all true all works :)
+        Paquet paq = new Paquet(Couleur.values(), 3, Figure.values(), Texture.values());
+        int note1, note2, note3;
+        note1 = note2 = note3 = 0;
+        System.out.println("\033[0;32m");
+        System.out.println("\033[40m");
+        System.out.println("\nBEGIN-TEST-TRIS---------------------------------------------------------\n");
+        System.out.println("Paquet à trier est-il trié ? " + paq.estTrie());
+    
+        //triSelect
+        Paquet paqTriSelect = paq.trierSelection();
+        if (paqTriSelect.estTrie()) {
+            note1++;
+        }
+        System.out.println("TRI SELECTION : " + note1 + "/1");
 
+        //triBubble
+        Paquet paqTriBulles = paq.trierBulles();
+        if (paqTriBulles.estTrie()) {
+            note2++;
+        }
+        System.out.println("TRI BULLES : " + note2 + "/1");
+
+        //triInsert
+        Paquet paqTriInsert = paq.trierInsertion();
+        if (paqTriInsert.estTrie()) {
+            note3++;
+        }
+        System.out.println("TRI INSERT : " + note3 + "/1");
+
+        System.out.println("RESULTS : " + (note1+note2+note3) + "/3");
+        if (note1+note2+note3 == 3) {
+            System.out.println("TEST SUCCESFUL");
+        }
+        else {
+            System.out.println("TEST FAILED");
+        }
+
+        //bonus
+        System.out.println("Bonus : Les 3 paquets triés sont identiques ? " + (paqTriSelect.estIdentique(paqTriBulles) && paqTriBulles.estIdentique(paqTriInsert)));
+
+        System.out.println("\nEND-TEST-TRIS-----------------------------------------------------------");
+        System.out.println(Couleur.getReset());
     }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : verifie si this est un paquet trié (sans se préoccuper des cartes "piochés")
+     * Rq : un paquet vide est considéré comme trié
+     * @return true si oui, false sinon
+     */
+    public boolean estTrie() {
+        boolean isSorted = true;
+        int i = 0;
+        while (isSorted && i<this.nbCartesLeft-1) {
+            if (this.cartes[i].compareTo(this.cartes[i+1]) > 0) {
+                isSorted = false;
+            }
+            else {
+                i++;
+            }
+        }
+        return isSorted;
+    }
+
+    /**
+     * FONCTION AJOUTEE 
+     * Action : verifie si le paquet this est identique à paquet
+     * c-a-d ayant le meme nombre de cartes restantes ET qui sont dans le même ordre
+     * @param paquet
+     * @return true si oui, false sinon
+     */
+    public boolean estIdentique(Paquet paquet) {
+        boolean estIdentique = true;
+        int i = 0;
+        if (this.nbCartesLeft == paquet.nbCartesLeft) {
+            while (estIdentique && i<this.nbCartesLeft) {
+                if (this.cartes[i].compareTo(paquet.cartes[i]) != 0) {
+                    estIdentique = false;
+                }
+                else {
+                    i++;
+                }
+            }            
+        }
+        else {
+            estIdentique = false;
+        }
+        return estIdentique;
+    }
+
+
+
+
 
     /**
      * Pre-requis : 0 < nbCartes <= nombre de cartes restantes dans le paquet.
@@ -187,8 +353,23 @@ public class Paquet {
      */
 
     public boolean estVide() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        return this.nbCartesLeft == 0;
     }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : echange l'emplacement de deux cartes dans un paquet.
+     * Prérequis : 0 <= indice1 et indice2 < this.nbCartesLeft et indice1 =/ indice2
+     * @param indice1 indice de la premiere carte dans le paquet
+     * @param indice2 indice de la deuxieme carte dans le paquet
+     */
+    public void swap2Cartes(int indice1, int indice2) {
+            Carte temp;
+            temp = this.cartes[indice1];
+            this.cartes[indice1] = this.cartes[indice2];
+            this.cartes[indice2] = temp;
+    }
+
 
     /**
      * Résultat : Une chaîne de caractères représentant le paquet sous la forme d'un tableau
@@ -202,6 +383,13 @@ public class Paquet {
 
     @Override
     public String toString() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        String str = "\nPAQUET n°" + this.idPaquet + "\nNombre de cartes restantes : " + this.nbCartesLeft + "\n[\n";
+        int i;
+        for (i = 0; i < this.nbCartesLeft - 1; i++) {
+            str = str + this.cartes[i].toString() + ",\n";
+        }
+        str = str + this.cartes[i].toString() + "\n]\n";
+
+        return str;
     }
 }

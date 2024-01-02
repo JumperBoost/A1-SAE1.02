@@ -22,15 +22,37 @@ public class Test {
 
         //TEST PAQUET
         System.out.println("\n\nTEST PAQUET----------------------------------------------------");
+        
+        //constructeur
         Paquet paq = new Paquet(tabCouleurs, 3, Figure.values(), Texture.values());
+        System.out.println(paq);
 
-        System.out.println("===============================");
-        for (Carte carte : paq.cartes) {
-            System.out.println(carte);
-        }
-        System.out.println("===============================");
-        System.out.println(paq.nbCartesLeft);
+        //constructeur copie
+        Paquet paq2 = new Paquet(paq);
+        System.out.println(paq2);
 
+        //triSelect
+        Paquet paqTriSelect = paq.trierSelection();
+        System.out.println(paqTriSelect);
 
+        //triBubble
+        Paquet paqTriBulles = paq.trierBulles();
+        System.out.println(paqTriBulles);
+
+        //triInsert
+        Paquet paqTriInsert = paq.trierInsertion();
+        System.out.println(paqTriInsert);
+
+        //estTrie()
+        System.out.println("Le paquet paq est trié ? " + paq.estTrie());
+        System.out.println("Le paquet paqTriInsert est trié ? " + paqTriInsert.estTrie());
+        //estEgal()
+        System.out.println("paqTriInsert identique à paqTriBulles ? " + paqTriInsert.estIdentique(paqTriBulles));
+        System.out.println("paq identique à paq2 ? " + paq.estIdentique(paq2));
+        System.out.println("paq identique à paq ? " + paq.estIdentique(paq));
+        System.out.println("paq identique à paqTriSelect ? " + paq.estIdentique(paqTriSelect));       
+
+        //TestTris
+        Paquet.testTris();
     }
 }
