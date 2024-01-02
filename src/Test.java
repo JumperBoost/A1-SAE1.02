@@ -10,6 +10,20 @@ public class Test {
         Couleur[] tabCouleurs = Couleur.values();
         System.out.println(Arrays.toString(tabCouleurs));
 
+        Couleur[] couls = Couleur.valuesInRange(1, Couleur.getNbEnumTotal());
+        System.out.println(Arrays.toString(couls));
+
+
+        //TEST FIGURE, TEXTURES
+        System.out.println("\n\nTEST FIGURE/TEXTURES----------------------------------------------------");
+        Figure[] figs = Figure.valuesInRange(0, 2);
+        System.out.println(Arrays.toString(figs));
+        System.out.println("Enum Total Figure : " + Figure.getNbEnumTotal());
+
+        Texture[] texts = Texture.valuesInRange(0, 2);
+        System.out.println(Arrays.toString(texts));
+        System.out.println("Enum Total Texture : " + Texture.getNbEnumTotal());
+
 
         //TEST CARTES
         System.out.println("\n\nTEST CARTES----------------------------------------------------");
@@ -52,20 +66,27 @@ public class Test {
         System.out.println("paq identique à paq ? " + paq.estIdentique(paq));
         System.out.println("paq identique à paqTriSelect ? " + paq.estIdentique(paqTriSelect));       
 
+
+        //piocher()
+        System.out.println(paq);
+        Carte[] cartesP = paq.piocher(3);
+        System.out.println(paq);
+        for (Carte carte : cartesP) {
+            System.out.println(carte);
+        }
+        //peutPiocher()
+        System.out.println(paq.peutPicoher(81));
+        System.out.println(paq.peutPicoher(78));
+        System.out.println(paq.peutPicoher(0));
+        System.out.println(paq.peutPicoher(-9999));
+
+
         //TestTris
         Paquet.testTris();
 
-        // //piocher()
-        // System.out.println(paq);
-        // Carte[] cartesP = paq.piocher(3);
-        // System.out.println(paq);
-        // for (Carte carte : cartesP) {
-        //     System.out.println(carte);
-        // }
-        // //peutPiocher()
-        // System.out.println(paq.peutPicoher(81));
-        // System.out.println(paq.peutPicoher(78));
-        // System.out.println(paq.peutPicoher(0));
-        // System.out.println(paq.peutPicoher(-9999));
+
+
+
+
     }
 }

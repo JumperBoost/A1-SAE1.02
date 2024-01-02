@@ -238,11 +238,9 @@ public class Paquet {
         //verifier que P1, P2, P3 sont triés
         //bonus verifier P1 = P2 = P3
         // si all true all works :)
-        Couleur[] couleurs = Couleur.values();
-        Figure[] figures = Figure.values();
-        Texture[] textures = Texture.values();
+  
 
-        Paquet paq = new Paquet(couleurs, 50, figures, textures);
+        Paquet paq = new Paquet(Couleur.valuesInRange(0, 2), 50, Figure.valuesInRange(0, 2), Texture.valuesInRange(0, 2));
         int note1, note2, note3;
         note1 = note2 = note3 = 0;
         double tempsExec;
