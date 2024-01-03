@@ -1,4 +1,7 @@
 import java.util.Random;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 /**
  * La classe Paquet représente un paquet de cartes.
@@ -26,6 +29,7 @@ public class Paquet {
     //VARIABLES DE CLASSE
     private static int nbPaquets = 0;
     private static int nbOpApprox = 0;
+    private static int nbRepetTest = 1000;
 
 
     /**
@@ -240,7 +244,7 @@ public class Paquet {
         // si all true all works :)
   
 
-        Paquet paq = new Paquet(Couleur.valuesInRange(0, 2), 50, Figure.valuesInRange(0, 2), Texture.valuesInRange(0, 2));
+        Paquet paq = new Paquet(Couleur.valuesInRange(0, 1), 500, Figure.valuesInRange(0, 1), Texture.valuesInRange(0, 1));
         int note1, note2, note3;
         note1 = note2 = note3 = 0;
         double tempsExec;
@@ -301,6 +305,158 @@ public class Paquet {
         System.out.println("\nEND-TEST-TRIS-----------------------------------------------------------");
         System.out.println(Couleur.getReset());
     }
+
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : réalise les 3 méthodes de tris pour un paquet initialisé à nbCartes nombre de carte.
+     * Nous fixons le nombre de Couleur/Figure/Texture à 1 pour que seul le nbFigures determine le nombre de cartes.
+     * Nous répétons ces tris plusieurs fois sur des paquets presentant les memes caracteristiques mais mélangés différremment ; pour obtenir des données significatifs :
+     * Stock les donées relatifs (nb Cartes, nombre OP et temps exec) aux tris dans un tableau de tableau.
+     * tabInfos[O à 2][0] --> nbCartes
+     * tabInfos[O à 2][1] --> nbOP moyen
+     * tabInfos[O à 2][2] --> tempsExec moyen
+     * 
+     * tabInfos[0][0 à 2] --> Infos de Méthode SELECTION
+     * tabInfos[1][0 à 2] --> Infos de Méthode BULLES
+     * tabInfos[2][0 à 2] --> Infos de Méthode INSERTION
+     * @param nbCartes
+     * @param nbRepetition
+     * @return un tableau de tableau (3x3) de double.
+     */
+    private static double[][] trisPaquet(int nbCartes, int nbRepetition) {
+        double[][] tabInfos = new double[3][3];
+        double tempsExec;
+        double sumTempsExecSel, sumTempsExecBul, sumTempsExecIns;
+        sumTempsExecSel = sumTempsExecBul = sumTempsExecIns = 0;
+        int sumNbOpSel, sumNbOpBul, sumNbOpIns;
+        sumNbOpSel = sumNbOpBul = sumNbOpIns = 0;
+
+        Paquet paq;
+
+        for (int i = 0; i < nbRepetition; i++) {
+
+            paq = new Paquet(
+                Couleur.valuesInRange(0, 1), 
+                nbCartes, 
+                Figure.valuesInRange(0, 1), 
+                Texture.valuesInRange(0, 1)
+                );
+
+
+            tempsExec = Ut.getTempsExecution(paq::trierSelection);
+            sumTempsExecSel += tempsExec;
+            sumNbOpSel += nbOpApprox;
+
+            tempsExec = Ut.getTempsExecution(paq::trierBulles);
+            sumTempsExecBul += tempsExec;
+            sumNbOpBul += nbOpApprox;
+
+            tempsExec = Ut.getTempsExecution(paq::trierInsertion);
+            sumTempsExecIns += tempsExec;
+            sumNbOpIns += nbOpApprox;
+        }
+
+        for (int i = 0; i < 3; i++) {
+            tabInfos[i][0] = nbCartes;
+        }
+        tabInfos[0][1] = sumNbOpSel/nbRepetition;
+        tabInfos[0][2] = sumTempsExecSel/nbRepetition; 
+        
+        tabInfos[1][1] = sumNbOpBul/nbRepetition;
+        tabInfos[1][2] = sumTempsExecBul/nbRepetition;   
+
+        tabInfos[2][1] = sumNbOpIns/nbRepetition;
+        tabInfos[2][2] = sumTempsExecIns/nbRepetition;   
+
+        return tabInfos;
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Prérequis : 0 < nStart < nEnd ET 0 < nStep 
+     * Acrion : réalise trisPaquet(int nbCartes, int nbRepetition) en variant le nbCartes entré en parametres, de nStart à nEnd(exclu) en faisant des pas de nStep
+     * @param nStart premiere valeur de N
+     * @param nEnd valeur limite N (exclue)
+     * @param step pas
+     * @return un tableau contenant touts les résultats de chacun des trisPaquet().
+     */
+    private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
+        double[][][] tabInfos = new double[(nEnd - nStart)/nStep][3][3];
+        int count = 0;
+        for (int n = nStart; n < nEnd; n+=nStep) {
+            tabInfos[count] = trisPaquet(n, nbRepetTest);
+            count++;
+        }
+        return tabInfos;
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : convertit les données de tabInfos en un tableau de String[] de taille 3.
+     * Chacun des String contient toutes les donées d'une méthode de TRI.
+     * Le format est adapté pour favoriser l'exportation en fichier .csv
+     * Prérequis : tabInfos est retourné par testTrisVarN(int nStart, int nEnd, int nStep) OU
+     * format conforme à ce dernier double[nbval de N][3][3];
+     * @param tabInfos
+     * @return stringInfos, un tableau de String de taille 3.
+     */
+    private static String[] convertInfosToString(double[][][] tabInfos) {
+        String[] stringInfos = new String[3];
+        for (int i = 0; i < stringInfos.length; i++) {
+            stringInfos[i] = "N, nbOp, tExec (ms)\n";
+        }
+
+        int i, j, k;
+        for (i = 0; i < tabInfos.length; i++) {
+            for (j = 0; j < tabInfos[i].length; j++){
+                for (k = 0; k < tabInfos[i][j].length - 1; k++) {
+                    stringInfos[j] += String.format("%.0f", tabInfos[i][j][k]) + ", ";
+                }
+                stringInfos[j] += String.format("%.3f", tabInfos[i][j][k]) + "\n";
+            }
+        }
+        return stringInfos;
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : convertit un tableau de String contenant les donées de chacune des méthodes en fichiers CSV.
+     * Prérequis : format des String dans stringInfos adapté OU stringInfos directement retourné par convertInfosToString(double[][][] tabInfos).
+     * @param stringInfos
+     * @throws FileNotFoundException
+     */
+    private static void stringInfosToCsv(String[] stringInfos) throws FileNotFoundException {
+        for (int i = 0; i < stringInfos.length; i++) {
+            File csvFile = new File("./sae_e3cete/datas/datas"+(i+1)+".csv");
+            PrintWriter output = new PrintWriter(csvFile);
+            output.print(stringInfos[i]);
+            output.close();
+        }
+    }
+
+
+    /**
+     * FONCTION AJOUTEE
+     * Prerequis : 0 < nStart < nEnd ET 0 < nStep 
+     * Action : réunit les méthodes ci-dessus :
+     * 1. Realise les 3 tris (plusieurs fois pour un meme N pour different paquet ayant meme caracteristique) en variant N (selon la borne et le pas entrés en parametres).
+     * Stockage des donées : double[nStart-nEnd/nStep][3][3]
+     * 2. Conversion des donées en String[3] dont chacun des String contient les donées d'une des méthodes sous un format adapté au fichiers .csv
+     * String[0] --> SELECTION
+     * String[1] --> BULLES
+     * String[2] --> INSERION
+     * 3. Ecrit chaque String dans un fichier .csv pour bien séparer les données de chacune des méthodes.
+     * @throws FileNotFoundException
+     */
+    public static void testTrisWithDatas(int nStart, int nEnd, int nStep) throws FileNotFoundException {
+        stringInfosToCsv(convertInfosToString(Paquet.testTrisVarN(nStart, nEnd, nStep)));
+    }
+
+
+
+
+
 
     /**
      * FONCTION AJOUTEE

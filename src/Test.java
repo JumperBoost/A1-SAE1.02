@@ -1,8 +1,9 @@
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         //TEST COULEUR
         System.out.println("\n\nTEST COULEUR----------------------------------------------------");
         System.out.println(Couleur.BLEU.getTraduction());
@@ -85,8 +86,23 @@ public class Test {
         Paquet.testTris();
 
 
+        //TEST METHODE PRIV pour DATAS
+        // //TrisPaquet
+        // double[][] tabInfos = Paquet.trisPaquet(500, 1000);
+        // for (int i = 0; i < 3; i++) {
+        //     System.out.println(Arrays.toString(tabInfos[i]));
+        // }
+        // //testVariantN
+        // double[][][] tabInfos2 = Paquet.testTrisVarN(10, 500, 2);
+        // for (int i = 0; i < 490/2; i++) {
+        //     System.out.println(Arrays.deepToString(tabInfos2[i]));
+        // }
+        // //stringinfo
+        // String[] stringInfos = Paquet.convertInfosToString(tabInfos2);
+        // System.out.println(stringInfos[0]);
+        // Paquet.stringInfosToCsv(stringInfos);
 
-
-
+        //TESTTRI
+        Paquet.testTrisWithDatas(10, 100, 1);
     }
 }
