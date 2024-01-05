@@ -1,0 +1,242 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,includeheadfoot,margin=2.54cm, top=0.5in, bottom=0.5in]{geometry}
+\usepackage{xcolor, hyperref, lipsum, graphicx}
+\usepackage{amsmath, amsthm, amsfonts, textgreek}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{textcomp}
+\usepackage{xinttools}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{caption, float}
+\usepackage[most]{tcolorbox}
+\usepackage{physics}
+
+\captionsetup[lstlisting]{skip=7pt}
+\renewcommand\lstlistingname{Code}
+\renewcommand\lstlistlistingname{Code}
+
+\definecolor{darkred}{rgb}{0.6,0.0,0.0}
+\definecolor{darkgreen}{rgb}{0,0.50,0}
+\definecolor{lightblue}{rgb}{0.0,0.42,0.91}
+\definecolor{orange}{rgb}{0.99,0.48,0.13}
+\definecolor{grass}{rgb}{0.18,0.80,0.18}
+\definecolor{pink}{rgb}{0.97,0.15,0.45}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+
+\lstset{language=java,
+aboveskip=1em,
+breaklines=true,
+abovecaptionskip=-6pt,
+frame=single,
+numbers=left,
+numbersep=15pt,
+numberstyle=\tiny,
+backgroundcolor=\color{white},   % choose the background color
+basicstyle=\footnotesize,        % size of fonts used for the code
+breaklines=true,                 % automatic line breaking only at whitespace
+captionpos=b,                    % sets the caption-position to bottom
+commentstyle=\color{mygreen},    % comment style
+escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+keywordstyle=\color{blue},       % keyword style
+stringstyle=\color{mymauve},     % string literal style
+}
+
+
+\usepackage{fancyvrb}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancyplain}% <- pagestyle fancyplain
+\renewcommand\plainheadrulewidth{.4pt}% headrule on plain pages
+\lhead{Marche aléatoire}
+\rhead{Compte rendu - 2022}
+\cfoot{Page \thepage\ of \pageref{LastPage}}
+\usepackage{setspace}
+\onehalfspacing
+
+
+\usepackage{titlesec}
+
+
+\titlespacing*{\section}
+{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+\titlespacing*{\subsection}
+{0pt}{5.5ex plus 1ex minus .2ex}{4.3ex plus .2ex}
+
+\title{\textbf{SAE 1.02 - E3CETE}}
+\author{J. Renaud - M. Franceus-Cointrel}
+\date{Pour le 14 janvier 2024}
+
+
+\addtolength{\jot}{1em}
+
+\hypersetup{
+  pdftitle={SAE 1.02 : E3Cete - 2023/2024},
+  pdfauthor={Renaud Julien},
+  pdfsubject={Dev. Init.}
+}
+
+\renewcommand{\contentsname}{Table des matières}
+\renewcommand{\appendixname}{Annexe}
+\renewcommand{\chaptername}{Chapitre}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter*{Introduction}
+
+\qquad Dans cette SAE nous étudions...
+
+
+
+
+\chapter{Analyse et comparaison des 3 méthodes de tris}
+
+\qquad 
+
+\section{Les fonctions de tris et comptage du nombre d'opérations approximatif}
+
+\subsection{Tri par sélection}
+
+\begin{lstlisting}[language=java, caption={\it Focntion marche aléatoire}, label=code1]
+%insert code here
+\end{lstlisting}
+
+\subsection{Tri par bulles}
+
+\subsection{Tri par insertion}
+
+\pagebreak
+
+
+
+\subsection{Initialisation des variables}
+
+L'objectif de cette expérience est d'évaluer la performance de chacun des tris. Pour cela nous devons réaliser chacun des tris en variant le nombre de cartes contenus dans le Paquet.
+\bigskip
+
+
+
+Les variables fixés : \\
+\begin{itemize}
+
+	\item int $nbRepetTest = 1000$
+	\item int $cardCouleurs = 1$
+	\item int $cardFigures = 1$
+	\item int $cardTextures = 1$
+	
+	\item int $cardRepetFigures \in [\, 10-500 ]\, $
+	
+	
+	
+\end{itemize}
+
+Protocole expérimental :
+\begin{itemize}
+	\item Réaliser les 3 tris sur 1000 paquets ayant les mêmes caractéristiques mais mélangés différemment, pour un même nombre de carte $N$.
+	\item Récupérer les nombre d'opérations moyens et le temps d'éxecution moyen des 
+\end{itemize}
+
+\boldmath
+\begin{equation}
+  x_{N+1}=x_{N}\pm \delta
+\end{equation}
+\unboldmath
+
+
+
+\subsection{Analyse graphique}
+
+
+
+\chapter{Class \it Table}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\appendix
+\chapter{Modules utilisés}
+
+\begin{lstlisting}[caption={\it Modules utilisés en Python 3.9.2}, label=annexe]
+  import math
+    from math import pi
+  import random as rnd
+  import statistics as stats
+  import matplotlib
+  import matplotlib.pyplot as plt
+  import matplotlib.cm as cm
+    from matplotlib.patches import Ellipse
+    from mpl_toolkits import mplot3d
+  import numpy as np
+  import scipy as scp
+  import scipy.stats as st
+    from scipy.stats import multivariate_normal
+
+\end{lstlisting}
+
+\chapter{Sources}
+
+\begin{itemize}
+  \item \url{https://moodle.umontpellier.fr/course/view.php?id=25363}
+  \item \url{https://femto-physique.fr/physique_statistique/diffusion-moleculaire.php}
+  \item \url{https://stringfixer.com/fr/Random_walk}
+  \item \url{https://en.wikipedia.org/wiki/Mass_diffusivity}
+  \item \url{https://fr.wikipedia.org/wiki/Mouvement_brownien}
+  \item \url{https://fr.wikipedia.org/wiki/Lois_de_Fick}
+  \item \url{https://fr.wikipedia.org/wiki/Cha%C3%AEne_id%C3%A9ale}
+  \item \url{https://fr.wikipedia.org/wiki/Loi_multinomiale}
+  \item \url{https://en.wikipedia.org/wiki/Multivariate_normal_distribution}
+  \item \url{https://www.youtube.com/channel/UCmpptkXu8iIFe6kfDK5o7VQ}
+  \item \url{https://www.caam.rice.edu/~heinken/latex/symbols.pdf}
+  \item \url{https://matplotlib.org/stable/index.html}
+\end{itemize}
+
+\begin{figure}
+  \centering
+
+  \caption{\it Langages et éditeurs utilisés}
+\end{figure}
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+

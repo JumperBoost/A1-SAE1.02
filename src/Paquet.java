@@ -31,6 +31,12 @@ public class Paquet {
     private static int nbOpApprox = 0;
     private static int nbRepetTest = 1000;
 
+    //caracteristiques par default du Paquet pour TestTri
+    private static int cardCouleurs = 3;
+    private static int cardRepetFigures = 3;
+    private static int cardFigures = 3;
+    private static int cardTextures = 3;
+
 
     /**
      * Pre-requis : figures.length > 0, couleurs.length > 0, textures.length > 0, nbFiguresMax > 0
@@ -230,6 +236,19 @@ public class Paquet {
         return paqTri;
     }
 
+
+    /**
+     * Action : Modifie les valeurs des cardinalités pour les Paquets Test
+     * Prerequis : 1 <= cardNbFig
+     * 1 <= cardCoul/cardFig/cardText <= <nom_Enum>.values().length 
+     */
+    public static void setCardPaqTest(int cardCoul, int cardNbFig, int cardFig, int cardText) {
+        cardCouleurs = cardCoul;
+        cardRepetFigures = cardNbFig;
+        cardFigures = cardFig;
+        cardTextures = cardText;
+    }
+
     /**
      * Action : Permet de tester les différents tris.
      * On doit s'assurer que chaque tri permette effectivement de trier un paquet mélangé.
@@ -244,7 +263,7 @@ public class Paquet {
         // si all true all works :)
   
 
-        Paquet paq = new Paquet(Couleur.valuesInRange(0, 1), 500, Figure.valuesInRange(0, 1), Texture.valuesInRange(0, 1));
+        Paquet paq = new Paquet(Couleur.valuesInRange(0, cardCouleurs), cardRepetFigures, Figure.valuesInRange(0, cardFigures), Texture.valuesInRange(0, cardTextures));
         int note1, note2, note3;
         note1 = note2 = note3 = 0;
         double tempsExec;
@@ -310,8 +329,8 @@ public class Paquet {
     /**
      * FONCTION AJOUTEE
      * Action : réalise les 3 méthodes de tris pour un paquet initialisé à nbCartes nombre de carte.
-     * Nous fixons le nombre de Couleur/Figure/Texture à 1 pour que seul le nbFigures determine le nombre de cartes.
-     * Nous répétons ces tris plusieurs fois sur des paquets presentant les memes caracteristiques mais mélangés différremment ; pour obtenir des données significatifs :
+     * Pour cette fonction le nombre de Couleur/nbFigures/Figure/Texture sont fixes (variables de classes : cardCouleurs, cardRepetFigures, cardFigures, cardTextures).
+     * Nous répétons ces tris plusieurs fois (valeurs entrés en params) sur des paquets presentant les memes caracteristiques mais mélangés différremment ; pour obtenir des données significatifs :
      * Stock les donées relatifs (nb Cartes, nombre OP et temps exec) aux tris dans un tableau de tableau.
      * tabInfos[O à 2][0] --> nbCartes
      * tabInfos[O à 2][1] --> nbOP moyen
@@ -324,50 +343,54 @@ public class Paquet {
      * @param nbRepetition
      * @return un tableau de tableau (3x3) de double.
      */
-    private static double[][] trisPaquet(int nbCartes, int nbRepetition) {
-        double[][] tabInfos = new double[3][3];
+    private static double[][] trisPaquet(int nbRepetition) {
+        double[][] tabInfos = new double[3][5];
         double tempsExec;
-        double sumTempsExecSel, sumTempsExecBul, sumTempsExecIns;
-        sumTempsExecSel = sumTempsExecBul = sumTempsExecIns = 0;
-        int sumNbOpSel, sumNbOpBul, sumNbOpIns;
-        sumNbOpSel = sumNbOpBul = sumNbOpIns = 0;
+        double[][][] tabInterm = new double [3][2][nbRepetition];
 
         Paquet paq;
 
         for (int i = 0; i < nbRepetition; i++) {
 
             paq = new Paquet(
-                Couleur.valuesInRange(0, 1), 
-                nbCartes, 
-                Figure.valuesInRange(0, 1), 
-                Texture.valuesInRange(0, 1)
+                Couleur.valuesInRange(0, cardCouleurs), 
+                cardRepetFigures, 
+                Figure.valuesInRange(0, cardFigures), 
+                Texture.valuesInRange(0, cardTextures)
                 );
 
-
             tempsExec = Ut.getTempsExecution(paq::trierSelection);
-            sumTempsExecSel += tempsExec;
-            sumNbOpSel += nbOpApprox;
+            tabInterm[0][0][i] = nbOpApprox;
+            tabInterm[0][1][i] = tempsExec;
 
             tempsExec = Ut.getTempsExecution(paq::trierBulles);
-            sumTempsExecBul += tempsExec;
-            sumNbOpBul += nbOpApprox;
+            tabInterm[1][0][i] = nbOpApprox;
+            tabInterm[1][1][i] = tempsExec;
 
             tempsExec = Ut.getTempsExecution(paq::trierInsertion);
-            sumTempsExecIns += tempsExec;
-            sumNbOpIns += nbOpApprox;
+            tabInterm[2][0][i] = nbOpApprox;
+            tabInterm[2][1][i] = tempsExec;
+
+            
         }
 
         for (int i = 0; i < 3; i++) {
-            tabInfos[i][0] = nbCartes;
+            tabInfos[i][0] = cardCouleurs * cardRepetFigures * cardFigures * cardTextures;
         }
-        tabInfos[0][1] = sumNbOpSel/nbRepetition;
-        tabInfos[0][2] = sumTempsExecSel/nbRepetition; 
+        tabInfos[0][1] = Ut.moyenne(tabInterm[0][0]);
+        tabInfos[0][2] = Ut.ecarttype(tabInterm[0][0]);
+        tabInfos[0][3] = Ut.moyenne(tabInterm[0][1]);
+        tabInfos[0][4] = Ut.ecarttype(tabInterm[0][1]);
         
-        tabInfos[1][1] = sumNbOpBul/nbRepetition;
-        tabInfos[1][2] = sumTempsExecBul/nbRepetition;   
+        tabInfos[1][1] = Ut.moyenne(tabInterm[1][0]);
+        tabInfos[1][2] = Ut.ecarttype(tabInterm[1][0]);
+        tabInfos[1][3] = Ut.moyenne(tabInterm[1][1]); 
+        tabInfos[1][4] = Ut.ecarttype(tabInterm[1][1]);
 
-        tabInfos[2][1] = sumNbOpIns/nbRepetition;
-        tabInfos[2][2] = sumTempsExecIns/nbRepetition;   
+        tabInfos[2][1] = Ut.moyenne(tabInterm[2][0]);
+        tabInfos[2][2] = Ut.ecarttype(tabInterm[2][0]);
+        tabInfos[2][3] = Ut.moyenne(tabInterm[2][1]); 
+        tabInfos[2][4] = Ut.ecarttype(tabInterm[2][1]);
 
         return tabInfos;
     }
@@ -375,21 +398,25 @@ public class Paquet {
     /**
      * FONCTION AJOUTEE
      * Prérequis : 0 < nStart < nEnd ET 0 < nStep 
-     * Acrion : réalise trisPaquet(int nbCartes, int nbRepetition) en variant le nbCartes entré en parametres, de nStart à nEnd(exclu) en faisant des pas de nStep
-     * @param nStart premiere valeur de N
-     * @param nEnd valeur limite N (exclue)
-     * @param step pas
-     * @return un tableau contenant touts les résultats de chacun des trisPaquet().
+     * Action : réalise trisPaquet(int nbRepetition) en variant le nbCartes en modifiant la cardinalité de nbFigures, entré en parametres, de nStart à nEnd(exclu) en faisant des pas de nStep.
+     * Les cardinalités de couleurs/figures/textures sont fixées à des valeurs constantes par les variables de class.
+     * @param nStart premiere valeur de nbFiguresMax
+     * @param nEnd valeur limite (exclue)
+     * @param nstep pas
+     * @return un tableau contenant tout les résultats de chacun des trisPaquet().
      */
     private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
-        double[][][] tabInfos = new double[(nEnd - nStart)/nStep][3][3];
+        double[][][] tabInfos = new double[(nEnd - nStart)/nStep][3][5];
         int count = 0;
+        
         for (int n = nStart; n < nEnd; n+=nStep) {
-            tabInfos[count] = trisPaquet(n, nbRepetTest);
+            cardRepetFigures = n;
+            tabInfos[count] = trisPaquet(nbRepetTest);
             count++;
         }
         return tabInfos;
     }
+
 
     /**
      * FONCTION AJOUTEE
@@ -404,16 +431,17 @@ public class Paquet {
     private static String[] convertInfosToString(double[][][] tabInfos) {
         String[] stringInfos = new String[3];
         for (int i = 0; i < stringInfos.length; i++) {
-            stringInfos[i] = "N, nbOp, tExec (ms)\n";
+            stringInfos[i] = "N, nbOp, u_nbOP, tExec (ms), u_tExec (ms)\n";
         }
 
         int i, j, k;
         for (i = 0; i < tabInfos.length; i++) {
             for (j = 0; j < tabInfos[i].length; j++){
-                for (k = 0; k < tabInfos[i][j].length - 1; k++) {
+                for (k = 0; k < tabInfos[i][j].length - 2; k++) {
                     stringInfos[j] += String.format("%.0f", tabInfos[i][j][k]) + ", ";
                 }
-                stringInfos[j] += String.format("%.3f", tabInfos[i][j][k]) + "\n";
+                stringInfos[j] += String.format("%.3f", tabInfos[i][j][k]) + ", ";
+                stringInfos[j] += String.format("%.3f", tabInfos[i][j][k+1]) + "\n";
             }
         }
         return stringInfos;
@@ -438,7 +466,7 @@ public class Paquet {
 
     /**
      * FONCTION AJOUTEE
-     * Prerequis : 0 < nStart < nEnd ET 0 < nStep 
+     * Prerequis : 0 < nStart < nEnd ET 0 < nStep
      * Action : réunit les méthodes ci-dessus :
      * 1. Realise les 3 tris (plusieurs fois pour un meme N pour different paquet ayant meme caracteristique) en variant N (selon la borne et le pas entrés en parametres).
      * Stockage des donées : double[nStart-nEnd/nStep][3][3]

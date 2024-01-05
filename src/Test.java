@@ -82,13 +82,12 @@ public class Test {
         System.out.println(paq.peutPicoher(-9999));
 
 
-        //TestTris
-        Paquet.testTris();
 
 
-        //TEST METHODE PRIV pour DATAS
-        // //TrisPaquet
-        // double[][] tabInfos = Paquet.trisPaquet(500, 1000);
+
+        // TEST METHODE PRIV pour DATAS
+        //TrisPaquet
+        // double[][] tabInfos = Paquet.trisPaquet(1000);
         // for (int i = 0; i < 3; i++) {
         //     System.out.println(Arrays.toString(tabInfos[i]));
         // }
@@ -102,7 +101,14 @@ public class Test {
         // System.out.println(stringInfos[0]);
         // Paquet.stringInfosToCsv(stringInfos);
 
+        //TestTris
+        Paquet.setCardPaqTest(1, 1000, 1, 1);
+        //Paquet.testTris();
+
         //TESTTRI
-        Paquet.testTrisWithDatas(10, 100, 1);
+        Paquet.setCardPaqTest(1, 1, 1, 1);
+        Paquet.testTrisWithDatas(10, 20, 1);
+
+
     }
 }

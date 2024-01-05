@@ -257,6 +257,41 @@ public class Ut {
         return ((endTime - startTime) * 1e-6);
     }
 
+
+    public static double valSup(double nb1, double nb2) {
+        if (nb1 > nb2) {
+            return nb1;
+        }
+        else {
+            return nb2;
+        }
+    }
+
+    public static double valInf(double nb1, double nb2) {
+        if (nb1 < nb2) {
+            return nb1;
+        }
+        else {
+            return nb2;
+        }
+    }
+
+    public static double moyenne(double[] tab) {
+        double sum = 0;
+        for (int i = 0; i < tab.length; i++) {
+            sum += tab[i];
+        }
+        return sum/tab.length;
+    }
+
+    public static double ecarttype(double[] tab) {
+        double moy = Ut.moyenne(tab);
+        double sum = 0;
+        for (int i = 0; i < tab.length; i++) {
+            sum += (tab[i] - moy) * (tab[i] - moy);
+        }
+        return Math.sqrt(sum/tab.length);
+    }
 } // end class
 
 
