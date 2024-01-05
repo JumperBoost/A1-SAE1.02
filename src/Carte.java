@@ -122,9 +122,17 @@ public class Carte  {
 
     @Override
     public String toString() {
-        String str = getCouleur().getCouleurText() + getNbFigures()
-                    + "  \t" + getFigure() + "     \t" + getTexture() + 
-                    Couleur.getReset();
+        String textureChar = String.valueOf(texture.getTextureChar());
+        String bgColor = "\033[47m";
+        String cardColor = getCouleur().getCouleurText();
+        String bothColor = cardColor + bgColor;
+        String textColor = Couleur.getReset() + bgColor + "\u001B[30m";
+
+        String str = (textColor + textureChar + bothColor + getNbFigures() + textColor + textureChar.repeat(8 - String.valueOf(getNbFigures()).length()) + Couleur.getReset() + "\n" +
+                textColor + textureChar.repeat(9) + Couleur.getReset() + "\n") +
+                textColor + textureChar.repeat(4) + bothColor + getFigure().getFigureChar() + textColor + textureChar.repeat(4) + Couleur.getReset() + "\n" +
+                textColor + textureChar.repeat(9) + Couleur.getReset() + "\n" +
+                textColor + textureChar.repeat(8 - String.valueOf(getNbFigures()).length()) + bothColor + getNbFigures() + textColor + textureChar + Couleur.getReset();
         
         return str;
     }

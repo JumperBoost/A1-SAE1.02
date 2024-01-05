@@ -1,9 +1,20 @@
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Test {
     public static void main(String[] args) throws FileNotFoundException {
+        // TEST AFFICHAGE CARTES
+        System.out.println("\n\nTEST AFFICHAGE CARTES----------------------------------------------------");
+        Carte carte1 = new Carte(Couleur.ROUGE, 3, Figure.CERCLE, Texture.TIRET);
+        System.out.println(carte1 + "\n\n");
+
+        Carte carte2 = new Carte(Couleur.BLEU, 12, Figure.LOSANGE, Texture.RAYURE);
+        System.out.println(carte2 + "\n\n");
+
+        Carte carte3 = new Carte(Couleur.VERT, 345, Figure.CARRE, Texture.VIDE);
+        System.out.println(carte3);
+
+
         //TEST COULEUR
         System.out.println("\n\nTEST COULEUR----------------------------------------------------");
         System.out.println(Couleur.BLEU.getTraduction());
@@ -28,10 +39,10 @@ public class Test {
 
         //TEST CARTES
         System.out.println("\n\nTEST CARTES----------------------------------------------------");
-        Carte card = new Carte(Couleur.BLEU, 2, Figure.CARRE, Texture.PLEINE);
+        Carte card = new Carte(Couleur.BLEU, 2, Figure.CARRE, Texture.TIRET);
         System.out.println(card);
 
-        Carte card2 = new Carte(Couleur.ROUGE, 3, Figure.TRIANGLE, Texture.RAYURE);
+        Carte card2 = new Carte(Couleur.ROUGE, 3, Figure.LOSANGE, Texture.RAYURE);
         System.out.println(card2);
 
 
@@ -76,10 +87,10 @@ public class Test {
             System.out.println(carte);
         }
         //peutPiocher()
-        System.out.println(paq.peutPicoher(81));
-        System.out.println(paq.peutPicoher(78));
-        System.out.println(paq.peutPicoher(0));
-        System.out.println(paq.peutPicoher(-9999));
+        System.out.println(paq.peutPiocher(81));
+        System.out.println(paq.peutPiocher(78));
+        System.out.println(paq.peutPiocher(0));
+        System.out.println(paq.peutPiocher(-9999));
 
 
         //TestTris
@@ -104,5 +115,6 @@ public class Test {
 
         //TESTTRI
         Paquet.testTrisWithDatas(10, 100, 1);
+
     }
 }

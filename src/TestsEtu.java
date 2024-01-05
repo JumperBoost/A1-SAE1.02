@@ -105,7 +105,7 @@ public class TestsEtu {
         Paquet p = new Paquet(selectCouleurs(3), 3, selectFigures(3), selectTextures(3));
         p.melanger();
         Carte[] prochainesCartes;
-        while(p.peutPicoher(2)) {
+        while(p.peutPiocher(2)) {
             prochainesCartes = p.piocher(2);
             if(prochainesCartes[0].compareTo(prochainesCartes[1]) > 0) {
                 return;
@@ -116,10 +116,10 @@ public class TestsEtu {
 
     public static void testPeutPiocher() {
         Paquet p = new Paquet(selectCouleurs(3), 3, selectFigures(3), selectTextures(3));
-        if(!p.peutPicoher(1)) {
+        if(!p.peutPiocher(1)) {
             throw new TestException("Le paquet contient 81 cartes, on doit pouvoir piocher une carte");
         }
-        if(!p.peutPicoher(81)) {
+        if(!p.peutPiocher(81)) {
             throw new TestException("Le paquet contient 81 cartes, on doit pouvoir piocher 81 cartes");
         }
     }

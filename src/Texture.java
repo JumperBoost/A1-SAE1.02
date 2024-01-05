@@ -4,9 +4,9 @@ public enum Texture {
      * Représente la texture d'une Carte : pleine , à pois...
      */
 
-    PLEINE,
-    POIS,
-    RAYURE;
+    VIDE(' '),
+    TIRET('-'),
+    RAYURE('/');
    
    
 
@@ -14,6 +14,16 @@ public enum Texture {
 
     public static int getNbEnumTotal() {
         return nbEnum;
+    }
+
+    private char textureChar;
+
+    private Texture(char textureChar) {
+        this.textureChar = textureChar;
+    }
+
+    public char getTextureChar() {
+        return this.textureChar;
     }
 
     /**

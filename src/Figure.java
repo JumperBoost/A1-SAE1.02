@@ -4,12 +4,21 @@ public enum Figure {
      * Représente la figure (forme) d'une Carte : ovale , triangle ...
      */
 
-    CARRE,
-    OVALE,
-    TRIANGLE;
-
+    CARRE('■'),
+    LOSANGE('⧫'),
+    CERCLE('●');
 
     private static int nbEnum = Figure.values().length;
+
+    private char figureChar;
+
+    private Figure(char figureChar) {
+        this.figureChar = figureChar;
+    }
+
+    public char getFigureChar() {
+        return this.figureChar;
+    }
 
     public static int getNbEnumTotal() {
         return nbEnum;

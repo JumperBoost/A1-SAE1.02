@@ -56,19 +56,14 @@ public class Paquet {
         this.nbCartesLeft = 0;
         this.cartes = new Carte[getNombreCartesAGenerer(couleurs, nbFiguresMax, figures, textures)];
 
-        for (Couleur coul : couleurs) {
-            for (int i = 1; i <= nbFiguresMax; i++) {
-                for (Figure fig : figures) {
-                    for (Texture text : textures) {
-                        this.cartes[this.nbCartesLeft] = new Carte(coul, i, fig, text);
-                        this.nbCartesLeft++;
-                    }
-                }
-            }
-        }
+        for (Couleur coul : couleurs)
+            for (int i = 1; i <= nbFiguresMax; i++)
+                for (Figure fig : figures)
+                    for (Texture text : textures)
+                        this.cartes[this.nbCartesLeft++] = new Carte(coul, i, fig, text);
+
         this.melanger();
-        nbPaquets++;
-        this.idPaquet = nbPaquets;
+        this.idPaquet = ++nbPaquets;
     }
 
     /**
@@ -83,13 +78,10 @@ public class Paquet {
 
         this.nbCartesLeft = paquet.nbCartesLeft;
         this.cartes = new Carte[paquet.cartes.length];
-
-        for (int i = 0; i < cartes.length; i++) {
+        for (int i = 0; i < cartes.length; i++)
             this.cartes[i] = paquet.cartes[i];
-        }
 
-        nbPaquets++;
-        this.idPaquet = nbPaquets;
+        this.idPaquet = ++nbPaquets;
     }
 
 
@@ -101,7 +93,6 @@ public class Paquet {
      */
 
     public static int getNombreCartesAGenerer(Couleur[] couleurs, int nbFiguresMax, Figure[] figures, Texture[] textures) {
-
         return couleurs.length * nbFiguresMax * figures.length * textures.length; 
     }
 
@@ -132,27 +123,21 @@ public class Paquet {
      */
 
     public Paquet trierSelection() {
-        //STRAT
-        //create copy
-        //ignore cartes piochées
-        //select current first from left
-        //compare from first on right
-            //if inf than actual swap places and inf becomes current
-        //repeat until end of table and put current in current
-        
         Paquet paqTri = new Paquet(this);
         // si vide ne fait rien
         nbOpApprox = 0;
 
-        for (int i = 0; i < paqTri.nbCartesLeft - 1; i++) {
-            nbOpApprox = nbOpApprox + 3;
-            for (int j = i + 1; j < paqTri.nbCartesLeft; j++) {
-                if (paqTri.cartes[j].compareTo(paqTri.cartes[i]) < 0) {
-                    paqTri.swap2Cartes(i, j);
-                    nbOpApprox = nbOpApprox + 6 + 4;
+        for (int i = 0; i < paqTri.nbCartesLeft-1; i++) {
+            int indiceMin = i;
+            for (int j = i+1; j < paqTri.nbCartesLeft; j++) {
+                if (paqTri.cartes[j].compareTo(paqTri.cartes[indiceMin]) < 0) {
+                    indiceMin = j;
+                    nbOpApprox += 6 + 4 + 1; // 6 pour le compareTo, 4 pour le if, 1 pour l'affectation
                 }
-                nbOpApprox = nbOpApprox + 4;
+                nbOpApprox += 4;
             }
+            paqTri.swap2Cartes(i, indiceMin);
+            nbOpApprox += 2; // 2 pour le swap
         }
         return paqTri;
     }
@@ -168,13 +153,6 @@ public class Paquet {
      */
 
     public Paquet trierBulles() {
-        //STRAT
-        //create copy
-        //parcourir tout le paquet
-        //comparer par paire croissant 0-1 puis 1-2 etc.
-            //si carte(indiceSup) infereieur à carte(indiceInf) alors swap
-        //repeter tant que tout n'est pas en ordre (bool)
-        //note : max nombre de repet = pour deplacer la plus petite carte située en derniere position = this.nbCartesLeft - 1
         Paquet paqTri = new Paquet(this);
         boolean inOrder = false;
         nbOpApprox = 1;
@@ -184,11 +162,11 @@ public class Paquet {
                 if (paqTri.cartes[i+1].compareTo(paqTri.cartes[i]) < 0) {
                     paqTri.swap2Cartes(i+1, i);
                     inOrder = false;
-                    nbOpApprox = nbOpApprox + 6 + 4 + 1;
+                    nbOpApprox = nbOpApprox + 6 + 4 + 1 + 2; // 6 pour le compareTo, 4 pour le if, 1 pour l'affectation, 2 pour le swap
                 }
                 nbOpApprox = nbOpApprox + 4;
             }
-            nbOpApprox = nbOpApprox + 2;
+            nbOpApprox = nbOpApprox + 2; // 2 pour le while
         }
         return paqTri;
     }
@@ -203,29 +181,16 @@ public class Paquet {
      */
 
     public Paquet trierInsertion() {
-        //STRAT
-        //create copy
-        //parcourir UNE FOIS tout le paquet de 1 à nbCartesLeft(exclus)
-        //tant que carte current inferieur à carte de gauche OU pas au bord gauche
-            //swap et stocker nouvel indice current-1
         Paquet paqTri = new Paquet(this);
         nbOpApprox = 0;
         for (int i = 1; i < paqTri.nbCartesLeft; i++) {
-            boolean inPlace = false;
             int j = i;
-            while (!inPlace && j!=0) {
-                if (paqTri.cartes[j].compareTo(paqTri.cartes[j-1]) < 0) {
-                    paqTri.swap2Cartes(j, j-1);
-                    j--;
-                    nbOpApprox = nbOpApprox + 6 + 4 + 1;
-                }
-                else {
-                    inPlace = true;
-                    nbOpApprox = nbOpApprox + 1;
-                }
-                nbOpApprox = nbOpApprox + 2;  
+            while (j > 0 && paqTri.cartes[j].compareTo(paqTri.cartes[j-1]) < 0) {
+                paqTri.swap2Cartes(j, j-1);
+                j--;
+                nbOpApprox += + 6 + 4 + 1 + 2; // 6 pour le compareTo, 4 pour le if, 1 pour l'affectation, 2 pour le swap
             }
-            nbOpApprox = nbOpApprox + 5;
+            nbOpApprox += 4; // 4 pour le for
         }
         return paqTri;
     }
@@ -245,8 +210,7 @@ public class Paquet {
   
 
         Paquet paq = new Paquet(Couleur.valuesInRange(0, 1), 500, Figure.valuesInRange(0, 1), Texture.valuesInRange(0, 1));
-        int note1, note2, note3;
-        note1 = note2 = note3 = 0;
+        int note = 0;
         double tempsExec;
         System.out.println("\033[0;32m");
         System.out.println("\033[40m");
@@ -258,46 +222,37 @@ public class Paquet {
         //triSelect
         Paquet paqTriSelect = paq.trierSelection();
         tempsExec = Ut.getTempsExecution(paq::trierSelection);
-        if (paqTriSelect.estTrie()) {
-            note1++;
-        }
-        System.out.println("TRI SELECTION : " + note1 + "/1");
+        if (paqTriSelect.estTrie())
+            note++;
+        System.out.println("TRI SELECTION : " + (paqTriSelect.estTrie() ? 1 : 0) + "/1");
 
         System.out.println("nbOP :\t" + nbOpApprox);
-        System.out.println("Time :\t" + tempsExec + " ms");
-        System.out.println();
+        System.out.println("Time :\t" + tempsExec + " ms\n");
 
         //triBubble
         Paquet paqTriBulles = paq.trierBulles();
         tempsExec = Ut.getTempsExecution(paq::trierBulles);
-        if (paqTriBulles.estTrie()) {
-            note2++;
-        }
-        System.out.println("TRI BULLES : " + note2 + "/1");
+        if (paqTriBulles.estTrie())
+            note++;
+        System.out.println("TRI BULLES : " + (paqTriBulles.estTrie() ? 1 : 0) + "/1");
 
         System.out.println("nbOP :\t" + nbOpApprox);
-        System.out.println("Time :\t" + tempsExec + " ms");
-        System.out.println();
+        System.out.println("Time :\t" + tempsExec + " ms\n");
 
         //triInsert
         Paquet paqTriInsert = paq.trierInsertion();
         tempsExec = Ut.getTempsExecution(paq::trierInsertion);
-        if (paqTriInsert.estTrie()) {
-            note3++;
-        }
-        System.out.println("TRI INSERT : " + note3 + "/1");
+        if (paqTriInsert.estTrie())
+            note++;
+        System.out.println("TRI INSERT : " + (paqTriInsert.estTrie() ? 1 : 0) + "/1");
 
         System.out.println("nbOP :\t" + nbOpApprox);
-        System.out.println("Time :\t" + tempsExec + " ms");
-        System.out.println();
+        System.out.println("Time :\t" + tempsExec + " ms\n");
 
-        System.out.println("RESULTS : " + (note1+note2+note3) + "/3");
-        if (note1+note2+note3 == 3) {
+        System.out.println("RESULTS : " + note + "/3");
+        if (note == 3)
             System.out.println("TEST SUCCESFUL");
-        }
-        else {
-            System.out.println("TEST FAILED");
-        }
+        else System.out.println("TEST FAILED");
 
         //bonus
         System.out.println("Bonus : Les 3 paquets triés sont identiques ? " + (paqTriSelect.estIdentique(paqTriBulles) && paqTriBulles.estIdentique(paqTriInsert)));
@@ -335,7 +290,6 @@ public class Paquet {
         Paquet paq;
 
         for (int i = 0; i < nbRepetition; i++) {
-
             paq = new Paquet(
                 Couleur.valuesInRange(0, 1), 
                 nbCartes, 
@@ -378,7 +332,7 @@ public class Paquet {
      * Acrion : réalise trisPaquet(int nbCartes, int nbRepetition) en variant le nbCartes entré en parametres, de nStart à nEnd(exclu) en faisant des pas de nStep
      * @param nStart premiere valeur de N
      * @param nEnd valeur limite N (exclue)
-     * @param step pas
+     * @param nStep pas
      * @return un tableau contenant touts les résultats de chacun des trisPaquet().
      */
     private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
@@ -428,7 +382,7 @@ public class Paquet {
      */
     private static void stringInfosToCsv(String[] stringInfos) throws FileNotFoundException {
         for (int i = 0; i < stringInfos.length; i++) {
-            File csvFile = new File("./sae_e3cete/datas/datas"+(i+1)+".csv");
+            File csvFile = new File("./datas/datas"+(i+1)+".csv");
             PrintWriter output = new PrintWriter(csvFile);
             output.print(stringInfos[i]);
             output.close();
@@ -454,10 +408,6 @@ public class Paquet {
     }
 
 
-
-
-
-
     /**
      * FONCTION AJOUTEE
      * Action : verifie si this est un paquet trié (sans se préoccuper des cartes "piochés")
@@ -465,17 +415,12 @@ public class Paquet {
      * @return true si oui, false sinon
      */
     public boolean estTrie() {
-        boolean isSorted = true;
-        int i = 0;
-        while (isSorted && i<this.nbCartesLeft-1) {
+        for(int i = 0; i < this.nbCartesLeft - 1; i++) {
             if (this.cartes[i].compareTo(this.cartes[i+1]) > 0) {
-                isSorted = false;
-            }
-            else {
-                i++;
+                return false;
             }
         }
-        return isSorted;
+        return true;
     }
 
     /**
@@ -486,26 +431,16 @@ public class Paquet {
      * @return true si oui, false sinon
      */
     public boolean estIdentique(Paquet paquet) {
-        boolean estIdentique = true;
-        int i = 0;
-        if (this.nbCartesLeft == paquet.nbCartesLeft) {
-            while (estIdentique && i<this.nbCartesLeft) {
-                if (this.cartes[i].compareTo(paquet.cartes[i]) != 0) {
-                    estIdentique = false;
-                }
-                else {
-                    i++;
-                }
-            }            
+        if (this.nbCartesLeft != paquet.nbCartesLeft)
+            return false;
+
+        for (int i = 0; i < this.nbCartesLeft; i++) {
+            if (this.cartes[i].compareTo(paquet.cartes[i]) != 0) {
+                return false;
+            }
         }
-        else {
-            estIdentique = false;
-        }
-        return estIdentique;
+        return true;
     }
-
-
-
 
 
     /**
@@ -538,7 +473,7 @@ public class Paquet {
      * Résultat : Vrai s'il reste assez de cartes dans le paquet pour piocher nbCartes.
      */
 
-    public boolean peutPicoher(int nbCartes) {
+    public boolean peutPiocher(int nbCartes) {
         return 0 <= nbCartes && nbCartes <= this.nbCartesLeft;
     }
 
@@ -558,10 +493,10 @@ public class Paquet {
      * @param indice2 indice de la deuxieme carte dans le paquet
      */
     public void swap2Cartes(int indice1, int indice2) {
-            Carte temp;
-            temp = this.cartes[indice1];
-            this.cartes[indice1] = this.cartes[indice2];
-            this.cartes[indice2] = temp;
+        Carte temp;
+        temp = this.cartes[indice1];
+        this.cartes[indice1] = this.cartes[indice2];
+        this.cartes[indice2] = temp;
     }
 
 
@@ -580,9 +515,9 @@ public class Paquet {
         String str = "\nPAQUET n°" + this.idPaquet + "\nNombre de cartes restantes : " + this.nbCartesLeft + "\n[\n";
         int i;
         for (i = 0; i < this.nbCartesLeft - 1; i++) {
-            str = str + this.cartes[i].toString() + ",\n";
+            str += this.cartes[i].toString() + ",\n";
         }
-        str = str + this.cartes[i].toString() + "\n]\n";
+        str += this.cartes[i].toString() + "\n]\n";
 
         return str;
     }
