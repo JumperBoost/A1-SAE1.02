@@ -113,13 +113,25 @@ public class Test {
         // Paquet.stringInfosToCsv(stringInfos);
 
         //TestTris
-        Paquet.setCardPaqTest(1, 1000, 1, 1);
-        //Paquet.testTris();
+        Paquet.setCardPaqTest(1, 50, 1, 1);
+        Paquet.testTris();
 
         //TESTTRI
-        Paquet.setCardPaqTest(1, 1, 1, 1);
-        Paquet.testTrisWithDatas(10, 20, 1);
+        // Paquet.setCardPaqTest(1, 1, 1, 1);
+        // Paquet.testTrisWithDatas(10, 500, 1);
 
+        //PROBA
+        double proba3CR = Paquet.proba3CR(1000)/1000;
+        double proba3CRAnd2CL = Paquet.proba3CRAnd2CL(1000);
+        System.out.println("La probabilité théorique de l'événement 3CR est de " + Ut.arrondirNDecimal(0.28956680871386137, 5));
+        System.out.println("La probabilité expérimental de l'événement 3CR est de " + proba3CR);
+        System.out.println("Le pourcentage d'erreur est de " + Ut.arrondirNDecimal(Ut.pourcentageErreur(0.28956680871386137, proba3CR), 3)+" %" +"\n");
+        System.out.println("La probabilité théorique de l'événement 3CR&2CL est de " + Ut.arrondirNDecimal(0.06884362550959248, 5));
+        System.out.println("La probabilité expérimental de l'événement 3CR&2CL est de " + proba3CRAnd2CL);
+        System.out.println("Le pourcentage d'erreur est de " + Ut.arrondirNDecimal(Ut.pourcentageErreur(0.06884362550959248, proba3CRAnd2CL), 3) +" %");
+
+        //
+        // Paquet.proba3CRVarEssai(100, 100000, 100);
 
     }
 }

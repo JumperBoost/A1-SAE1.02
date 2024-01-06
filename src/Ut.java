@@ -292,6 +292,18 @@ public class Ut {
         }
         return Math.sqrt(sum/tab.length);
     }
+
+    public static double pourcentageErreur(double valeurTheo, double valeurExp) {
+        return Math.abs((valeurTheo - valeurExp)/valeurTheo)*100;
+    }
+
+    public static double arrondirNDecimal(double nb, int N) {
+        double n = 1.0;
+        for (int i = 0; i < N; i++) {
+            n*=10.0;
+        }
+        return Math.round(n*nb)/n;
+    }
 } // end class
 
 

@@ -138,12 +138,12 @@ public class Paquet {
             for (int j = i+1; j < paqTri.nbCartesLeft; j++) {
                 if (paqTri.cartes[j].compareTo(paqTri.cartes[indiceMin]) < 0) {
                     indiceMin = j;
-                    nbOpApprox += 6 + 4 + 1; // 6 pour le compareTo, 4 pour le if, 1 pour l'affectation
+                    nbOpApprox += 1; // 1 pour l'affectation
                 }
-                nbOpApprox += 4;
+                nbOpApprox += 4 + 6 + 1 ; //4 pour le for, 6 pour le compareTo, 1 pour le if,
             }
             paqTri.swap2Cartes(i, indiceMin);
-            nbOpApprox += 2; // 2 pour le swap
+            nbOpApprox += 4 + 4 + 1; // 4 pour le swap, 4 pour le for, 1 pour l'affectation
         }
         return paqTri;
     }
@@ -168,11 +168,11 @@ public class Paquet {
                 if (paqTri.cartes[i+1].compareTo(paqTri.cartes[i]) < 0) {
                     paqTri.swap2Cartes(i+1, i);
                     inOrder = false;
-                    nbOpApprox = nbOpApprox + 6 + 4 + 1 + 2; // 6 pour le compareTo, 4 pour le if, 1 pour l'affectation, 2 pour le swap
+                    nbOpApprox += 1 + 5; // 1 pour l'affectation, 5 pour le swap
                 }
-                nbOpApprox = nbOpApprox + 4;
+                nbOpApprox += 4 + 6 + 2; // 4 pour le for, 6 pour le compareTo, 2 pour le if
             }
-            nbOpApprox = nbOpApprox + 2; // 2 pour le while
+            nbOpApprox += 2; // 2 pour le while
         }
         return paqTri;
     }
@@ -194,9 +194,9 @@ public class Paquet {
             while (j > 0 && paqTri.cartes[j].compareTo(paqTri.cartes[j-1]) < 0) {
                 paqTri.swap2Cartes(j, j-1);
                 j--;
-                nbOpApprox += + 6 + 4 + 1 + 2; // 6 pour le compareTo, 4 pour le if, 1 pour l'affectation, 2 pour le swap
+                nbOpApprox += 6 + 2 + 1 + 5; // 6 pour le compareTo, 2 pour le while, 1 pour l'affectation, 5 pour le swap
             }
-            nbOpApprox += 4; // 4 pour le for
+            nbOpApprox += 4 + 6 + 2; // 4 pour le for, (6+2) pour le while dans la cas on ne rentre pas
         }
         return paqTri;
     }
@@ -289,11 +289,13 @@ public class Paquet {
      * Stock les donées relatifs (nb Cartes, nombre OP et temps exec) aux tris dans un tableau de tableau.
      * tabInfos[O à 2][0] --> nbCartes
      * tabInfos[O à 2][1] --> nbOP moyen
-     * tabInfos[O à 2][2] --> tempsExec moyen
+     * tabInfos[O à 2][2] --> ecart-type nbOp
+     * tabInfos[O à 2][3] --> tempsExec moyen
+     * tabInfos[O à 2][4] --> ecart-type tempsExec
      * 
-     * tabInfos[0][0 à 2] --> Infos de Méthode SELECTION
-     * tabInfos[1][0 à 2] --> Infos de Méthode BULLES
-     * tabInfos[2][0 à 2] --> Infos de Méthode INSERTION
+     * tabInfos[0][0 à 4] --> Infos de Méthode SELECTION
+     * tabInfos[1][0 à 4] --> Infos de Méthode BULLES
+     * tabInfos[2][0 à 4] --> Infos de Méthode INSERTION
      * @param nbCartes
      * @param nbRepetition
      * @return un tableau de tableau (3x3) de double.
@@ -360,7 +362,8 @@ public class Paquet {
      * @return un tableau contenant tout les résultats de chacun des trisPaquet().
      */
     private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
-        double[][][] tabInfos = new double[(nEnd - nStart)/nStep][3][5];
+        int range = (int) Math.ceil((float) (nEnd - nStart)/nStep);
+        double[][][] tabInfos = new double[range][3][5];
         int count = 0;
         
         for (int n = nStart; n < nEnd; n+=nStep) {
@@ -374,47 +377,53 @@ public class Paquet {
 
     /**
      * FONCTION AJOUTEE
-     * Action : convertit les données de tabInfos en un tableau de String[] de taille 3.
-     * Chacun des String contient toutes les donées d'une méthode de TRI.
+     * Action : convertit les données de tabInfos en un String.
+     * Le String contient toutes les donées de chacune des méthodes de TRI.
      * Le format est adapté pour favoriser l'exportation en fichier .csv
      * Prérequis : tabInfos est retourné par testTrisVarN(int nStart, int nEnd, int nStep) OU
-     * format conforme à ce dernier double[nbval de N][3][3];
+     * format conforme à ce dernier double[nbval de N][3][5];
      * @param tabInfos
-     * @return stringInfos, un tableau de String de taille 3.
+     * @return stringInfos, un String.
      */
-    private static String[] convertInfosToString(double[][][] tabInfos) {
-        String[] stringInfos = new String[3];
-        for (int i = 0; i < stringInfos.length; i++) {
-            stringInfos[i] = "N, nbOp, u_nbOP, tExec (ms), u_tExec (ms)\n";
-        }
+    private static String convertInfosToString(double[][][] tabInfos) {
+        String stringInfos = 
+            "N, nbOpSEL, u_nbOPSEL, tExecSEL (ms), u_tExecSEL (ms), " + 
+            "nbOpBUL, u_nbOPBUL, tExecBUL (ms), u_tExecBUL (ms), " + 
+            "nbOpINS, u_nbOPINS, tExecINS (ms), u_tExecINS (ms)\n";
 
-        int i, j, k;
+        int i, j, k, l=0;
         for (i = 0; i < tabInfos.length; i++) {
             for (j = 0; j < tabInfos[i].length; j++){
-                for (k = 0; k < tabInfos[i][j].length - 2; k++) {
-                    stringInfos[j] += String.format("%.0f", tabInfos[i][j][k]) + ", ";
+                for (k = l; k < tabInfos[i][j].length - 2; k++) {
+                    stringInfos += String.format("%.0f", tabInfos[i][j][k]) + ", ";
                 }
-                stringInfos[j] += String.format("%.3f", tabInfos[i][j][k]) + ", ";
-                stringInfos[j] += String.format("%.3f", tabInfos[i][j][k+1]) + "\n";
+                l=1;
+                stringInfos += String.format("%.3f", tabInfos[i][j][k]) + ", ";
+                stringInfos += String.format("%.3f", tabInfos[i][j][k+1]);
+                if (j == tabInfos[i].length - 1) {
+                    stringInfos += "\n";
+                }
+                else {
+                    stringInfos += ", ";
+                }
             }
+            l=0;
         }
         return stringInfos;
     }
 
     /**
      * FONCTION AJOUTEE
-     * Action : convertit un tableau de String contenant les donées de chacune des méthodes en fichiers CSV.
+     * Action : convertit le String contenant les donées de chacune des méthodes en fichiers CSV.
      * Prérequis : format des String dans stringInfos adapté OU stringInfos directement retourné par convertInfosToString(double[][][] tabInfos).
      * @param stringInfos
      * @throws FileNotFoundException
      */
-    private static void stringInfosToCsv(String[] stringInfos) throws FileNotFoundException {
-        for (int i = 0; i < stringInfos.length; i++) {
-            File csvFile = new File("./datas/datas"+(i+1)+".csv");
-            PrintWriter output = new PrintWriter(csvFile);
-            output.print(stringInfos[i]);
-            output.close();
-        }
+    private static void stringInfosToCsv(String stringInfos, String fileName) throws FileNotFoundException {
+        File csvFile = new File("./datas/"+fileName+".csv");
+        PrintWriter output = new PrintWriter(csvFile);
+        output.print(stringInfos);
+        output.close();
     }
 
 
@@ -432,7 +441,7 @@ public class Paquet {
      * @throws FileNotFoundException
      */
     public static void testTrisWithDatas(int nStart, int nEnd, int nStep) throws FileNotFoundException {
-        stringInfosToCsv(convertInfosToString(Paquet.testTrisVarN(nStart, nEnd, nStep)));
+        stringInfosToCsv(convertInfosToString(Paquet.testTrisVarN(nStart, nEnd, nStep)), "datas");
     }
 
 
@@ -549,4 +558,95 @@ public class Paquet {
 
         return str;
     }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
+     * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges.
+     * Valeur théorique : 0.28956680871386137
+     * @param nb nombre d'essai
+     * @return
+     */
+    public static double proba3CR(int nbEssai) {
+        double countCasFavorable = 0;
+        Paquet paq;
+        for (int j = 0; j < nbEssai; j++) {
+            paq = new Paquet(
+                Couleur.valuesInRange(0, 3), 
+                3, 
+                Figure.valuesInRange(0, 3), 
+                Texture.valuesInRange(0, 3)
+                );
+            Carte[] tab = paq.piocher(9);
+            double countRed=0;
+            for (int k = 0; k < tab.length; k++) {
+                if (tab[k].getCouleur() == Couleur.ROUGE) {
+                    countRed++;
+                }
+            }
+            if (countRed==3) {
+                countCasFavorable++;
+            }
+        }
+        return countCasFavorable;
+    }
+
+
+    public static void proba3CRVarEssai(int startEssai, int endEssai, int stepEssai) throws FileNotFoundException {
+        int range = (int) Math.ceil((float) (endEssai - startEssai)/stepEssai);
+        double[][] tabStats = new double[range][4];
+        int count = 0;
+        for (int i = startEssai; i < endEssai; i+=stepEssai) {
+            tabStats[count][0] = i;
+            tabStats[count][1] = proba3CR(i);
+            tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
+            tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]);
+            count++;
+        }
+        stringInfosToCsv(probaDatasToString(tabStats), "proba3CR");
+    }
+
+
+    public static String probaDatasToString(double[][] tabStats) {
+        String stringDatas = "NbEssai, Freq, P, Erreur (%)\n";
+        int i,j;
+        for (i = 0; i < tabStats.length; i++) {
+            for (j = 0; j < tabStats[i].length - 1; j++) {
+                stringDatas += tabStats[i][j] + ", ";
+            }
+            stringDatas += tabStats[i][j] + "\n";
+        }
+        return stringDatas;
+    }
+
+
+
+    public static double proba3CRAnd2CL(int nb) {
+        double countCasFavorable = 0;
+        Paquet paq;
+        for (int i = 0; i < nb; i++) {
+            paq = new Paquet(
+                Couleur.valuesInRange(0, 3), 
+                3, 
+                Figure.valuesInRange(0, 3), 
+                Texture.valuesInRange(0, 3)
+                );
+            Carte[] tab = paq.piocher(9);
+            double countRed=0;
+            double countLosange=0;
+            for (int j = 0; j < tab.length; j++) {
+                if (tab[j].getCouleur() == Couleur.ROUGE) {
+                    countRed++;
+                }
+                if (tab[j].getFigure() == Figure.LOSANGE) {
+                    countLosange++;
+                }
+            }
+            if (countRed==3 && countLosange==2) {
+                countCasFavorable++;
+            }
+        }
+        return countCasFavorable/nb;
+    }
+
 }
