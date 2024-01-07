@@ -121,17 +121,23 @@ public class Test {
         // Paquet.testTrisWithDatas(10, 500, 1);
 
         //PROBA
-        double proba3CR = Paquet.proba3CR(1000)/1000;
-        double proba3CRAnd2CL = Paquet.proba3CRAnd2CL(1000);
+        int nbEssai = 100000;
+        double proba3CR = Paquet.proba3CR(nbEssai)/nbEssai;
+        double proba3CRAnd2CL = Paquet.proba3CRAnd2CL(nbEssai);
+        double probaE3C = Paquet.probaE3C(nbEssai)/nbEssai;
         System.out.println("La probabilité théorique de l'événement 3CR est de " + Ut.arrondirNDecimal(0.28956680871386137, 5));
         System.out.println("La probabilité expérimental de l'événement 3CR est de " + proba3CR);
         System.out.println("Le pourcentage d'erreur est de " + Ut.arrondirNDecimal(Ut.pourcentageErreur(0.28956680871386137, proba3CR), 3)+" %" +"\n");
         System.out.println("La probabilité théorique de l'événement 3CR&2CL est de " + Ut.arrondirNDecimal(0.06884362550959248, 5));
         System.out.println("La probabilité expérimental de l'événement 3CR&2CL est de " + proba3CRAnd2CL);
-        System.out.println("Le pourcentage d'erreur est de " + Ut.arrondirNDecimal(Ut.pourcentageErreur(0.06884362550959248, proba3CRAnd2CL), 3) +" %");
+        System.out.println("Le pourcentage d'erreur est de " + Ut.arrondirNDecimal(Ut.pourcentageErreur(0.06884362550959248, proba3CRAnd2CL), 3) +" %" + "\n");
+        System.out.println("La probabilité expérimental de l'événement E3C est de " + probaE3C);
 
-        //
-        // Paquet.proba3CRVarEssai(100, 100000, 100);
+        // 3RC
+        // Paquet.probaVarEssai(100, 1000, 10, 1);
+
+        // E3C
+        // Paquet.probaVarEssai(10, 1000, 10, 2);
 
     }
 }

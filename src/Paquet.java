@@ -430,12 +430,14 @@ public class Paquet {
      * Prerequis : 0 < nStart < nEnd ET 0 < nStep
      * Action : réunit les méthodes ci-dessus :
      * 1. Realise les 3 tris (plusieurs fois pour un meme N pour different paquet ayant meme caracteristique) en variant N (selon la borne et le pas entrés en parametres).
-     * Stockage des donées : double[nStart-nEnd/nStep][3][3]
-     * 2. Conversion des donées en String[3] dont chacun des String contient les donées d'une des méthodes sous un format adapté au fichiers .csv
-     * String[0] --> SELECTION
-     * String[1] --> BULLES
-     * String[2] --> INSERION
-     * 3. Ecrit chaque String dans un fichier .csv pour bien séparer les données de chacune des méthodes.
+     * Stockage des donées : double[nStart-nEnd/nStep][3][5]
+     * 2. Conversion des donées en String contenant les donées des 3 méthodes sous un format adapté au fichiers .csv
+     * Ordre des infos
+     * col1 --> N
+     * col2-5 --> SELECTION
+     * col6-9 --> BULLES
+     * col10-13 --> INSERION
+     * 3. Ecrit le String dans un fichier .csv pour favoriser le traitement de données
      * @throws FileNotFoundException
      */
     public static void testTrisWithDatas(int nStart, int nEnd, int nStep) throws FileNotFoundException {
@@ -556,6 +558,17 @@ public class Paquet {
         return str;
     }
 
+
+
+
+
+
+
+
+
+
+
+
     /**
      * FONCTION AJOUTEE
      * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
@@ -588,19 +601,42 @@ public class Paquet {
         return countCasFavorable;
     }
 
-
-    public static void proba3CRVarEssai(int startEssai, int endEssai, int stepEssai) throws FileNotFoundException {
+    /**
+     * 1 pour 3CR
+     * 2 pour E3C
+     * 
+     */
+    public static void probaVarEssai(int startEssai, int endEssai, int stepEssai, int experience) throws FileNotFoundException {
         int range = (int) Math.ceil((float) (endEssai - startEssai)/stepEssai);
         double[][] tabStats = new double[range][4];
         int count = 0;
         for (int i = startEssai; i < endEssai; i+=stepEssai) {
             tabStats[count][0] = i;
-            tabStats[count][1] = proba3CR(i);
-            tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
-            tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]);
+            switch (experience) {
+                case 1:
+                    tabStats[count][1] = proba3CR(i);
+                    tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
+                    tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]); 
+                    break;
+                case 2:
+                    tabStats[count][1] = probaE3C(i);
+                    tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
+                    break;
+                default:
+                    break;
+            } 
             count++;
         }
-        stringInfosToCsv(probaDatasToString(tabStats), "proba3CR");
+        switch (experience) {
+            case 1:
+                stringInfosToCsv(probaDatasToString(tabStats), "proba3CR");
+                break;
+            case 2:
+                stringInfosToCsv(probaDatasToString(tabStats), "probaE3C");
+                break;
+            default:
+                break;
+        }
     }
 
 
@@ -646,4 +682,33 @@ public class Paquet {
         return countCasFavorable/nb;
     }
 
+    public static double probaE3C(int nb) {
+        double countCasFavorable = 0;
+        Paquet paq;
+        for (int i = 0; i < nb; i++) {
+            paq = new Paquet(
+                Couleur.valuesInRange(0, 3), 
+                3, 
+                Figure.valuesInRange(0, 3), 
+                Texture.valuesInRange(0, 3)
+                );
+            Carte[] tab = paq.piocher(9);
+            if (trouverE3C(tab)) {
+                countCasFavorable++;
+            }    
+        }
+        return countCasFavorable;
+    }
+
+    public static boolean trouverE3C(Carte[] cartes) {
+        if (cartes.length < 3) {
+            return false;
+        }
+        for(int i = 0; i < cartes.length; i++)
+            for(int j = i+1; j < cartes.length; j++)
+                for(int k = j+1; k < cartes.length; k++)
+                    if(Jeu.estUnE3C(new Carte[]{cartes[i], cartes[j], cartes[k]}))
+                        return true;
+        return false;
+    }
 }

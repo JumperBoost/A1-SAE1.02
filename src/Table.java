@@ -37,7 +37,7 @@ public class Table {
     /*
     * FONCTION AJOUTEE
     * Pré-requis : hauteur >= 3, largeur >= 3, paquet.nbCartesLeft >= hauteur * largeur
-    * Action : Construit une table rempli avec les dimensions et paquet précisées en paraètre.
+    * Action : Construit une table rempli avec les dimensions et paquet précisées en paramètre.
     * Exemple : hauteur : 3, largeur : 3 => construit une table 3x3 (avec 9 cartes piochées dans le paquet précisé en paramètre)
      */
     public Table(int hauteur, int largeur, Paquet paquet) {
@@ -95,8 +95,7 @@ public class Table {
             return faireSelectionneUneCarte();
         }
 
-        String[] coordonnees = input.split(",");
-        Coordonnees coordCarte = new Coordonnees(Integer.parseInt(coordonnees[0]), Integer.parseInt(coordonnees[1]));
+        Coordonnees coordCarte = new Coordonnees(input);
         if(!carteExiste(coordCarte)) {
             Ut.afficherSL("Cette carte n'existe pas, veuillez réessayer.");
             return faireSelectionneUneCarte();
@@ -157,7 +156,7 @@ public class Table {
             for(int j = 0; j < Carte.getHauteur(); j++)
                 affichageLigne[i][j] = "";
 
-        // Insérer l'affichage de chaqye carte dans la matrice d'une table
+        // Insérer l'affichage de chaque carte dans la matrice d'une table
         for(int index : selection) {
             String[] lignesCarte = cartes[index-1].toString().split("\n");
             for(int i = 0; i < Carte.getHauteur(); i++)

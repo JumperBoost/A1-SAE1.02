@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.6)  6 JAN 2024 15:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.6)  7 JAN 2024 15:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1417,32 +1417,33 @@ nput line 109.
 [3
 
 ] [4] [5]
-<../graphe/graph1.png, id=236, 2836.5975pt x 1306.8825pt>
-File: ../graphe/graph1.png Graphic file (type png)
-<use ../graphe/graph1.png>
-Package pdftex.def Info: ../graphe/graph1.png  used on input line 192.
-(pdftex.def)             Requested size: 452.96826pt x 208.6867pt.
-File: ../graphe/graph1.png Graphic file (type png)
-<use ../graphe/graph1.png>
-Package pdftex.def Info: ../graphe/graph1.png  used on input line 196.
-(pdftex.def)             Requested size: 452.96826pt x 208.6867pt.
- [6 <../graphe/graph1.png>] [7]
+<../graphe/nbOp.jpg, id=236, 803.0pt x 451.6875pt>
+File: ../graphe/nbOp.jpg Graphic file (type jpg)
+<use ../graphe/nbOp.jpg>
+Package pdftex.def Info: ../graphe/nbOp.jpg  used on input line 192.
+(pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
+<../graphe/tExecSansU.jpg, id=237, 803.0pt x 451.6875pt>
+File: ../graphe/tExecSansU.jpg Graphic file (type jpg)
+<use ../graphe/tExecSansU.jpg>
+Package pdftex.def Info: ../graphe/tExecSansU.jpg  used on input line 196.
+(pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
+ [6 <../graphe/nbOp.jpg>] [7 <../graphe/tExecSansU.jpg>]
 Chapitre 2.
 [8
 
 ]
-<../graphe/Freq(n).jpg, id=266, 803.0pt x 451.6875pt>
+<../graphe/Freq(n).jpg, id=265, 803.0pt x 451.6875pt>
 File: ../graphe/Freq(n).jpg Graphic file (type jpg)
 <use ../graphe/Freq(n).jpg>
 Package pdftex.def Info: ../graphe/Freq(n).jpg  used on input line 230.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
-<../graphe/Erreur(n).jpg, id=268, 803.0pt x 451.6875pt>
+<../graphe/Erreur(n).jpg, id=267, 803.0pt x 451.6875pt>
 File: ../graphe/Erreur(n).jpg Graphic file (type jpg)
 <use ../graphe/Erreur(n).jpg>
 Package pdftex.def Info: ../graphe/Erreur(n).jpg  used on input line 244.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
  [9 <../graphe/Freq(n).jpg>]
-<../graphe/P(n).jpg, id=278, 803.0pt x 451.6875pt>
+<../graphe/P(n).jpg, id=277, 803.0pt x 451.6875pt>
 File: ../graphe/P(n).jpg Graphic file (type jpg)
 <use ../graphe/P(n).jpg>
 Package pdftex.def Info: ../graphe/P(n).jpg  used on input line 249.
@@ -1467,10 +1468,10 @@ has not changed.
 (rerunfilecheck)             Checksum: 96485BD2FEBB2A9658DEF29B5F33E147;4762.
  ) 
 Here is how much of TeX's memory you used:
- 32845 strings out of 474495
- 649838 string characters out of 5743936
+ 32852 strings out of 474495
+ 650040 string characters out of 5743936
  1997460 words of memory out of 5000000
- 54500 multiletter control sequences out of 15000+600000
+ 54507 multiletter control sequences out of 15000+600000
  571796 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  93i,12n,99p,878b,1203s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1499,10 +1500,10 @@ y7.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
 s/cm/cmti10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmti12.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/ty
 pe1/public/amsfonts/cm/cmtt10.pfb>
-Output written on SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.pdf (14 pages, 970254 
+Output written on SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.pdf (14 pages, 877670 
 bytes).
 PDF statistics:
- 443 PDF objects out of 1000 (max. 8388607)
+ 442 PDF objects out of 1000 (max. 8388607)
  83 named destinations out of 1000 (max. 500000)
- 385 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 390 words of extra memory for PDF output out of 10000 (max. 10000000)
 

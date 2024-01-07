@@ -39,7 +39,7 @@ public class Jeu {
 
     public Jeu() {
         this.score = 0;
-        this.paquet = new Paquet(Couleur.values(), 3, Figure.values(), Texture.values());
+        this.paquet = new Paquet(Couleur.valuesInRange(0,3), 3, Figure.valuesInRange(0,3), Texture.valuesInRange(0, 3));
         this.table = new Table(3, 3, this.paquet);
     }
 
@@ -61,7 +61,7 @@ public class Jeu {
 
     public void resetJeu() {
         this.score = 0;
-        this.paquet = new Paquet(Couleur.values(), 3, Figure.values(), Texture.values());
+        this.paquet = new Paquet(Couleur.valuesInRange(0, 3), 3, Figure.valuesInRange(0, 3), Texture.valuesInRange(0,3));
         this.table = new Table(3, 3, this.paquet);
     }
 
@@ -306,8 +306,9 @@ public class Jeu {
 
     public void jouer() {
         boolean fini = false;
+        Ut.clearConsole();
         while(!fini) {
-            Ut.afficherSL("Bienvenue dans le jeu E3Cète !");
+            Ut.afficherSL("\n\nBienvenue dans le jeu E3Cète !");
             Ut.sautLigne();
             Ut.afficherSL("Veuillez sélectionner une option :");
             Ut.afficherSL("1. Humain");

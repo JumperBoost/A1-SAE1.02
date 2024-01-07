@@ -25,7 +25,7 @@ public class Coordonnees {
      */
     public Coordonnees(String input) {
         String[] splited = input.split(",");
-        //splitted est un tableau de String qui contient les sous chaines de caracteres contenues dans input et séparées par ','
+        //splited est un tableau de String qui contient les sous chaines de caracteres contenues dans input et séparées par ','
         this.x = Integer.parseInt(splited[0]);
         this.y = Integer.parseInt(splited[1]);
     }
