@@ -15,7 +15,8 @@ public class Carte  {
     private Texture texture;
 
     //VARIABLES DE CLASSE
-
+    private static final int hauteur = 5;
+    private static final int largeur = 9;
 
 
     /**
@@ -91,7 +92,7 @@ public class Carte  {
                 res = this.figure.compareTo(carte.figure);
                 if (res == 0) {
                     res = this.texture.compareTo(carte.texture);
-                } 
+                }
             }
         }
         return res;
@@ -102,7 +103,7 @@ public class Carte  {
      * FONCTION AJOUTEE
      * Action : compare le nbFigures de this et de carte
      * @param carte une carte
-     * @return 
+     * @return
      *  0 si "this.nbFigures" égal à "carte.nbFigures"
      * <0 si "this.nbFigures" inférieur à "carte.nbFigures"*
      * >0 si "this.nbFigures" supérieur à "carte.nbFigures"*
@@ -133,8 +134,24 @@ public class Carte  {
                 textColor + textureChar.repeat(4) + bothColor + getFigure().getFigureChar() + textColor + textureChar.repeat(4) + Couleur.getReset() + "\n" +
                 textColor + textureChar.repeat(9) + Couleur.getReset() + "\n" +
                 textColor + textureChar.repeat(8 - String.valueOf(getNbFigures()).length()) + bothColor + getNbFigures() + textColor + textureChar + Couleur.getReset();
-        
+
         return str;
+    }
+
+    /*
+    * FONCTION AJOUTE
+    * Résultat : Hauteur d'affichage d'une carte
+     */
+    public static int getHauteur() {
+        return hauteur;
+    }
+
+    /*
+    * FONCTION AJOUTE
+    * Résultat : Largeur d'affichage d'une carte
+     */
+    public static int getLargeur() {
+        return largeur;
     }
 
 }

@@ -16,6 +16,10 @@
  */
 public class Table {
 
+    // Variables d'instance
+    private Carte[] cartes;
+    private int hauteur, largeur;
+
     /**
      * Pre-requis : hauteur >=3, largeur >=3
      *
@@ -25,7 +29,21 @@ public class Table {
      */
 
     public Table(int hauteur, int largeur){
+        this.hauteur = hauteur;
+        this.largeur = largeur;
+        this.cartes = new Carte[hauteur * largeur];
+    }
 
+    /*
+    * FONCTION AJOUTEE
+    * Pré-requis : hauteur >= 3, largeur >= 3, paquet.nbCartesLeft >= hauteur * largeur
+    * Action : Construit une table rempli avec les dimensions et paquet précisées en paraètre.
+    * Exemple : hauteur : 3, largeur : 3 => construit une table 3x3 (avec 9 cartes piochées dans le paquet précisé en paramètre)
+     */
+    public Table(int hauteur, int largeur, Paquet paquet) {
+        this.hauteur = hauteur;
+        this.largeur = largeur;
+        this.cartes = paquet.piocher(getTaille());
     }
 
     /**
@@ -33,7 +51,7 @@ public class Table {
      */
 
     public int getTaille() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        return this.hauteur * this.largeur;
     }
 
     /**
@@ -44,14 +62,18 @@ public class Table {
      */
 
     public String toString() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        int[] selections = new int[getTaille()];
+        for(int i = 0; i < getTaille(); i++)
+            selections[i] = i+1;
+        return recupererSelection(selections);
     }
 
     /**
      * Résullat : Vrai la carte située aux coordonnées précisées en paramètre est une carte possible pour la table.
      */
     public boolean carteExiste(Coordonnees coordonnees) {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        int index = selectionnerIndex(coordonnees);
+        return index >= 0 && index < getTaille();
     }
 
     /**
@@ -66,7 +88,20 @@ public class Table {
      */
 
     public int faireSelectionneUneCarte() {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        Ut.afficher("Veuillez saisir les coordonnées de la carte que vous souhaitez sélectionner (x,y): ");
+        String input = Ut.saisirChaine();
+        if(!Coordonnees.formatEstValide(input)) {
+            Ut.afficherSL("Format invalide, veuillez réessayer.");
+            return faireSelectionneUneCarte();
+        }
+
+        String[] coordonnees = input.split(",");
+        Coordonnees coordCarte = new Coordonnees(Integer.parseInt(coordonnees[0]), Integer.parseInt(coordonnees[1]));
+        if(!carteExiste(coordCarte)) {
+            Ut.afficherSL("Cette carte n'existe pas, veuillez réessayer.");
+            return faireSelectionneUneCarte();
+        }
+        return selectionnerIndex(coordCarte)+1;
     }
 
     /**
@@ -77,7 +112,26 @@ public class Table {
      */
 
     public int[] selectionnerCartesJoueur(int nbCartes) {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        int[] selections = new int[nbCartes];
+        int index = 0;
+        while(index < nbCartes) {
+            int selection;
+            boolean doublon;
+            do {
+                selection = faireSelectionneUneCarte();
+                doublon = false;
+                // Vérification de doublon
+                int i = 0;
+                while(i < index && !doublon) {
+                    if(selections[i++] == selection) {
+                        Ut.afficherSL("Vous avez déjà sélectionné cette carte, veuillez en choisir une autre.");
+                        doublon = true;
+                    }
+                }
+            } while(doublon);
+            selections[index++] = selection;
+        }
+        return selections;
     }
 
     /**
@@ -87,7 +141,70 @@ public class Table {
      */
 
     public void afficherSelection(int[] selection) {
-        throw new RuntimeException("Méthode non implémentée ! Effacez cette ligne et écrivez le code nécessaire");
+        Ut.afficherSL(recupererSelection(selection));
+    }
+
+    /**
+     * Pré-requis : 1 <= nbCartes <= nombre de Cartes de this
+     * @param selection
+     * @return Le champ de texte représentant les cartes de la table correspondantes aux numéros de cartes contenus dans selection
+     */
+    private String recupererSelection(int[] selection) {
+        int curLigne = 0;
+        int curCol = 0;
+        String[][] affichageLigne = new String[this.hauteur][Carte.getHauteur()];
+        for(int i = 0; i < this.hauteur; i++)
+            for(int j = 0; j < Carte.getHauteur(); j++)
+                affichageLigne[i][j] = "";
+
+        // Insérer l'affichage de chaqye carte dans la matrice d'une table
+        for(int index : selection) {
+            String[] lignesCarte = cartes[index-1].toString().split("\n");
+            for(int i = 0; i < Carte.getHauteur(); i++)
+                affichageLigne[curLigne][i] += (curCol != 0 ? " ".repeat(5) : "") + lignesCarte[i];
+
+            // Vérifier si la largeur max de la table est atteint, afin de sauter à la ligne suivante
+            if(curCol == this.largeur-1) {
+                curLigne++;
+                curCol = 0;
+            } else curCol++;
+        }
+
+        // Formatter l'affichage final et l'afficher
+        String affichage = "";
+        for(int ligne = 0; ligne < affichageLigne.length; ligne++) {
+            String[] lignesCartes = affichageLigne[ligne];
+            for(String ligneCartes : lignesCartes)
+                if(ligneCartes != "")
+                    affichage += ligneCartes + "\n";
+            affichage += "\n";
+        }
+        return affichage;
+    }
+
+    /**
+    * FONCTION AJOUTEE
+    * Action : Détermine l'index de la carte aux coordonnées précisées en paramètre
+    * Résultat : L'index de la carte par rapport au tableau de cartes
+     */
+    public int selectionnerIndex(Coordonnees coordonnees) {
+        return (coordonnees.getLigne() - 1) * this.largeur + coordonnees.getColonne() - 1;
+    }
+
+    /**
+    * FONCTION AJOUTEE
+    * Action : Remplace la carte à la position précisée en paramètre par la carte précisée en paramètre
+     */
+    public void remplacerCarte(Carte carte, int position) {
+        this.cartes[position-1] = carte;
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Résullat : Le tableau de cartes représentant la table.
+     */
+    public Carte[] getCartes() {
+        return this.cartes;
     }
 
 }

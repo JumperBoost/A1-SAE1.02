@@ -15,7 +15,6 @@ import java.io.PrintWriter;
  */
 public class Paquet {
 
-
     //VARIABLE D'INSTANCES
     private Carte[] cartes;
     private Couleur[] couleurs;
@@ -296,7 +295,6 @@ public class Paquet {
      * tabInfos[0][0 à 4] --> Infos de Méthode SELECTION
      * tabInfos[1][0 à 4] --> Infos de Méthode BULLES
      * tabInfos[2][0 à 4] --> Infos de Méthode INSERTION
-     * @param nbCartes
      * @param nbRepetition
      * @return un tableau de tableau (3x3) de double.
      */
@@ -358,7 +356,7 @@ public class Paquet {
      * Les cardinalités de couleurs/figures/textures sont fixées à des valeurs constantes par les variables de class.
      * @param nStart premiere valeur de nbFiguresMax
      * @param nEnd valeur limite (exclue)
-     * @param nstep pas
+     * @param nStep pas
      * @return un tableau contenant tout les résultats de chacun des trisPaquet().
      */
     private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
@@ -500,9 +498,8 @@ public class Paquet {
     public Carte[] piocher(int nbCartes) {
         Carte[] tabCartes = new Carte[nbCartes];
         for (int i = 0; i < nbCartes; i++) {
-            tabCartes[i] = this.cartes[this.nbCartesLeft - 1 - i];
+            tabCartes[i] = this.cartes[--this.nbCartesLeft];
         }
-        this.nbCartesLeft = this.nbCartesLeft - nbCartes;
         return tabCartes;
     }
 
@@ -564,7 +561,7 @@ public class Paquet {
      * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
      * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges.
      * Valeur théorique : 0.28956680871386137
-     * @param nb nombre d'essai
+     * @param nbEssai nombre d'essai
      * @return
      */
     public static double proba3CR(int nbEssai) {
