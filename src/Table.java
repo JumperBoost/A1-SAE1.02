@@ -170,7 +170,7 @@ public class Table {
             } else curCol++;
         }
 
-        // Formatter l'affichage final et l'afficher
+        // Formatter l'affichage final
         String affichage = "";
         for(int ligne = 0; ligne < affichageLigne.length; ligne++) {
             String[] lignesCartes = affichageLigne[ligne];
