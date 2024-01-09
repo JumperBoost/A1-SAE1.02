@@ -17,10 +17,6 @@ public class Paquet {
 
     //VARIABLE D'INSTANCES
     private Carte[] cartes;
-    private Couleur[] couleurs;
-    private int nbFiguresMax;
-    private Figure[] figures;
-    private Texture[] textures;
     private int nbCartesLeft;
     private int idPaquet;
     //initialisation au nombre max de cartes créer
@@ -53,11 +49,6 @@ public class Paquet {
      */
 
     public Paquet(Couleur[] couleurs, int nbFiguresMax, Figure[] figures, Texture[] textures) {
-        this.couleurs = couleurs;
-        this.nbFiguresMax = nbFiguresMax;
-        this.figures = figures;
-        this.textures = textures;
-
         this.nbCartesLeft = 0;
         this.cartes = new Carte[getNombreCartesAGenerer(couleurs, nbFiguresMax, figures, textures)];
 
@@ -76,11 +67,6 @@ public class Paquet {
      */
 
     public Paquet(Paquet paquet) {
-        this.couleurs = paquet.couleurs;
-        this.nbFiguresMax = paquet.nbFiguresMax;
-        this.figures = paquet.figures;
-        this.textures = paquet.textures;
-
         this.nbCartesLeft = paquet.nbCartesLeft;
         this.cartes = new Carte[paquet.cartes.length];
         for (int i = 0; i < cartes.length; i++)
@@ -108,7 +94,7 @@ public class Paquet {
 
     public void melanger() {
         Random r = new Random();
-        int nbSwap = getNombreCartesAGenerer(this.couleurs, this.nbFiguresMax, this.figures, this.textures) * 2;
+        int nbSwap = this.cartes.length * 2;
         int choix1;
         int choix2;
         for (int i = 0; i < nbSwap; i++) {
@@ -567,7 +553,7 @@ public class Paquet {
 
 
 
-
+//FONCTIONS PROBABILITE
 
     /**
      * FONCTION AJOUTEE
@@ -612,30 +598,23 @@ public class Paquet {
         int count = 0;
         for (int i = startEssai; i < endEssai; i+=stepEssai) {
             tabStats[count][0] = i;
-            switch (experience) {
-                case 1:
-                    tabStats[count][1] = proba3CR(i);
-                    tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
-                    tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]); 
-                    break;
-                case 2:
-                    tabStats[count][1] = probaE3C(i);
-                    tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
-                    break;
-                default:
-                    break;
-            } 
+            if (experience == 1) {
+                tabStats[count][1] = proba3CR(i);
+                tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
+                tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]); 
+            }
+            else if (experience == 2) {
+                tabStats[count][1] = probaE3C(i);
+                tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
+                //na calcul pas erreur car pas de val theorique
+            }
             count++;
         }
-        switch (experience) {
-            case 1:
-                stringInfosToCsv(probaDatasToString(tabStats), "proba3CR");
-                break;
-            case 2:
-                stringInfosToCsv(probaDatasToString(tabStats), "probaE3C");
-                break;
-            default:
-                break;
+        if (experience == 1) {
+            stringInfosToCsv(probaDatasToString(tabStats), "proba3CR"); 
+        }
+        else if (experience == 2) {
+            stringInfosToCsv(probaDatasToString(tabStats), "probaE3C");
         }
     }
 

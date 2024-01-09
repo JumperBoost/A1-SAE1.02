@@ -6,7 +6,7 @@ public enum Figure {
 
     CARRE('■'),
     LOSANGE('⧫'),
-    CERCLE('●');
+    CERCLE('O');
 
     private static int nbEnum = Figure.values().length;
 
