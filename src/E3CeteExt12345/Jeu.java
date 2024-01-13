@@ -3,7 +3,7 @@ package E3CeteExt12345;
 import utils.Ut;
 
 /**
- * La classe E3CeteBase.Jeu permet de faire des parties du jeu "E3Cète" soit avec un humain, soit avec un ordinateur.
+ * La classe Jeu permet de faire des parties du jeu "E3Cète" soit avec un humain, soit avec un ordinateur.
  *
  * Règles :
  *
@@ -206,7 +206,7 @@ public class Jeu {
 
     /**
      * Action : Fait jouer un tour à un joueur humain.
-     * La E3CeteBase.Table et le score du joueur sont affichés.
+     * La Table et le score du joueur sont affichés.
      * Le joueur sélectionne 3 cartes.
      *  - Si c'est un E3C, il gagne trois points.
      *  - Sinon, il perd un point.
@@ -215,7 +215,7 @@ public class Jeu {
      */
 
     public void jouerTourHumain() {
-        Ut.afficherSL("E3CeteBase.Table de jeu :\n" + this.table.toString());
+        Ut.afficherSL("Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
         Ut.afficherSL("Veuillez sélectionner 3 cartes formant un E3C :");
@@ -250,7 +250,7 @@ public class Jeu {
 
     /**
      * Action : Fait jouer un tour à l'ordinateur.
-     * La E3CeteBase.Table et le score de l'ordinateur sont affichés.
+     * La Table et le score de l'ordinateur sont affichés.
      * L'ordinateur sélectionne des cartes :
      *  - L'ordinateur essaye toujours de trouver un E3C sur la table. S'il en trouve un, il gagne donc trois points.
      *  - S'il n'en trouve pas, il se rabat sur 3 cartes sélectionnées aléatoirement et perd un point.
@@ -259,7 +259,7 @@ public class Jeu {
      */
 
     public void joueurTourOrdinateur() {
-        Ut.afficherSL("E3CeteBase.Table de jeu :\n" + this.table.toString());
+        Ut.afficherSL("Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
         Ut.afficherSL("L'ordinateur sélectionne 3 cartes formant un E3C :");

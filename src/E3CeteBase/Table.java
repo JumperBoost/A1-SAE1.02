@@ -3,11 +3,11 @@ package E3CeteBase;
 import utils.Ut;
 
 /**
- * La classe E3CeteBase.Table représente une table de jeu contenant des cartes.
+ * La classe Table représente une table de jeu contenant des cartes.
  *
  * La table est représentée graphiquement par une matrice.
  * On peut donc avoir des tables de dimensions 3x3, 3x4, 4x4, 5x5, 10x15...
- * En mémoire, la E3CeteBase.Table est représentée par un simple tableau (à une dimension)
+ * En mémoire, la Table est représentée par un simple tableau (à une dimension)
  * Quand elle est initialisée, la table est vide.
  *
  * Pour désigner une carte sur la table, on utilise des coordonées (i,j) ou i représenta la ligne et j la colonne.
@@ -61,8 +61,8 @@ public class Table {
     /**
      * Pre-requis : la table est pleine
      * Action : Affiche des cartes de la table sous forme de matrice
-     * L'affichage des cartes doit respecter le format défini dans la classe E3CeteBase.Carte (chaque carte doit donc être colorée).
-     * On ne donne volontairement pas d'exemple puisque celà depend du choix fait pour votre représentation de E3CeteBase.Carte
+     * L'affichage des cartes doit respecter le format défini dans la classe Carte (chaque carte doit donc être colorée).
+     * On ne donne volontairement pas d'exemple puisque celà depend du choix fait pour votre représentation de Carte
      */
 
     public String toString() {

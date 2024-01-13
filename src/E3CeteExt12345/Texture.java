@@ -3,7 +3,7 @@ package E3CeteExt12345;
 public enum Texture {
 
     /**
-     * Représente la texture d'une E3CeteBase.Carte : pleine , à pois...
+     * Représente la texture d'une Carte : pleine , à pois...
      */
 
     VIDE(' '),

@@ -5,7 +5,7 @@ import utils.Ut;
 public class Coordonnees {
 
     /**
-     * La classe E3CeteBase.Coordonnees représente les coordonnées (i,j) d'une E3CeteBase.Carte sur la E3CeteBase.Table
+     * La classe Coordonnees représente les coordonnées (i,j) d'une Carte sur la Table
      * ou i représenta la ligne et j la colonne
      * Cette classe est utilisée uniquement pour intéragir avec l'utilisateur
      **/
