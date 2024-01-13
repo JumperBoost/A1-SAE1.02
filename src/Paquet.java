@@ -19,13 +19,13 @@ public class Paquet {
     private Carte[] cartes;
     private int nbCartesLeft;
     private int idPaquet;
-    //initialisation au nombre max de cartes créer
 
     //VARIABLES DE CLASSE
     private static int nbPaquets = 0;
     private static int nbOpApprox = 0;
-    private static int nbRepetTest = 1000;
 
+    //Nombre de fois qu'on répète l'experience des 3 tris pour un N donné.
+    private static int nbRepetTest = 1000;
     //caracteristiques par default du Paquet pour TestTri
     private static int cardCouleurs = 3;
     private static int cardRepetFigures = 3;
@@ -188,6 +188,7 @@ public class Paquet {
 
 
     /**
+     * FONCTION AJOUTEE
      * Action : Modifie les valeurs des cardinalités pour les Paquets Test
      * Prerequis : 1 <= cardNbFig
      * 1 <= cardCoul/cardFig/cardText <= <nom_Enum>.values().length 
@@ -206,12 +207,13 @@ public class Paquet {
      * La méthode est "static" et ne s'effectue donc pas sur la paquet courant "this".
      */
     public static void testTris() {
-        //generer paquet mélangé
-        //trier ce paquet selon les differentes methodes P1, P2, P3
-        //verifier que P1, P2, P3 sont triés
-        //bonus verifier P1 = P2 = P3
-        // si all true all works :)
-  
+        //STRAT
+        // 1. Generer paquet mélangé
+        // 2. Verifier qu'il est bien mélangé
+        // 3. Trier ce paquet pour chacune des méthodes en générant 3 nouveaux paquets P1, P2, P3.
+        // 4. Vérifier que P1, P2 et P3 sont triés
+        // 5. Afficher temps d'execution et nbOp des 3 méthodes
+        // 6. Bonus : verifier que P1 = P2 = P3
 
         Paquet paq = new Paquet(Couleur.valuesInRange(0, cardCouleurs), cardRepetFigures, Figure.valuesInRange(0, cardFigures), Texture.valuesInRange(0, cardTextures));
         int note = 0;
@@ -263,171 +265,6 @@ public class Paquet {
 
         System.out.println("\nEND-TEST-TRIS-----------------------------------------------------------");
         System.out.println(Couleur.getReset());
-    }
-
-
-    /**
-     * FONCTION AJOUTEE
-     * Action : réalise les 3 méthodes de tris pour un paquet initialisé à nbCartes nombre de carte.
-     * Pour cette fonction le nombre de Couleur/nbFigures/Figure/Texture sont fixes (variables de classes : cardCouleurs, cardRepetFigures, cardFigures, cardTextures).
-     * Nous répétons ces tris plusieurs fois (valeurs entrés en params) sur des paquets presentant les memes caracteristiques mais mélangés différremment ; pour obtenir des données significatifs :
-     * Stock les donées relatifs (nb Cartes, nombre OP et temps exec) aux tris dans un tableau de tableau.
-     * tabInfos[O à 2][0] --> nbCartes
-     * tabInfos[O à 2][1] --> nbOP moyen
-     * tabInfos[O à 2][2] --> ecart-type nbOp
-     * tabInfos[O à 2][3] --> tempsExec moyen
-     * tabInfos[O à 2][4] --> ecart-type tempsExec
-     * 
-     * tabInfos[0][0 à 4] --> Infos de Méthode SELECTION
-     * tabInfos[1][0 à 4] --> Infos de Méthode BULLES
-     * tabInfos[2][0 à 4] --> Infos de Méthode INSERTION
-     * @param nbRepetition
-     * @return un tableau de tableau (3x3) de double.
-     */
-    private static double[][] trisPaquet(int nbRepetition) {
-        double[][] tabInfos = new double[3][5];
-        double tempsExec;
-        double[][][] tabInterm = new double [3][2][nbRepetition];
-
-        Paquet paq;
-
-        for (int i = 0; i < nbRepetition; i++) {
-            paq = new Paquet(
-                Couleur.valuesInRange(0, cardCouleurs), 
-                cardRepetFigures, 
-                Figure.valuesInRange(0, cardFigures), 
-                Texture.valuesInRange(0, cardTextures)
-                );
-
-            tempsExec = Ut.getTempsExecution(paq::trierSelection);
-            tabInterm[0][0][i] = nbOpApprox;
-            tabInterm[0][1][i] = tempsExec;
-
-            tempsExec = Ut.getTempsExecution(paq::trierBulles);
-            tabInterm[1][0][i] = nbOpApprox;
-            tabInterm[1][1][i] = tempsExec;
-
-            tempsExec = Ut.getTempsExecution(paq::trierInsertion);
-            tabInterm[2][0][i] = nbOpApprox;
-            tabInterm[2][1][i] = tempsExec;
-
-            
-        }
-
-        for (int i = 0; i < 3; i++) {
-            tabInfos[i][0] = cardCouleurs * cardRepetFigures * cardFigures * cardTextures;
-        }
-        tabInfos[0][1] = Ut.moyenne(tabInterm[0][0]);
-        tabInfos[0][2] = Ut.ecarttype(tabInterm[0][0]);
-        tabInfos[0][3] = Ut.moyenne(tabInterm[0][1]);
-        tabInfos[0][4] = Ut.ecarttype(tabInterm[0][1]);
-        
-        tabInfos[1][1] = Ut.moyenne(tabInterm[1][0]);
-        tabInfos[1][2] = Ut.ecarttype(tabInterm[1][0]);
-        tabInfos[1][3] = Ut.moyenne(tabInterm[1][1]); 
-        tabInfos[1][4] = Ut.ecarttype(tabInterm[1][1]);
-
-        tabInfos[2][1] = Ut.moyenne(tabInterm[2][0]);
-        tabInfos[2][2] = Ut.ecarttype(tabInterm[2][0]);
-        tabInfos[2][3] = Ut.moyenne(tabInterm[2][1]); 
-        tabInfos[2][4] = Ut.ecarttype(tabInterm[2][1]);
-
-        return tabInfos;
-    }
-
-    /**
-     * FONCTION AJOUTEE
-     * Prérequis : 0 < nStart < nEnd ET 0 < nStep 
-     * Action : réalise trisPaquet(int nbRepetition) en variant le nbCartes en modifiant la cardinalité de nbFigures, entré en parametres, de nStart à nEnd(exclu) en faisant des pas de nStep.
-     * Les cardinalités de couleurs/figures/textures sont fixées à des valeurs constantes par les variables de class.
-     * @param nStart premiere valeur de nbFiguresMax
-     * @param nEnd valeur limite (exclue)
-     * @param nStep pas
-     * @return un tableau contenant tout les résultats de chacun des trisPaquet().
-     */
-    private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
-        int range = (int) Math.ceil((float) (nEnd - nStart)/nStep);
-        double[][][] tabInfos = new double[range][3][5];
-        int count = 0;
-        
-        for (int n = nStart; n < nEnd; n+=nStep) {
-            cardRepetFigures = n;
-            tabInfos[count] = trisPaquet(nbRepetTest);
-            count++;
-        }
-        return tabInfos;
-    }
-
-
-    /**
-     * FONCTION AJOUTEE
-     * Action : convertit les données de tabInfos en un String.
-     * Le String contient toutes les donées de chacune des méthodes de TRI.
-     * Le format est adapté pour favoriser l'exportation en fichier .csv
-     * Prérequis : tabInfos est retourné par testTrisVarN(int nStart, int nEnd, int nStep) OU
-     * format conforme à ce dernier double[nbval de N][3][5];
-     * @param tabInfos
-     * @return stringInfos, un String.
-     */
-    private static String convertInfosToString(double[][][] tabInfos) {
-        String stringInfos = 
-            "N, nbOpSEL, u_nbOPSEL, tExecSEL (ms), u_tExecSEL (ms), " + 
-            "nbOpBUL, u_nbOPBUL, tExecBUL (ms), u_tExecBUL (ms), " + 
-            "nbOpINS, u_nbOPINS, tExecINS (ms), u_tExecINS (ms)\n";
-
-        int i, j, k, l=0;
-        for (i = 0; i < tabInfos.length; i++) {
-            for (j = 0; j < tabInfos[i].length; j++){
-                for (k = l; k < tabInfos[i][j].length - 2; k++) {
-                    stringInfos += String.format("%.0f", tabInfos[i][j][k]) + ", ";
-                }
-                l=1;
-                stringInfos += String.format("%.3f", tabInfos[i][j][k]) + ", ";
-                stringInfos += String.format("%.3f", tabInfos[i][j][k+1]);
-                if (j == tabInfos[i].length - 1) {
-                    stringInfos += "\n";
-                }
-                else {
-                    stringInfos += ", ";
-                }
-            }
-            l=0;
-        }
-        return stringInfos;
-    }
-
-    /**
-     * FONCTION AJOUTEE
-     * Action : convertit le String contenant les donées de chacune des méthodes en fichiers CSV.
-     * Prérequis : format des String dans stringInfos adapté OU stringInfos directement retourné par convertInfosToString(double[][][] tabInfos).
-     * @param stringInfos
-     * @throws FileNotFoundException
-     */
-    private static void stringInfosToCsv(String stringInfos, String fileName) throws FileNotFoundException {
-        File csvFile = new File("./datas/"+fileName+".csv");
-        PrintWriter output = new PrintWriter(csvFile);
-        output.print(stringInfos);
-        output.close();
-    }
-
-
-    /**
-     * FONCTION AJOUTEE
-     * Prerequis : 0 < nStart < nEnd ET 0 < nStep
-     * Action : réunit les méthodes ci-dessus :
-     * 1. Realise les 3 tris (plusieurs fois pour un meme N pour different paquet ayant meme caracteristique) en variant N (selon la borne et le pas entrés en parametres).
-     * Stockage des donées : double[nStart-nEnd/nStep][3][5]
-     * 2. Conversion des donées en String contenant les donées des 3 méthodes sous un format adapté au fichiers .csv
-     * Ordre des infos
-     * col1 --> N
-     * col2-5 --> SELECTION
-     * col6-9 --> BULLES
-     * col10-13 --> INSERION
-     * 3. Ecrit le String dans un fichier .csv pour favoriser le traitement de données
-     * @throws FileNotFoundException
-     */
-    public static void testTrisWithDatas(int nStart, int nEnd, int nStep) throws FileNotFoundException {
-        stringInfosToCsv(convertInfosToString(Paquet.testTrisVarN(nStart, nEnd, nStep)), "datas");
     }
 
 
@@ -546,14 +383,171 @@ public class Paquet {
 
 
 
+    //CI-DESSOUS LES FONCTIONS LIES A LA PARTIE MATHS ====================================================
+    
+    /**
+     * FONCTION AJOUTEE
+     * Action : réalise les 3 méthodes de tris pour un paquet initialisé à nbCartes nombre de carte.
+     * Pour cette fonction le nombre de Couleur/nbFigures/Figure/Texture sont fixes (variables de classes : cardCouleurs, cardRepetFigures, cardFigures, cardTextures).
+     * Nous répétons ces tris plusieurs fois (valeurs entrés en params) sur des paquets presentant les memes caracteristiques mais mélangés différremment ; pour obtenir des données significatifs :
+     * Stock les donées relatifs (nb Cartes, nombre OP et temps exec) aux tris dans un tableau de tableau.
+     * tabInfos[O à 2][0] --> nbCartes
+     * tabInfos[O à 2][1] --> nbOP moyen
+     * tabInfos[O à 2][2] --> ecart-type nbOp
+     * tabInfos[O à 2][3] --> tempsExec moyen
+     * tabInfos[O à 2][4] --> ecart-type tempsExec
+     * 
+     * tabInfos[0][0 à 4] --> Infos de Méthode SELECTION
+     * tabInfos[1][0 à 4] --> Infos de Méthode BULLES
+     * tabInfos[2][0 à 4] --> Infos de Méthode INSERTION
+     * @param nbRepetition
+     * @return un tableau de tableau (3x3) de double.
+     */
+    private static double[][] trisPaquet(int nbRepetition) {
+        double[][] tabInfos = new double[3][5];
+        double tempsExec;
+        double[][][] tabInterm = new double [3][2][nbRepetition];
+
+        Paquet paq;
+
+        for (int i = 0; i < nbRepetition; i++) {
+            paq = new Paquet(
+                Couleur.valuesInRange(0, cardCouleurs), 
+                cardRepetFigures, 
+                Figure.valuesInRange(0, cardFigures), 
+                Texture.valuesInRange(0, cardTextures)
+                );
+
+            tempsExec = Ut.getTempsExecution(paq::trierSelection);
+            tabInterm[0][0][i] = nbOpApprox;
+            tabInterm[0][1][i] = tempsExec;
+
+            tempsExec = Ut.getTempsExecution(paq::trierBulles);
+            tabInterm[1][0][i] = nbOpApprox;
+            tabInterm[1][1][i] = tempsExec;
+
+            tempsExec = Ut.getTempsExecution(paq::trierInsertion);
+            tabInterm[2][0][i] = nbOpApprox;
+            tabInterm[2][1][i] = tempsExec;   
+        }
+
+        for (int i = 0; i < 3; i++) {
+            tabInfos[i][0] = cardCouleurs * cardRepetFigures * cardFigures * cardTextures;
+        }
+        tabInfos[0][1] = Ut.moyenne(tabInterm[0][0]);
+        tabInfos[0][2] = Ut.ecarttype(tabInterm[0][0]);
+        tabInfos[0][3] = Ut.moyenne(tabInterm[0][1]);
+        tabInfos[0][4] = Ut.ecarttype(tabInterm[0][1]);
+        
+        tabInfos[1][1] = Ut.moyenne(tabInterm[1][0]);
+        tabInfos[1][2] = Ut.ecarttype(tabInterm[1][0]);
+        tabInfos[1][3] = Ut.moyenne(tabInterm[1][1]); 
+        tabInfos[1][4] = Ut.ecarttype(tabInterm[1][1]);
+
+        tabInfos[2][1] = Ut.moyenne(tabInterm[2][0]);
+        tabInfos[2][2] = Ut.ecarttype(tabInterm[2][0]);
+        tabInfos[2][3] = Ut.moyenne(tabInterm[2][1]); 
+        tabInfos[2][4] = Ut.ecarttype(tabInterm[2][1]);
+
+        return tabInfos;
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Prérequis : 0 < nStart < nEnd ET 0 < nStep 
+     * Action : réalise trisPaquet(int nbRepetition) en variant le nbCartes en modifiant la cardinalité de nbFigures, entré en parametres, de nStart à nEnd(exclu) en faisant des pas de nStep.
+     * Les cardinalités de couleurs/figures/textures sont fixées à des valeurs constantes par les variables de class.
+     * @param nStart premiere valeur de nbFiguresMax
+     * @param nEnd valeur limite (exclue)
+     * @param nStep pas
+     * @return un tableau contenant tout les résultats de chacun des trisPaquet().
+     */
+    private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
+        int range = (int) Math.ceil((float) (nEnd - nStart)/nStep);
+        double[][][] tabInfos = new double[range][3][5];
+        int count = 0;
+        
+        for (int n = nStart; n < nEnd; n+=nStep) {
+            cardRepetFigures = n;
+            tabInfos[count] = trisPaquet(nbRepetTest);
+            count++;
+        }
+        return tabInfos;
+    }
 
 
+    /**
+     * FONCTION AJOUTEE
+     * Action : convertit les données de tabInfos en un String.
+     * Le String contient toutes les donées de chacune des méthodes de TRI.
+     * Le format est adapté pour favoriser l'exportation en fichier .csv
+     * Prérequis : tabInfos est retourné par testTrisVarN(int nStart, int nEnd, int nStep) OU
+     * format conforme à ce dernier double[nbval de N][3][5];
+     * @param tabInfos
+     * @return stringInfos, un String.
+     */
+    private static String convertInfosToString(double[][][] tabInfos) {
+        String stringInfos = 
+            "N, nbOpSEL, u_nbOPSEL, tExecSEL (ms), u_tExecSEL (ms), " + 
+            "nbOpBUL, u_nbOPBUL, tExecBUL (ms), u_tExecBUL (ms), " + 
+            "nbOpINS, u_nbOPINS, tExecINS (ms), u_tExecINS (ms)\n";
+
+        int i, j, k, l=0;
+        for (i = 0; i < tabInfos.length; i++) {
+            for (j = 0; j < tabInfos[i].length; j++){
+                for (k = l; k < tabInfos[i][j].length - 2; k++) {
+                    stringInfos += String.format("%.0f", tabInfos[i][j][k]) + ", ";
+                }
+                l=1;
+                stringInfos += String.format("%.3f", tabInfos[i][j][k]) + ", ";
+                stringInfos += String.format("%.3f", tabInfos[i][j][k+1]);
+                if (j == tabInfos[i].length - 1) {
+                    stringInfos += "\n";
+                }
+                else {
+                    stringInfos += ", ";
+                }
+            }
+            l=0;
+        }
+        return stringInfos;
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : convertit le String contenant les donées de chacune des méthodes en fichiers CSV.
+     * Prérequis : format des String dans stringInfos adapté OU stringInfos directement retourné par convertInfosToString(double[][][] tabInfos).
+     * @param stringInfos
+     * @throws FileNotFoundException
+     */
+    private static void stringInfosToCsv(String stringInfos, String fileName) throws FileNotFoundException {
+        File csvFile = new File("./datas/"+fileName+".csv");
+        PrintWriter output = new PrintWriter(csvFile);
+        output.print(stringInfos);
+        output.close();
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Prerequis : 0 < nStart < nEnd ET 0 < nStep
+     * Action : réunit les méthodes ci-dessus :
+     * 1. Realise les 3 tris (plusieurs fois pour un meme N pour different paquet ayant meme caracteristique) en variant N (selon la borne et le pas entrés en parametres).
+     * Stockage des donées : double[nStart-nEnd/nStep][3][5]
+     * 2. Conversion des donées en String contenant les donées des 3 méthodes sous un format adapté au fichiers .csv
+     * Ordre des infos
+     * col1 --> N
+     * col2-5 --> SELECTION
+     * col6-9 --> BULLES
+     * col10-13 --> INSERION
+     * 3. Ecrit le String dans un fichier .csv pour favoriser le traitement de données
+     * @throws FileNotFoundException
+     */
+    public static void testTrisWithDatas(int nStart, int nEnd, int nStep) throws FileNotFoundException {
+        stringInfosToCsv(convertInfosToString(Paquet.testTrisVarN(nStart, nEnd, nStep)), "datas");
+    }
 
 
-
-
-
-//FONCTIONS PROBABILITE
+//FONCTIONS PROBABILITE ================================================================================
 
     /**
      * FONCTION AJOUTEE
@@ -561,7 +555,6 @@ public class Paquet {
      * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges.
      * Valeur théorique : 0.28956680871386137
      * @param nbEssai nombre d'essai
-     * @return
      */
     public static double proba3CR(int nbEssai) {
         double countCasFavorable = 0;
@@ -588,9 +581,21 @@ public class Paquet {
     }
 
     /**
-     * 1 pour 3CR
-     * 2 pour E3C
-     * 
+     * FONCTION AJOUTEE
+     * Prerequis : 0 <= startEssai < endEssai ET 0 <= stepEssai 
+     * experience = 1 pour probabilité de 3CR
+     * experience = 2 pour probabilité de E3C
+     * experience = 3 pour probabilité de E3C&2CL
+     * Action : Réalise les fonctions proba3CR(int nbEssai) ou probaE3C(int nb) en 
+     * faisant varier le nombre d'essai de startEssai à endEssai en faisant des pas
+     * de stepEssai.
+     * Stock les données dans un tableau de double de taille 4 :
+     *  tabStats[0] --> Nombre d'essai
+     *  tabStats[1] --> Fréquence de cas favorables de l'événement
+     *  tabStats[2] --> Probablilité individuelle : P = fréquence/nbEssai
+     *  tabStats[3] --> Pourcentage d'Erreur de la probabilité individuelle de l'évenement par rapport à la valeur théorique ; calculable seulement en connaissance de la valeur théorique
+     * Convertion de ces données en String adaptés au format .csv et écrit le String dans un fichier
+     * "proba3CR.csv" ou "probaE3C.csv" ou "proba3CR&2L"
      */
     public static void probaVarEssai(int startEssai, int endEssai, int stepEssai, int experience) throws FileNotFoundException {
         int range = (int) Math.ceil((float) (endEssai - startEssai)/stepEssai);
@@ -600,13 +605,18 @@ public class Paquet {
             tabStats[count][0] = i;
             if (experience == 1) {
                 tabStats[count][1] = proba3CR(i);
-                tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
+                tabStats[count][2] = tabStats[count][1]/i; //proba individuelle
                 tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]); 
             }
             else if (experience == 2) {
                 tabStats[count][1] = probaE3C(i);
-                tabStats[count][2] = tabStats[count][1]/i; //probaIndividuel
+                tabStats[count][2] = tabStats[count][1]/i; //proba individuelle
                 //na calcul pas erreur car pas de val theorique
+            }
+            else if (experience == 3) {
+                tabStats[count][1] = proba3CRAnd2CL(i);
+                tabStats[count][2] = tabStats[count][1]/i; //proba individuelle
+                tabStats[count][3] = Ut.pourcentageErreur(0.06884362550959248, tabStats[count][2]); 
             }
             count++;
         }
@@ -616,10 +626,19 @@ public class Paquet {
         else if (experience == 2) {
             stringInfosToCsv(probaDatasToString(tabStats), "probaE3C");
         }
+        else if (experience == 3) {
+            stringInfosToCsv(probaDatasToString(tabStats), "proba3CR&2L");
+        }
     }
 
 
-    public static String probaDatasToString(double[][] tabStats) {
+    /**
+     * FONCTION AJOUTEE
+     * Prérequis : tabStats un tableau générer dans probaVarEssai
+     * Action : Convertion du tableau de double en un String adapté au fichier .csv
+     * @param tabStats
+     */
+    private static String probaDatasToString(double[][] tabStats) {
         String stringDatas = "NbEssai, Freq, P, Erreur (%)\n";
         int i,j;
         for (i = 0; i < tabStats.length; i++) {
@@ -632,7 +651,13 @@ public class Paquet {
     }
 
 
-
+    /**
+     * FONCTION AJOUTEE
+     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
+     * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
+     * Valeur théorique : 0.06884362550959248
+     * @param nb nombre d'essai
+     */
     public static double proba3CRAnd2CL(int nb) {
         double countCasFavorable = 0;
         Paquet paq;
@@ -658,9 +683,16 @@ public class Paquet {
                 countCasFavorable++;
             }
         }
-        return countCasFavorable/nb;
+        return countCasFavorable;
     }
 
+    /**
+     * FONCTION AJOUTEE
+     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
+     * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
+     * Valeur théorique : non connue
+     * @param nb nombre d'essai
+     */
     public static double probaE3C(int nb) {
         double countCasFavorable = 0;
         Paquet paq;
@@ -679,7 +711,13 @@ public class Paquet {
         return countCasFavorable;
     }
 
-    public static boolean trouverE3C(Carte[] cartes) {
+    /**
+     * FONCTION AJOUTEE
+     * Action : verifie si un ensemble de cartes contient un E3C
+     * @param cartes
+     * @return vrai si oui, false sinon;
+     */
+    private static boolean trouverE3C(Carte[] cartes) {
         if (cartes.length < 3) {
             return false;
         }
