@@ -1,3 +1,5 @@
+package E3CeteBase;
+
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 
@@ -30,11 +32,11 @@ public class Test {
         System.out.println("\n\nTEST FIGURE/TEXTURES----------------------------------------------------");
         Figure[] figs = Figure.valuesInRange(0, 2);
         System.out.println(Arrays.toString(figs));
-        System.out.println("Enum Total Figure : " + Figure.getNbEnumTotal());
+        System.out.println("Enum Total E3CeteBase.Figure : " + Figure.getNbEnumTotal());
 
         Texture[] texts = Texture.valuesInRange(0, 2);
         System.out.println(Arrays.toString(texts));
-        System.out.println("Enum Total Texture : " + Texture.getNbEnumTotal());
+        System.out.println("Enum Total E3CeteBase.Texture : " + Texture.getNbEnumTotal());
 
 
         //TEST CARTES
@@ -98,49 +100,49 @@ public class Test {
 
         // TEST METHODE PRIV pour DATAS
         //TrisPaquet
-        // double[][] tabInfos = Paquet.trisPaquet(1000);
+        // double[][] tabInfos = E3CeteBase.Paquet.trisPaquet(1000);
         // for (int i = 0; i < 3; i++) {
         //     System.out.println(Arrays.toString(tabInfos[i]));
         // }
         // //testVariantN
-        // double[][][] tabInfos2 = Paquet.testTrisVarN(10, 500, 2);
+        // double[][][] tabInfos2 = E3CeteBase.Paquet.testTrisVarN(10, 500, 2);
         // for (int i = 0; i < 490/2; i++) {
         //     System.out.println(Arrays.deepToString(tabInfos2[i]));
         // }
         // //stringinfo
-        // String[] stringInfos = Paquet.convertInfosToString(tabInfos2);
+        // String[] stringInfos = E3CeteBase.Paquet.convertInfosToString(tabInfos2);
         // System.out.println(stringInfos[0]);
-        // Paquet.stringInfosToCsv(stringInfos);
+        // E3CeteBase.Paquet.stringInfosToCsv(stringInfos);
 
         //TestTris
         Paquet.setCardPaqTest(1, 1000, 1, 1);
         Paquet.testTris();
 
         //TESTTRI
-        // Paquet.setCardPaqTest(1, 1, 1, 1);
-        // Paquet.testTrisWithDatas(1000, 10001, 1000);
+        // E3CeteBase.Paquet.setCardPaqTest(1, 1, 1, 1);
+        // E3CeteBase.Paquet.testTrisWithDatas(1000, 10001, 1000);
 
         //PROBA
         // int nbEssai = 100000;
-        // double proba3CR = Paquet.proba3CR(nbEssai)/nbEssai;
-        // double proba3CRAnd2CL = Paquet.proba3CRAnd2CL(nbEssai)/nbEssai;
-        // double probaE3C = Paquet.probaE3C(nbEssai)/nbEssai;
-        // System.out.println("La probabilité théorique de l'événement 3CR est de " + Ut.arrondirNDecimal(0.28956680871386137, 5));
+        // double proba3CR = E3CeteBase.Paquet.proba3CR(nbEssai)/nbEssai;
+        // double proba3CRAnd2CL = E3CeteBase.Paquet.proba3CRAnd2CL(nbEssai)/nbEssai;
+        // double probaE3C = E3CeteBase.Paquet.probaE3C(nbEssai)/nbEssai;
+        // System.out.println("La probabilité théorique de l'événement 3CR est de " + utils.Ut.arrondirNDecimal(0.28956680871386137, 5));
         // System.out.println("La probabilité expérimental de l'événement 3CR est de " + proba3CR);
-        // System.out.println("Le pourcentage d'erreur est de " + Ut.arrondirNDecimal(Ut.pourcentageErreur(0.28956680871386137, proba3CR), 3)+" %" +"\n");
-        // System.out.println("La probabilité théorique de l'événement 3CR&2CL est de " + Ut.arrondirNDecimal(0.06884362550959248, 5));
+        // System.out.println("Le pourcentage d'erreur est de " + utils.Ut.arrondirNDecimal(utils.Ut.pourcentageErreur(0.28956680871386137, proba3CR), 3)+" %" +"\n");
+        // System.out.println("La probabilité théorique de l'événement 3CR&2CL est de " + utils.Ut.arrondirNDecimal(0.06884362550959248, 5));
         // System.out.println("La probabilité expérimental de l'événement 3CR&2CL est de " + proba3CRAnd2CL);
-        // System.out.println("Le pourcentage d'erreur est de " + Ut.arrondirNDecimal(Ut.pourcentageErreur(0.06884362550959248, proba3CRAnd2CL), 3) +" %" + "\n");
+        // System.out.println("Le pourcentage d'erreur est de " + utils.Ut.arrondirNDecimal(utils.Ut.pourcentageErreur(0.06884362550959248, proba3CRAnd2CL), 3) +" %" + "\n");
         // System.out.println("La probabilité expérimental de l'événement E3C est de " + probaE3C);
 
         // 3RC
-        // Paquet.probaVarEssai(100, 1000, 10, 1);
+        // E3CeteBase.Paquet.probaVarEssai(100, 1000, 10, 1);
 
         // E3C
-        // Paquet.probaVarEssai(10, 1000, 10, 2); //ideal100 à 100 000
+        // E3CeteBase.Paquet.probaVarEssai(10, 1000, 10, 2); //ideal100 à 100 000
 
         //3RC2L
-        // Paquet.probaVarEssai(100, 100000, 100, 3);
+        // E3CeteBase.Paquet.probaVarEssai(100, 100000, 100, 3);
         
 
     }

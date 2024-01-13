@@ -1,5 +1,7 @@
+package E3CeteExt12345;
+
 /**
- * La classe Carte représente une carte possèdant une figure répétée un certain nombre de fois avec une texture et une couleur.
+ * La classe E3CeteBase.Carte représente une carte possèdant une figure répétée un certain nombre de fois avec une texture et une couleur.
  * On a besoin de connaître :
  * - La figure représentée,
  * - Le nombre de fois où la figure est représentée,
@@ -22,7 +24,7 @@ public class Carte  {
     /**
      * Pre-requis : nbFigures > 0
      * Action : Construit une carte contenant nbFigures "figures" qui possèdent une "texture" et une "couleur"
-     * Exemple : new Carte(Couleur.ROUGE, 2, Figure.OVALE, Texture.PLEIN) représente une carte contenant 2 figures ovales rouge et pleines
+     * Exemple : new E3CeteBase.Carte(E3CeteBase.Couleur.ROUGE, 2, E3CeteBase.Figure.OVALE, E3CeteBase.Texture.PLEIN) représente une carte contenant 2 figures ovales rouge et pleines
      */
 
     public Carte(Couleur couleur, int nbFigures, Figure figure, Texture texture) {
@@ -69,10 +71,10 @@ public class Carte  {
      * afin de déterminer si this est plus petit, égal ou plus grand que "carte"
      *
      * L'odre d'importance des attrbiuts est celui donné dans le constructeur (du plus prioritaire au moins prioritaire) :
-     * Couleur, nombre de figures, figure, texture.
+     * E3CeteBase.Couleur, nombre de figures, figure, texture.
      * Pour comparer les couleurs, les figures et les textures, on utilisera leur position (ordinal) dans
      * leurs énumérations respectives.
-     * Ainsi, pour toute paire {c1,c2} de Carte, c1 est inférieure à c2 si et seulement si
+     * Ainsi, pour toute paire {c1,c2} de E3CeteBase.Carte, c1 est inférieure à c2 si et seulement si
      * la valeur de c1 est inférieure à celle de c2 pour la caractéristique ayant la plus grande priorité
      * parmi celles pour lesquelles c1 et c2 ont des valeurs différentes.
      *

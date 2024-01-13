@@ -1,5 +1,9 @@
+package E3CeteBase;
+
+import utils.Ut;
+
 /**
- * La classe Jeu permet de faire des parties du jeu "E3Cète" soit avec un humain, soit avec un ordinateur.
+ * La classe E3CeteBase.Jeu permet de faire des parties du jeu "E3Cète" soit avec un humain, soit avec un ordinateur.
  *
  * Règles :
  *
@@ -202,7 +206,7 @@ public class Jeu {
 
     /**
      * Action : Fait jouer un tour à un joueur humain.
-     * La Table et le score du joueur sont affichés.
+     * La E3CeteBase.Table et le score du joueur sont affichés.
      * Le joueur sélectionne 3 cartes.
      *  - Si c'est un E3C, il gagne trois points.
      *  - Sinon, il perd un point.
@@ -211,7 +215,7 @@ public class Jeu {
      */
 
     public void jouerTourHumain() {
-        Ut.afficherSL("Table de jeu :\n" + this.table.toString());
+        Ut.afficherSL("E3CeteBase.Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
         Ut.afficherSL("Veuillez sélectionner 3 cartes formant un E3C :");
@@ -246,7 +250,7 @@ public class Jeu {
 
     /**
      * Action : Fait jouer un tour à l'ordinateur.
-     * La Table et le score de l'ordinateur sont affichés.
+     * La E3CeteBase.Table et le score de l'ordinateur sont affichés.
      * L'ordinateur sélectionne des cartes :
      *  - L'ordinateur essaye toujours de trouver un E3C sur la table. S'il en trouve un, il gagne donc trois points.
      *  - S'il n'en trouve pas, il se rabat sur 3 cartes sélectionnées aléatoirement et perd un point.
@@ -255,7 +259,7 @@ public class Jeu {
      */
 
     public void joueurTourOrdinateur() {
-        Ut.afficherSL("Table de jeu :\n" + this.table.toString());
+        Ut.afficherSL("E3CeteBase.Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
         Ut.afficherSL("L'ordinateur sélectionne 3 cartes formant un E3C :");
@@ -281,7 +285,7 @@ public class Jeu {
      * Action : Fait jouer une partie à l'ordinateur.
      * Une pause est faite entre chaque tour (500 ms ou plus) afin de pouvoir observer la progression de l'ordinateur.
      * A la fin, le score final de l'ordinateur est affiché.
-     * Rappel : Ut.pause(temps) permet de faire une pause de "temps" millisecondes
+     * Rappel : utils.Ut.pause(temps) permet de faire une pause de "temps" millisecondes
      */
 
     public void jouerOrdinateur() {

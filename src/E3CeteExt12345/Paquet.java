@@ -1,10 +1,14 @@
-import java.util.Random;
+package E3CeteExt12345;
+
+import utils.Ut;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Random;
 
 /**
- * La classe Paquet représente un paquet de cartes.
+ * La classe E3CeteBase.Paquet représente un paquet de cartes.
  * Les cartes sont stockées dans un tableau fixe et un indice (entier) permet de connaître le nombre de cartes
  * restantes (non piochées) dans le paquet. Quand on pioche, cet indice diminue.
  * Dans les traitements, on considère alors seulement les cartes se trouvant entre 0 et cet indice (exclus).
@@ -26,7 +30,7 @@ public class Paquet {
 
     //Nombre de fois qu'on répète l'experience des 3 tris pour un N donné.
     private static int nbRepetTest = 1000;
-    //caracteristiques par default du Paquet pour TestTri
+    //caracteristiques par default du E3CeteBase.Paquet pour TestTri
     private static int cardCouleurs = 3;
     private static int cardRepetFigures = 3;
     private static int cardFigures = 3;
@@ -109,7 +113,7 @@ public class Paquet {
      * Le tri est effectué à partir des données du paquet courant (this) mais celui-ci ne doit pas être modifié !
      * Une nouvelle instance du paquet est traitée et renvoyée.
      * On rappelle que le paquet peut aussi contenir des cartes déjà piochées  qu'il faut ignorer (voir partie 2 de la SAE).
-     * Le tri doit fonctionner que le Paquet soit plein ou non.
+     * Le tri doit fonctionner que le E3CeteBase.Paquet soit plein ou non.
      * https://www.youtube.com/watch?v=Ns4TPTC8whw&t=2s vidéo explicative
      */
 
@@ -138,7 +142,7 @@ public class Paquet {
      * Le tri est effectué à partir des données du paquet courant (this) mais celui-ci ne doit pas être modifié !
      * Une nouvelle instance du paquet est traitée et renvoyée.
      * On rappelle que le paquet peut aussi contenir des cartes déjà piochées  qu'il faut ignorer (voir partie 2 de la SAE).
-     * Le tri doit fonctionner que le Paquet soit plein ou non.
+     * Le tri doit fonctionner que le E3CeteBase.Paquet soit plein ou non.
      * https://www.youtube.com/watch?v=lyZQPjUT5B4&embeds_referring_euri=https%3A%2F%2Fwww.developpez.com%2F&source_ve_path=Mjg2NjY&feature=emb_logo
      * vidéo explicative
      */
@@ -167,7 +171,7 @@ public class Paquet {
      * Le tri est effectué à partir des données du paquet courant (this) mais celui-ci ne doit pas être modifié !
      * Une nouvelle instance du paquet est traitée et renvoyée.
      * On rappelle que le paquet peut aussi contenir des cartes déjà piochées  qu'il faut ignorer (voir partie 2 de la SAE).
-     * Le tri doit fonctionner que le Paquet soit plein ou non.
+     * Le tri doit fonctionner que le E3CeteBase.Paquet soit plein ou non.
      * https://www.youtube.com/watch?v=ROalU379l3U&t=1s : vidéo explicative
      */
 
@@ -189,7 +193,7 @@ public class Paquet {
 
     /**
      * FONCTION AJOUTEE
-     * Action : Modifie les valeurs des cardinalités pour les Paquets Test
+     * Action : Modifie les valeurs des cardinalités pour les Paquets E3CeteBase.Test
      * Prerequis : 1 <= cardNbFig
      * 1 <= cardCoul/cardFig/cardText <= <nom_Enum>.values().length 
      */
@@ -221,7 +225,7 @@ public class Paquet {
         System.out.println("\033[0;32m");
         System.out.println("\033[40m");
         System.out.println("\nBEGIN-TEST-TRIS---------------------------------------------------------\n");
-        System.out.println("Paquet à trier est-il trié ? " + paq.estTrie());
+        System.out.println("E3CeteBase.Paquet à trier est-il trié ? " + paq.estTrie());
         System.out.println("Nb de cartes : " + paq.nbCartesLeft);
         System.out.println();
     
@@ -306,9 +310,9 @@ public class Paquet {
     /**
      * Pre-requis : 0 < nbCartes <= nombre de cartes restantes dans le paquet.
      *
-     * Action : Pioche nbCartes Cartes au dessus du Paquet this (et met à jour son état).
+     * Action : Pioche nbCartes Cartes au dessus du E3CeteBase.Paquet this (et met à jour son état).
      *
-     * Résultat : Un tableau contenant les nbCartes Cartes piochees dans le Paquet.
+     * Résultat : Un tableau contenant les nbCartes Cartes piochees dans le E3CeteBase.Paquet.
      *
      * Exemple :
      * Contenu paquet : [A,B,C,D,E,F,G]
@@ -388,7 +392,7 @@ public class Paquet {
     /**
      * FONCTION AJOUTEE
      * Action : réalise les 3 méthodes de tris pour un paquet initialisé à nbCartes nombre de carte.
-     * Pour cette fonction le nombre de Couleur/nbFigures/Figure/Texture sont fixes (variables de classes : cardCouleurs, cardRepetFigures, cardFigures, cardTextures).
+     * Pour cette fonction le nombre de E3CeteBase.Couleur/nbFigures/E3CeteBase.Figure/E3CeteBase.Texture sont fixes (variables de classes : cardCouleurs, cardRepetFigures, cardFigures, cardTextures).
      * Nous répétons ces tris plusieurs fois (valeurs entrés en params) sur des paquets presentant les memes caracteristiques mais mélangés différremment ; pour obtenir des données significatifs :
      * Stock les donées relatifs (nb Cartes, nombre OP et temps exec) aux tris dans un tableau de tableau.
      * tabInfos[O à 2][0] --> nbCartes
@@ -412,9 +416,9 @@ public class Paquet {
 
         for (int i = 0; i < nbRepetition; i++) {
             paq = new Paquet(
-                Couleur.valuesInRange(0, cardCouleurs), 
+                Couleur.valuesInRange(0, cardCouleurs),
                 cardRepetFigures, 
-                Figure.valuesInRange(0, cardFigures), 
+                Figure.valuesInRange(0, cardFigures),
                 Texture.valuesInRange(0, cardTextures)
                 );
 
@@ -552,7 +556,7 @@ public class Paquet {
     /**
      * FONCTION AJOUTEE
      * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
-     * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges.
+     * calcul expérimentalement et retourne la fréquence d'obtenir une E3CeteBase.Table (arrangement de 9 cartes distincts parmi les 81 du E3CeteBase.Paquet) contenant exactement 3 Cartes Rouges.
      * Valeur théorique : 0.28956680871386137
      * @param nbEssai nombre d'essai
      */
@@ -561,9 +565,9 @@ public class Paquet {
         Paquet paq;
         for (int j = 0; j < nbEssai; j++) {
             paq = new Paquet(
-                Couleur.valuesInRange(0, 3), 
+                Couleur.valuesInRange(0, 3),
                 3, 
-                Figure.valuesInRange(0, 3), 
+                Figure.valuesInRange(0, 3),
                 Texture.valuesInRange(0, 3)
                 );
             Carte[] tab = paq.piocher(9);
@@ -654,7 +658,7 @@ public class Paquet {
     /**
      * FONCTION AJOUTEE
      * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
-     * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
+     * calcul expérimentalement et retourne la fréquence d'obtenir une E3CeteBase.Table (arrangement de 9 cartes distincts parmi les 81 du E3CeteBase.Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
      * Valeur théorique : 0.06884362550959248
      * @param nb nombre d'essai
      */
@@ -663,9 +667,9 @@ public class Paquet {
         Paquet paq;
         for (int i = 0; i < nb; i++) {
             paq = new Paquet(
-                Couleur.valuesInRange(0, 3), 
+                Couleur.valuesInRange(0, 3),
                 3, 
-                Figure.valuesInRange(0, 3), 
+                Figure.valuesInRange(0, 3),
                 Texture.valuesInRange(0, 3)
                 );
             Carte[] tab = paq.piocher(9);
@@ -689,7 +693,7 @@ public class Paquet {
     /**
      * FONCTION AJOUTEE
      * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
-     * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
+     * calcul expérimentalement et retourne la fréquence d'obtenir une E3CeteBase.Table (arrangement de 9 cartes distincts parmi les 81 du E3CeteBase.Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
      * Valeur théorique : non connue
      * @param nb nombre d'essai
      */
@@ -698,9 +702,9 @@ public class Paquet {
         Paquet paq;
         for (int i = 0; i < nb; i++) {
             paq = new Paquet(
-                Couleur.valuesInRange(0, 3), 
+                Couleur.valuesInRange(0, 3),
                 3, 
-                Figure.valuesInRange(0, 3), 
+                Figure.valuesInRange(0, 3),
                 Texture.valuesInRange(0, 3)
                 );
             Carte[] tab = paq.piocher(9);

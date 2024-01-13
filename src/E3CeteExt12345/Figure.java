@@ -1,7 +1,9 @@
+package E3CeteExt12345;
+
 public enum Figure {
 
     /**
-     * Représente la figure (forme) d'une Carte : ovale , triangle ...
+     * Représente la figure (forme) d'une E3CeteBase.Carte : ovale , triangle ...
      */
 
     CARRE('■'),

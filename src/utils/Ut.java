@@ -1,4 +1,4 @@
-// dmaj : 24 septembre 2023
+package utils;// dmaj : 24 septembre 2023
 
 import java.util.Random;
 import java.util.Scanner;

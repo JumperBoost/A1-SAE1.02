@@ -1,3 +1,5 @@
+import E3CeteBase.*;
+
 import java.util.Arrays;
 import java.util.concurrent.*;
 
@@ -138,25 +140,25 @@ public class TestsEtu {
     public static void testTailleTable() {
         Table table = new Table(3, 3);
         if(table.getTaille() != 9) {
-            throw new TestException(String.format("etudiant.Table 3x3 : taille 9 attendue (%s obtenu)", table.getTaille()));
+            throw new TestException(String.format("etudiant.E3CeteBase.Table 3x3 : taille 9 attendue (%s obtenu)", table.getTaille()));
         }
         table = new Table(2, 3);
         if(table.getTaille() != 6) {
-            throw new TestException(String.format("etudiant.Table 2x3 : taille 6 attendue (%s obtenu)", table.getTaille()));
+            throw new TestException(String.format("etudiant.E3CeteBase.Table 2x3 : taille 6 attendue (%s obtenu)", table.getTaille()));
         }
         table = new Table(4, 9);
         if(table.getTaille() != 36) {
-            throw new TestException(String.format("etudiant.Table 4x9 : taille 36 attendue (%s obtenu)", table.getTaille()));
+            throw new TestException(String.format("etudiant.E3CeteBase.Table 4x9 : taille 36 attendue (%s obtenu)", table.getTaille()));
         }
     }
 
     public static void testCarteExisteTable() {
         Table table = new Table(3, 3);
         if(!table.carteExiste(new Coordonnees(1,1))) {
-            throw new TestException("etudiant.Table 3x3, la carte située aux coorodnnées (1,1) doit exister !");
+            throw new TestException("etudiant.E3CeteBase.Table 3x3, la carte située aux coorodnnées (1,1) doit exister !");
         }
         if(table.carteExiste(new Coordonnees(3,4))) {
-            throw new TestException("etudiant.Table 3x3, la carte située aux coorodnnées (3,4) ne doit pas exister !");
+            throw new TestException("etudiant.E3CeteBase.Table 3x3, la carte située aux coorodnnées (3,4) ne doit pas exister !");
         }
     }
 

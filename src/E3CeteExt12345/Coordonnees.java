@@ -1,7 +1,11 @@
+package E3CeteExt12345;
+
+import utils.Ut;
+
 public class Coordonnees {
 
     /**
-     * La classe Coordonnees représente les coordonnées (i,j) d'une Carte sur la Table
+     * La classe E3CeteBase.Coordonnees représente les coordonnées (i,j) d'une E3CeteBase.Carte sur la E3CeteBase.Table
      * ou i représenta la ligne et j la colonne
      * Cette classe est utilisée uniquement pour intéragir avec l'utilisateur
      **/
@@ -47,7 +51,7 @@ public class Coordonnees {
     /**
      * Pre-requis : aucun
      * Action : Retourne vrai si la variable input est dans un format valide à savoir int,int
-     * Aide : On peut utiliser Ut.estNombre pour vérifier qu'une chaîne de caractères est bien un nombre.
+     * Aide : On peut utiliser utils.Ut.estNombre pour vérifier qu'une chaîne de caractères est bien un nombre.
      */
     public static boolean formatEstValide(String input) {
         String[] splited = input.split(",");
