@@ -1,6 +1,5 @@
 package E3CeteBase;
 
-import utils.Ut;
 
 /**
  * La classe Table représente une table de jeu contenant des cartes.

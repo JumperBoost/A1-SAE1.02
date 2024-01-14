@@ -1,6 +1,5 @@
-package E3CeteExt12345;
+package E3CeteExt1234;
 
-import utils.Ut;
 
 /**
  * La classe Jeu permet de faire des parties du jeu "E3Cète" soit avec un humain, soit avec un ordinateur.
@@ -274,7 +273,7 @@ public class Jeu {
         Ut.afficherSL("Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
-        Ut.afficherSL("Veuillez sélectionner 3 cartes formant un E3C :");
+        Ut.afficherSL("Veuillez sélectionner 3 cartes formant un E"+xSousEnsemble+"C :");
 
         int[] selection = this.table.selectionnerCartesJoueur(3);
         Ut.afficherSL("Vous avez sélectionné les cartes suivantes :");
@@ -283,10 +282,10 @@ public class Jeu {
         Carte[] selCartes = new Carte[] {cartes[selection[0]-1], cartes[selection[1]-1], cartes[selection[2]-1]};
 
         if(estUnExC(selCartes)) {
-            Ut.afficherSL("C'est un E3C ! Vous gagnez 3 points.");
+            Ut.afficherSL("C'est un E"+xSousEnsemble+"C ! Vous gagnez 3 points.");
             this.score += 3;
         } else {
-            Ut.afficherSL("Ce n'est pas un E3C ! Vous perdez 1 point.");
+            Ut.afficherSL("Ce n'est pas un E"+xSousEnsemble+"C ! Vous perdez 1 point.");
             this.score -= 1;
         }
         // Remplacer les cartes
@@ -318,16 +317,16 @@ public class Jeu {
         Ut.afficherSL("Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
-        Ut.afficherSL("L'ordinateur sélectionne 3 cartes formant un E3C :");
+        Ut.afficherSL("L'ordinateur sélectionne 3 cartes formant un E"+xSousEnsemble+"C :");
 
         int[] selection = this.chercherExCSurTableOrdinateur();
         if(selection == null) {
-            Ut.afficherSL("L'ordinateur n'a pas trouvé de E3C ! Il perd 1 point.");
+            Ut.afficherSL("L'ordinateur n'a pas trouvé de E"+xSousEnsemble+"C ! Il perd 1 point.");
             selection = this.selectionAleatoireDeCartesOrdinateur();
             this.score -= 1;
         } else {
             this.table.afficherSelection(selection);
-            Ut.afficherSL("L'ordinateur a trouvé un E3C ! Il gagne 3 points.");
+            Ut.afficherSL("L'ordinateur a trouvé un E"+xSousEnsemble+"C ! Il gagne 3 points.");
             this.score += 3;
         }
 

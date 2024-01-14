@@ -1,6 +1,4 @@
-package E3CeteExt12345;
-
-import utils.Ut;
+package E3CeteExt1234;
 
 public class Main {
 

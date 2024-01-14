@@ -1,6 +1,5 @@
-package E3CeteExt12345;
+package E3CeteExt1234;
 
-import utils.Ut;
 
 /**
  * La classe Table représente une table de jeu contenant des cartes.
@@ -80,7 +79,7 @@ public class Table {
      */
     public boolean carteExiste(Coordonnees coordonnees) {
         int index = selectionnerIndex(coordonnees);
-        return index >= 0 && index < getTaille() && this.cartes[index-1] != null;
+        return index >= 0 && index < getTaille() && this.cartes[index] != null;
     }
 
     /**
@@ -229,9 +228,10 @@ public class Table {
             if (selection.length == this.hauteur * this.largeur) {
                 affichage += bg
                         + " ".repeat(2 + this.largeur * Carte.getLargeur() + 3 * this.largeur + lastLetter.length() * 3)
-                        + Couleur.getReset();
+                        + Couleur.getReset()
+                        + "\n";
             }
-            if (ligne <= selection.length/this.hauteur)
+            else if (ligne <= selection.length/this.hauteur)
                 affichage += "\n";
         }
         return affichage;

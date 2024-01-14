@@ -1,6 +1,5 @@
 package E3CeteBase;
 
-import utils.Ut;
 
 public class Coordonnees {
 

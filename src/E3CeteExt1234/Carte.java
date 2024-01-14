@@ -1,4 +1,4 @@
-package E3CeteExt12345;
+package E3CeteExt1234;
 
 /**
  * La classe Carte représente une carte possèdant une figure répétée un certain nombre de fois avec une texture et une couleur.

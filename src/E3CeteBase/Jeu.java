@@ -1,6 +1,5 @@
 package E3CeteBase;
 
-import utils.Ut;
 
 /**
  * La classe Jeu permet de faire des parties du jeu "E3Cète" soit avec un humain, soit avec un ordinateur.

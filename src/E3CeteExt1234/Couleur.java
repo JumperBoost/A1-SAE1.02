@@ -1,6 +1,5 @@
-package E3CeteExt12345;
+package E3CeteExt1234;
 
-import utils.Ut;
 
 public enum Couleur {
 
