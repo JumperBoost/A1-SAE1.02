@@ -1,6 +1,5 @@
 package E3CeteExt1234;
 
-
 /**
  * La classe Jeu permet de faire des parties du jeu "E3Cète" soit avec un humain, soit avec un ordinateur.
  *
@@ -53,7 +52,6 @@ public class Jeu {
         this.paquet = new Paquet(Couleur.randomValues(xSousEnsemble), xSousEnsemble, Figure.randomValues(xSousEnsemble), Texture.randomValues(xSousEnsemble));
         this.table = new Table(hauteur, largeur, this.paquet);
         this.xSousEnsemble = xSousEnsemble;
-        Coordonnees.setTabLettres(hauteur);
     }
 
     /**
@@ -273,19 +271,19 @@ public class Jeu {
         Ut.afficherSL("Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
-        Ut.afficherSL("Veuillez sélectionner 3 cartes formant un E"+xSousEnsemble+"C :");
+        Ut.afficherSL("Veuillez sélectionner  cartes formant un E" + this.xSousEnsemble + "C :");
 
-        int[] selection = this.table.selectionnerCartesJoueur(3);
+        int[] selection = this.table.selectionnerCartesJoueur(this.xSousEnsemble);
         Ut.afficherSL("Vous avez sélectionné les cartes suivantes :");
         this.table.afficherSelection(selection);
         Carte[] cartes = this.table.getCartes();
         Carte[] selCartes = new Carte[] {cartes[selection[0]-1], cartes[selection[1]-1], cartes[selection[2]-1]};
 
         if(estUnExC(selCartes)) {
-            Ut.afficherSL("C'est un E"+xSousEnsemble+"C ! Vous gagnez 3 points.");
+            Ut.afficherSL("C'est un E" + this.xSousEnsemble + "C ! Vous gagnez 3 points.");
             this.score += 3;
         } else {
-            Ut.afficherSL("Ce n'est pas un E"+xSousEnsemble+"C ! Vous perdez 1 point.");
+            Ut.afficherSL("Ce n'est pas un E" + this.xSousEnsemble + "C ! Vous perdez 1 point.");
             this.score -= 1;
         }
         // Remplacer les cartes
@@ -317,16 +315,16 @@ public class Jeu {
         Ut.afficherSL("Table de jeu :\n" + this.table.toString());
         Ut.afficherSL("Score : " + this.score);
         Ut.sautLigne();
-        Ut.afficherSL("L'ordinateur sélectionne 3 cartes formant un E"+xSousEnsemble+"C :");
+        Ut.afficherSL("L'ordinateur sélectionne " + this.xSousEnsemble + " cartes formant un E" + this.xSousEnsemble + "C :");
 
         int[] selection = this.chercherExCSurTableOrdinateur();
         if(selection == null) {
-            Ut.afficherSL("L'ordinateur n'a pas trouvé de E"+xSousEnsemble+"C ! Il perd 1 point.");
+            Ut.afficherSL("L'ordinateur n'a pas trouvé de E" + this.xSousEnsemble + "C ! Il perd 1 point.");
             selection = this.selectionAleatoireDeCartesOrdinateur();
             this.score -= 1;
         } else {
             this.table.afficherSelection(selection);
-            Ut.afficherSL("L'ordinateur a trouvé un E"+xSousEnsemble+"C ! Il gagne 3 points.");
+            Ut.afficherSL("L'ordinateur a trouvé un E" + this.xSousEnsemble + "C ! Il gagne 3 points.");
             this.score += 3;
         }
 
@@ -367,7 +365,7 @@ public class Jeu {
         boolean fini = false;
         Ut.clearConsole();
         while(!fini) {
-            Ut.afficherSL("\n\nBienvenue dans le jeu E3Cète !");
+            Ut.afficherSL("\n\nBienvenue dans le jeu E" + this.xSousEnsemble + "Cète !");
             Ut.sautLigne();
             Ut.afficherSL("Veuillez sélectionner une option :");
             Ut.afficherSL("1. Humain");

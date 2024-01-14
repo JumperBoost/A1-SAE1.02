@@ -1,6 +1,5 @@
 package E3CeteExt1234;
 
-
 /**
  * La classe Table représente une table de jeu contenant des cartes.
  *
@@ -79,7 +78,8 @@ public class Table {
      */
     public boolean carteExiste(Coordonnees coordonnees) {
         int index = selectionnerIndex(coordonnees);
-        return index >= 0 && index < getTaille() && this.cartes[index] != null;
+        return coordonnees.getLigne() <= this.hauteur && coordonnees.getColonne() <= this.largeur
+                && coordonnees.getLigne() > 0 && coordonnees.getColonne() > 0 && this.cartes[index] != null;
     }
 
     /**
@@ -155,30 +155,21 @@ public class Table {
      * @return Le champ de texte représentant les cartes de la table correspondantes aux numéros de cartes contenus dans selection
      */
     private String recupererSelection(int[] selection) {
-        String bg = Couleur.getReset();
-        if (selection.length == this.hauteur * this.largeur) {
-            bg = "\033[41m";
-        }
-
+        String bg = "\033[41m";
         int curLigne = 0;
         int curCol = 0;
-        String lastLetter = Coordonnees.lettres[Coordonnees.lettres.length - 1];
-        String[][] affichageLigne = new String[this.hauteur][Carte.getHauteur()];
-        for(int i = 0; i < this.hauteur; i++)
+        String[][] affichageLigne = new String[selection.length / this.largeur][Carte.getHauteur()];
+        for(int i = 0; i < selection.length / this.largeur; i++)
             for(int j = 0; j < Carte.getHauteur(); j++) {
+                // Vérifier si on affiche toute la table ou seulement la sélection
                 if (selection.length == this.hauteur * this.largeur) {
-                    if (j == Carte.getHauteur() / 2
-                            && this.hauteur <= Coordonnees.lettres.length
-                            && selection.length == this.hauteur * this.largeur) {
-                        affichageLigne[i][j] = " " + "\033[43m" + Couleur.JAUNE_BRIGHT.getCouleurText() + " ".repeat(lastLetter.length())
-                                + Coordonnees.lettres[i] + " ".repeat(lastLetter.length() - Coordonnees.lettres[i].length())
-                                + " ".repeat(lastLetter.length())
-                                + bg + " ";
+                    if (j == Carte.getHauteur() / 2) {
+                        String letters = Coordonnees.getLettres(i + 1);
+                        affichageLigne[i][j] = " ".repeat(3 - letters.length()) + Couleur.JAUNE_BRIGHT.getCouleurText() + letters + Couleur.getReset() + bg + " ";
                     } else {
-                        affichageLigne[i][j] = " ".repeat(2 + 3 * Coordonnees.lettres[Coordonnees.lettres.length - 1].length());
+                        affichageLigne[i][j] = bg + "  " + Couleur.JAUNE_BRIGHT.getCouleurText() + "|" + Couleur.getReset() + bg + " ";
                     }
-                }
-                else {affichageLigne[i][j] = "";}
+                } else affichageLigne[i][j] = "   ";
             }
 
         // Insérer l'affichage de chaque carte dans la matrice d'une table
@@ -204,35 +195,26 @@ public class Table {
         }
 
         // Formatter l'affichage final
-        String affichage = "";
-        affichage = bg + " ".repeat(2 + 3 * lastLetter.length());
+        String affichage = bg + " ".repeat((selection.length == this.hauteur * this.largeur ? 4 : 3) + Carte.getLargeur() * this.largeur + 3 * this.largeur)
+                + Couleur.getReset() + "\n" + bg;
         if (selection.length == this.hauteur * this.largeur) {
-            for (int ligne = 1; ligne <= this.largeur; ligne++) {
+            affichage += " ".repeat(4);
+            for (int col = 1; col <= this.largeur; col++) {
+                // Afficher les numéros de colonnes proportionnellement à la largeur de la carte
                 affichage += Couleur.JAUNE_BRIGHT.getCouleurText() +
-                        "-".repeat(Carte.getLargeur() / 2) + ligne + "-".repeat(Carte.getLargeur() / 2 - String.valueOf(ligne).length() + 1);
-                affichage += " ".repeat(3);
+                        "-".repeat(5 - String.valueOf(col).length() % 2) + col + "-".repeat(5 - String.valueOf(col).length() % 2) +
+                        Couleur.getReset() + bg + " ".repeat(3);
             }
+            affichage += Couleur.getReset() + "\n";
         }
-        else {
-            affichage += " ".repeat(this.largeur * Carte.getLargeur() + 3*this.largeur);
-        }
-        affichage += Couleur.getReset() + "\n";
 
         for(int ligne = 0; ligne < affichageLigne.length; ligne++) {
             String[] lignesCartes = affichageLigne[ligne];
             for(String ligneCartes : lignesCartes)
                 if(ligneCartes != "")
                     affichage += bg + ligneCartes + bg
-                            + " ".repeat(3) + Couleur.getReset() +"\n";
-
-            if (selection.length == this.hauteur * this.largeur) {
-                affichage += bg
-                        + " ".repeat(2 + this.largeur * Carte.getLargeur() + 3 * this.largeur + lastLetter.length() * 3)
-                        + Couleur.getReset()
-                        + "\n";
-            }
-            else if (ligne <= selection.length/this.hauteur)
-                affichage += "\n";
+                            + " ".repeat(3) + Couleur.getReset() + "\n";
+            affichage += bg + " ".repeat((selection.length == this.hauteur * this.largeur ? 4 : 3) + Carte.getLargeur() * this.largeur + 3 * this.largeur) + Couleur.getReset() + "\n";
         }
         return affichage;
     }

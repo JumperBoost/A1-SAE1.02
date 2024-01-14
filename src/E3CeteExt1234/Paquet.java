@@ -1,6 +1,5 @@
 package E3CeteExt1234;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -731,7 +730,7 @@ public class Paquet {
         for(int i = 0; i < cartes.length; i++)
             for(int j = i+1; j < cartes.length; j++)
                 for(int k = j+1; k < cartes.length; k++)
-                    if(Jeu.estUnExC(new Carte[]{cartes[i], cartes[j], cartes[k]})) // estUnExC agit comme estUnE3C (juste x est défini dans Jeu). Par défaut x = 3, donc don't worry.
+                    if(Jeu.estUnExC(new Carte[]{cartes[i], cartes[j], cartes[k]}))
                         return true;
         return false;
     }

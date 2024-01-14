@@ -1,6 +1,5 @@
 package E3CeteExt1234;
 
-
 public class Coordonnees {
 
     /**
@@ -30,7 +29,7 @@ public class Coordonnees {
     public Coordonnees(String input) {
         String[] splited = input.split(",");
         //splited est un tableau de String qui contient les sous chaines de caracteres contenues dans input et séparées par ','
-        this.x = lettreValide(splited[0]);
+        this.x = getLettreCoord(splited[0]);
         this.y = Integer.parseInt(splited[1]);
     }
 
@@ -66,28 +65,47 @@ public class Coordonnees {
      * Sinon retourne 0
      */
     private static int lettreValide(String input) {
-        for (int i = 0; i < lettres.length; i++) {
-            if (input.equals(lettres[i])) {
-                return i + 1;
+        for(int i = 0; i < input.length(); i++) {
+            for (int j = 0; j < lettres.length; j++) {
+                if (input.charAt(i) == lettres[j].charAt(0)) {
+                    return j + 1;
+                }
             }
         }
         return 0;
     }
 
-    public static void setTabLettres(int hauteurTable) {
-        if (hauteurTable > lettres.length) {
-            int repet = (hauteurTable-1)/lettres.length;
-            int indice = 0;
-            String[] tempLettres = new String[lettres.length*(repet+1)];
-            for (int i = 0; i < lettres.length; i++) {
-                tempLettres[indice] = lettres[i];
-                for (int j = 1; j <= repet; j++) {
-                    tempLettres[indice + j] = lettres[i].repeat(j + 1);
-                }
-                indice += repet+1;
-            }
-            lettres = tempLettres;
+    /**
+     * FONCTION AJOUTEE
+     * Action : Retourne la coordonnée correspond à/aux lettre(s) en paramètre
+     * Ex : AA --> 27
+     * Sinon retourne 0
+     */
+    public static int getLettreCoord(String lettre) {
+        if(lettreValide(lettre) == 0)
+            return 0;
+
+        int index = 0;
+        for(int i = lettre.length()-1; i >= 0; i--) {
+            int j = lettreValide(String.valueOf(lettre.charAt(i)));
+            index += (int) (j * Math.pow(lettres.length, lettre.length() - i - 1));
         }
+        return index;
+    }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : Retourne la/les lettre(s) correspondant à la coordonnée en paramètre
+     * Ex : 26 --> Z, 29 --> AC, 676 --> ZZ, 677 --> AAA
+     */
+    public static String getLettres(int coord) {
+        String res = "";
+        int i = 0;
+        while(coord > 0) {
+            res = lettres[(coord - 1) % lettres.length] + res;
+            coord = (coord - 1) / lettres.length;
+        }
+        return res;
     }
 
 }

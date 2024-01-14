@@ -154,7 +154,6 @@ public class Test {
 //        System.out.println(paqp);
 
         System.out.println(Coordonnees.lettres.length);
-        Coordonnees.setTabLettres(78);
         System.out.print(Arrays.toString(Coordonnees.lettres) +"\n");
         System.out.println(Coordonnees.lettres.length);
 
