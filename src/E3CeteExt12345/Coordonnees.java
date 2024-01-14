@@ -12,6 +12,7 @@ public class Coordonnees {
 
     // Variables d'instance
     private int x, y;
+    public static String[] lettres = "A B C D E F G H I J K L M N O P Q R S T U V W X Y Z".split(" ");
 
 
     /**
@@ -30,7 +31,7 @@ public class Coordonnees {
     public Coordonnees(String input) {
         String[] splited = input.split(",");
         //splited est un tableau de String qui contient les sous chaines de caracteres contenues dans input et séparées par ','
-        this.x = Integer.parseInt(splited[0]);
+        this.x = lettreValide(splited[0]);
         this.y = Integer.parseInt(splited[1]);
     }
 
@@ -55,6 +56,39 @@ public class Coordonnees {
      */
     public static boolean formatEstValide(String input) {
         String[] splited = input.split(",");
-        return splited.length == 2 && Ut.estNombre(splited[0]) && Ut.estNombre(splited[1]);
+        return splited.length == 2 && lettreValide(splited[0]) > 0 && Ut.estNombre(splited[1]);
     }
+
+    /**
+     * FONCTION AJOUTEE
+     * Action : vérifie si le String en paramètre est bien une lettre MAJ ;
+     * Si oui, retourne la coordonnée associée à la lettre
+     * Ex : A --> 1
+     * Sinon retourne 0
+     */
+    private static int lettreValide(String input) {
+        for (int i = 0; i < lettres.length; i++) {
+            if (input.equals(lettres[i])) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
+    public static void setTabLettres(int hauteurTable) {
+        if (hauteurTable > lettres.length) {
+            int repet = (hauteurTable-1)/lettres.length;
+            int indice = 0;
+            String[] tempLettres = new String[lettres.length*(repet+1)];
+            for (int i = 0; i < lettres.length; i++) {
+                tempLettres[indice] = lettres[i];
+                for (int j = 1; j <= repet; j++) {
+                    tempLettres[indice + j] = lettres[i].repeat(j + 1);
+                }
+                indice += repet+1;
+            }
+            lettres = tempLettres;
+        }
+    }
+
 }

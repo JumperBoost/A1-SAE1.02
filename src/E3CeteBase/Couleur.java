@@ -10,7 +10,7 @@ public enum Couleur {
 
     ROUGE("Red", "\033[0;31m"),
     BLEU("Blue", "\033[0;34m"),
-    VERT("Green", "\033[0;32m"),;
+    VERT("Green", "\033[0;32m");
 
 
     private String traduction;

@@ -308,7 +308,7 @@ public class Paquet {
 
 
     /**
-     * Pre-requis : 0 < nbCartes <= nombre de cartes restantes dans le paquet.
+     * Pre-requis : 0 <= nbCartes <= nombre de cartes restantes dans le paquet.
      *
      * Action : Pioche nbCartes Cartes au dessus du Paquet this (et met à jour son état).
      *
@@ -325,8 +325,12 @@ public class Paquet {
      */
 
     public Carte[] piocher(int nbCartes) {
+        int nbCartesPioch = nbCartes;
+        if (!peutPiocher(nbCartes)) {
+            nbCartesPioch = this.nbCartesLeft;
+        }
         Carte[] tabCartes = new Carte[nbCartes];
-        for (int i = 0; i < nbCartes; i++) {
+        for (int i = 0; i < nbCartesPioch; i++) {
             tabCartes[i] = this.cartes[--this.nbCartesLeft];
         }
         return tabCartes;
@@ -555,7 +559,7 @@ public class Paquet {
 
     /**
      * FONCTION AJOUTEE
-     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
+     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) :
      * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges.
      * Valeur théorique : 0.28956680871386137
      * @param nbEssai nombre d'essai
@@ -566,7 +570,7 @@ public class Paquet {
         for (int j = 0; j < nbEssai; j++) {
             paq = new Paquet(
                 Couleur.valuesInRange(0, 3),
-                3, 
+                3,
                 Figure.valuesInRange(0, 3),
                 Texture.valuesInRange(0, 3)
                 );
@@ -586,11 +590,11 @@ public class Paquet {
 
     /**
      * FONCTION AJOUTEE
-     * Prerequis : 0 <= startEssai < endEssai ET 0 <= stepEssai 
+     * Prerequis : 0 <= startEssai < endEssai ET 0 <= stepEssai
      * experience = 1 pour probabilité de 3CR
      * experience = 2 pour probabilité de E3C
      * experience = 3 pour probabilité de E3C&2CL
-     * Action : Réalise les fonctions proba3CR(int nbEssai) ou probaE3C(int nb) en 
+     * Action : Réalise les fonctions proba3CR(int nbEssai) ou probaE3C(int nb) en
      * faisant varier le nombre d'essai de startEssai à endEssai en faisant des pas
      * de stepEssai.
      * Stock les données dans un tableau de double de taille 4 :
@@ -610,7 +614,7 @@ public class Paquet {
             if (experience == 1) {
                 tabStats[count][1] = proba3CR(i);
                 tabStats[count][2] = tabStats[count][1]/i; //proba individuelle
-                tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]); 
+                tabStats[count][3] = Ut.pourcentageErreur(0.28956680871386137, tabStats[count][2]);
             }
             else if (experience == 2) {
                 tabStats[count][1] = probaE3C(i);
@@ -620,12 +624,12 @@ public class Paquet {
             else if (experience == 3) {
                 tabStats[count][1] = proba3CRAnd2CL(i);
                 tabStats[count][2] = tabStats[count][1]/i; //proba individuelle
-                tabStats[count][3] = Ut.pourcentageErreur(0.06884362550959248, tabStats[count][2]); 
+                tabStats[count][3] = Ut.pourcentageErreur(0.06884362550959248, tabStats[count][2]);
             }
             count++;
         }
         if (experience == 1) {
-            stringInfosToCsv(probaDatasToString(tabStats), "proba3CR"); 
+            stringInfosToCsv(probaDatasToString(tabStats), "proba3CR");
         }
         else if (experience == 2) {
             stringInfosToCsv(probaDatasToString(tabStats), "probaE3C");
@@ -657,7 +661,7 @@ public class Paquet {
 
     /**
      * FONCTION AJOUTEE
-     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
+     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) :
      * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
      * Valeur théorique : 0.06884362550959248
      * @param nb nombre d'essai
@@ -668,7 +672,7 @@ public class Paquet {
         for (int i = 0; i < nb; i++) {
             paq = new Paquet(
                 Couleur.valuesInRange(0, 3),
-                3, 
+                3,
                 Figure.valuesInRange(0, 3),
                 Texture.valuesInRange(0, 3)
                 );
@@ -692,7 +696,7 @@ public class Paquet {
 
     /**
      * FONCTION AJOUTEE
-     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) : 
+     * Action : Pour un paquet de 81 cartes distincts (3 Couleurs/ nbFiguresMax=3/ 3 Figures/ 3 Textures possibles par carte) :
      * calcul expérimentalement et retourne la fréquence d'obtenir une Table (arrangement de 9 cartes distincts parmi les 81 du Paquet) contenant exactement 3 Cartes Rouges et 2 cartes ayant au moins 1 Losange.
      * Valeur théorique : non connue
      * @param nb nombre d'essai
@@ -703,14 +707,14 @@ public class Paquet {
         for (int i = 0; i < nb; i++) {
             paq = new Paquet(
                 Couleur.valuesInRange(0, 3),
-                3, 
+                3,
                 Figure.valuesInRange(0, 3),
                 Texture.valuesInRange(0, 3)
                 );
             Carte[] tab = paq.piocher(9);
             if (trouverE3C(tab)) {
                 countCasFavorable++;
-            }    
+            }
         }
         return countCasFavorable;
     }
@@ -728,7 +732,7 @@ public class Paquet {
         for(int i = 0; i < cartes.length; i++)
             for(int j = i+1; j < cartes.length; j++)
                 for(int k = j+1; k < cartes.length; k++)
-                    if(Jeu.estUnE3C(new Carte[]{cartes[i], cartes[j], cartes[k]}))
+                    if(Jeu.estUnExC(new Carte[]{cartes[i], cartes[j], cartes[k]})) // estUnExC agit comme estUnE3C (juste x est défini dans Jeu). Par défaut x = 3, donc don't worry.
                         return true;
         return false;
     }

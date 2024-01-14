@@ -23,6 +23,7 @@ public class Table {
     // Variables d'instance
     private Carte[] cartes;
     private int hauteur, largeur;
+    private int nbCartesRestantes;
 
     /**
      * Pre-requis : hauteur >=3, largeur >=3
@@ -36,6 +37,7 @@ public class Table {
         this.hauteur = hauteur;
         this.largeur = largeur;
         this.cartes = new Carte[hauteur * largeur];
+        this.nbCartesRestantes = hauteur * largeur;
     }
 
     /*
@@ -48,6 +50,7 @@ public class Table {
         this.hauteur = hauteur;
         this.largeur = largeur;
         this.cartes = paquet.piocher(getTaille());
+        this.nbCartesRestantes = hauteur * largeur;
     }
 
     /**
@@ -77,7 +80,7 @@ public class Table {
      */
     public boolean carteExiste(Coordonnees coordonnees) {
         int index = selectionnerIndex(coordonnees);
-        return index >= 0 && index < getTaille();
+        return index >= 0 && index < getTaille() && this.cartes[index-1] != null;
     }
 
     /**
@@ -92,7 +95,7 @@ public class Table {
      */
 
     public int faireSelectionneUneCarte() {
-        Ut.afficher("Veuillez saisir les coordonnées de la carte que vous souhaitez sélectionner (x,y): ");
+        Ut.afficher("Veuillez saisir les coordonnées (ligne, colonne) de la carte que vous souhaitez sélectionner ex : A,1 --> ");
         String input = Ut.saisirChaine();
         if(!Coordonnees.formatEstValide(input)) {
             Ut.afficherSL("Format invalide, veuillez réessayer.");
@@ -155,14 +158,31 @@ public class Table {
     private String recupererSelection(int[] selection) {
         int curLigne = 0;
         int curCol = 0;
+        String lastLetter = Coordonnees.lettres[Coordonnees.lettres.length - 1];
         String[][] affichageLigne = new String[this.hauteur][Carte.getHauteur()];
         for(int i = 0; i < this.hauteur; i++)
-            for(int j = 0; j < Carte.getHauteur(); j++)
-                affichageLigne[i][j] = "";
+            for(int j = 0; j < Carte.getHauteur(); j++) {
+                if (j == Carte.getHauteur()/2
+                        && this.hauteur <= Coordonnees.lettres.length
+                        && selection.length == this.hauteur * this.largeur) {
+                    affichageLigne[i][j] = "\033[40m" + " ".repeat(lastLetter.length())
+                            + Coordonnees.lettres[i] + " ".repeat(lastLetter.length() - Coordonnees.lettres[i].length())
+                            + " ".repeat(lastLetter.length())
+                            + Couleur.getReset() +" " ;
+                }
+                else {affichageLigne[i][j] = " ".repeat(1+3*Coordonnees.lettres[Coordonnees.lettres.length - 1].length());}
+            }
 
         // Insérer l'affichage de chaque carte dans la matrice d'une table
         for(int index : selection) {
-            String[] lignesCarte = cartes[index-1].toString().split("\n");
+            String[] lignesCarte = cartes[index-1] != null ? cartes[index-1].toString().split("\n") : null;
+            // Si la carte n'existe pas, on affiche une carte vide
+            if(lignesCarte == null) {
+                lignesCarte = new String[Carte.getHauteur()];
+                for(int i = 0; i < Carte.getHauteur(); i++)
+                    lignesCarte[i] = "\033[47m" + " ".repeat(Carte.getLargeur()) + Couleur.getReset();
+            }
+
             for(int i = 0; i < Carte.getHauteur(); i++)
                 affichageLigne[curLigne][i] += (curCol != 0 ? " ".repeat(5) : "") + lignesCarte[i];
 
@@ -174,7 +194,12 @@ public class Table {
         }
 
         // Formatter l'affichage final
-        String affichage = "";
+        String affichage = " ";
+        for(int ligne = 1; ligne <= this.largeur; ligne++) {
+            affichage += " ".repeat(3*lastLetter.length());
+            affichage += "-".repeat(Carte.getLargeur()/2) + ligne + "-".repeat(Carte.getLargeur()/2 - ligne/10);
+        }
+        affichage += "\n";
         for(int ligne = 0; ligne < affichageLigne.length; ligne++) {
             String[] lignesCartes = affichageLigne[ligne];
             for(String ligneCartes : lignesCartes)
@@ -200,6 +225,8 @@ public class Table {
      */
     public void remplacerCarte(Carte carte, int position) {
         this.cartes[position-1] = carte;
+        if (carte == null)
+            this.desincrementerNbCartesRestantes();
     }
 
     /**
@@ -208,6 +235,22 @@ public class Table {
      */
     public Carte[] getCartes() {
         return this.cartes;
+    }
+
+    public int getHauteur() {
+        return this.hauteur;
+    }
+
+    public int getLargeur() {
+        return this.largeur;
+    }
+
+    public int getNbCartesRestantes() {
+        return this.nbCartesRestantes;
+    }
+
+    public void desincrementerNbCartesRestantes() {
+        this.nbCartesRestantes--;
     }
 
 }

@@ -1,5 +1,7 @@
 package E3CeteExt12345;
 
+import utils.Ut;
+
 public enum Figure {
 
     /**
@@ -8,7 +10,24 @@ public enum Figure {
 
     CARRE('■'),
     LOSANGE('⧫'),
-    CERCLE('O');
+    CERCLE('O'),
+    TRIANGLE('▲'),
+    ETOILE('★'),
+    RECTANGLE('▭'),
+    HEXAGONE('⬡'),
+    PENTAGONE('⬠'),
+    ASTERISQUE('*'),
+    COEUR('❤'),
+    DIAMANT('♦'),
+    LUNE('☾'),
+    SOLEIL('☼'),
+    PARALLELOGRAMME('▰'),
+    TRIANGLE_INVERSE('▼'),
+    FLEUR('❀'),
+    NUAGE('☁'),
+    SABRE('⚔'),
+    AVION('✈'),
+    ECLAIR('⚡');
 
     private static int nbEnum = Figure.values().length;
 
@@ -40,6 +59,28 @@ public enum Figure {
         Figure[] tabFigures = new Figure[end - begin];
         for (int i = begin; i < end; i++) {
             tabFigures[i - begin] = Figure.values()[i];
+        }
+        return tabFigures;
+    }
+
+
+    public static Figure[] randomValues(int nb) {
+        Figure[] tabFigures = new Figure[nb];
+        int index = 0;
+
+        Figure figure;
+        while (index < nb) {
+            figure = Figure.values()[Ut.randomMinMax(0, Figure.getNbEnumTotal()-1)];
+            int i = 0;
+            while (i < index && tabFigures[i] != figure) {
+                i++;
+            }
+
+            // Si i == index, alors la figure n'est pas dans le tableau
+            if (i == index) {
+                tabFigures[index] = figure;
+                index++;
+            }
         }
         return tabFigures;
     }

@@ -93,6 +93,16 @@ public class Ut {
         passerLigne();
     }
 
+    public static int saisirEntierMinMax(int min, int max){
+        //________________________________________________________
+        int entier = saisirEntier();
+        if(entier < min  || entier > max) {
+            afficher("Impossible, veuillez réessayer: ");
+            return saisirEntierMinMax(min, max);
+        }
+        return entier;
+    }
+
     public static int saisirEntier() {
         Scanner clavier = new Scanner(System.in);
         String s = clavier.nextLine();

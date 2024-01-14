@@ -34,6 +34,7 @@ public class Jeu {
     private int score;
     private Paquet paquet;
     private Table table;
+    private int xSousEnsemble;
 
     /**
      * Action :
@@ -43,8 +44,17 @@ public class Jeu {
 
     public Jeu() {
         this.score = 0;
-        this.paquet = new Paquet(Couleur.valuesInRange(0,3), 3, Figure.valuesInRange(0,3), Texture.valuesInRange(0, 3));
+        this.paquet = new Paquet(Couleur.randomValues(3), 3, Figure.randomValues(3), Texture.randomValues(3));
         this.table = new Table(3, 3, this.paquet);
+        this.xSousEnsemble = 3;
+    }
+
+    public Jeu(int xSousEnsemble, int hauteur, int largeur) {
+        this.score = 0;
+        this.paquet = new Paquet(Couleur.randomValues(xSousEnsemble), xSousEnsemble, Figure.randomValues(xSousEnsemble), Texture.randomValues(xSousEnsemble));
+        this.table = new Table(hauteur, largeur, this.paquet);
+        this.xSousEnsemble = xSousEnsemble;
+        Coordonnees.setTabLettres(hauteur);
     }
 
     /**
@@ -65,20 +75,25 @@ public class Jeu {
 
     public void resetJeu() {
         this.score = 0;
-        this.paquet = new Paquet(Couleur.valuesInRange(0, 3), 3, Figure.valuesInRange(0, 3), Texture.valuesInRange(0,3));
-        this.table = new Table(3, 3, this.paquet);
+        this.paquet = new Paquet(Couleur.randomValues(this.xSousEnsemble), this.xSousEnsemble, Figure.randomValues(this.xSousEnsemble), Texture.randomValues(this.xSousEnsemble));
+        this.table = new Table(this.table.getHauteur(), this.table.getLargeur(), this.paquet);
     }
 
     /**
-     * Résullat : Vrai si les cartes passées en paramètre forment un E3C.
+     * Résullat : Vrai si les cartes passées en paramètre forment un ExC.
      */
 
-    public static boolean estUnE3C(Carte[] cartes) {
+    public static boolean estUnExC(Carte[] cartes) {
         Couleur[] couleurs = new Couleur[cartes.length];
         Figure[] figures = new Figure[cartes.length];
         Texture[] textures = new Texture[cartes.length];
         int[] nbFigures = new int[cartes.length];
         int[] indexes = new int[4];
+
+        // Vérifier si les cartes existent
+        for(Carte carte : cartes)
+            if(carte == null)
+                return false;
 
         // Ajout des caractéristiques des cartes
         for(Carte carte : cartes) {
@@ -153,44 +168,85 @@ public class Jeu {
     }
 
     /**
-     * Action : Recherche un E3C parmi les cartes disposées sur la table.
+     * Action : Recherche un ExC parmi les cartes disposées sur la table.
      * Résullat :
-     *  - Si un E3C existe, un tableau contenant les numéros de cartes (de la table) qui forment un E3C.
+     *  - Si un ExC existe, un tableau contenant les numéros de cartes (de la table) qui forment un ExC.
      *  - Sinon, la valeur null.
      */
 
-    public int[] chercherE3CSurTableOrdinateur() {
+    public int[] chercherExCSurTableOrdinateur() {
         Carte[] cartes = this.table.getCartes();
-        for(int i = 0; i < cartes.length; i++)
-            for(int j = i+1; j < cartes.length; j++)
-                for(int k = j+1; k < cartes.length; k++)
-                    if(estUnE3C(new Carte[]{cartes[i], cartes[j], cartes[k]}))
-                        return new int[]{i+1, j+1, k+1};
+        int[] indexes = new int[this.xSousEnsemble];
+        for (int i = 0; i < this.xSousEnsemble; i++)
+            indexes[i] = i + 1;
+
+        while (indexes != null) {
+            // Vérifier si il y a pas de doublons
+            boolean doublon = false;
+            int i = 0;
+            while (i < this.xSousEnsemble && !doublon) {
+                int j = i + 1;
+                while (j < this.xSousEnsemble && !doublon) {
+                    if (indexes[i] == indexes[j])
+                        doublon = true;
+                    j++;
+                }
+                i++;
+            }
+
+            if (!doublon) {
+                Carte[] selCartes = new Carte[this.xSousEnsemble];
+                String t = "";
+                for (int y = 0; y < this.xSousEnsemble; y++) {
+                    selCartes[y] = cartes[indexes[y] - 1];
+                }
+                if (estUnExC(selCartes))
+                    return indexes;
+            }
+
+            indexes = incrementerTabLimite(indexes, cartes.length, this.xSousEnsemble - 1);
+        }
         return null;
     }
 
+    private int[] incrementerTabLimite(int[] tab, int limite, int index) {
+        if(tab[index]+1 > limite) {
+            if(index-1 >= 0) {
+                tab[index] = Math.min(tab[index - 1] + 1, limite);
+                return incrementerTabLimite(tab, limite, index - 1);
+            } else return null;
+        } else {
+            tab[index]++;
+            return tab;
+        }
+    }
+
     /**
-     * Action : Sélectionne alétoirement trois cartes sur la table.
+     * Action : Sélectionne alétoirement x cartes sur la table.
      * La sélection ne doit pas contenir de doublons
      * Résultat : un tableau contenant les numéros des cartes sélectionnées alétaoirement
      */
 
     public int[] selectionAleatoireDeCartesOrdinateur() {
-        int[] selections = new int[3];
+        int[] selections = new int[this.xSousEnsemble];
         int index = 0;
-        while(index < 3) {
+        while(index < this.xSousEnsemble) {
             int selection;
-            boolean doublon;
+            boolean refaire;
             do {
-                selection = Ut.randomMinMax(1, 9);
-                doublon = false;
+                selection = Ut.randomMinMax(1, this.table.getTaille());
+                refaire = false;
+                // Vérification d'existence
+                if(this.table.getCartes()[selection-1] == null)
+                    refaire = true;
+
                 // Vérification de doublon
                 int i = 0;
-                while(i < index && !doublon) {
+                while(i < index && !refaire) {
                     if(selections[i++] == selection)
-                        doublon = true;
+                        refaire = true;
                 }
-            } while(doublon);
+            } while(refaire);
             selections[index++] = selection;
         }
         return selections;
@@ -201,7 +257,7 @@ public class Jeu {
      */
 
     public boolean partieEstTerminee() {
-        return this.paquet.estVide();
+        return this.paquet.estVide() && this.table.getNbCartesRestantes() < this.xSousEnsemble && chercherExCSurTableOrdinateur() == null;
     }
 
     /**
@@ -226,7 +282,7 @@ public class Jeu {
         Carte[] cartes = this.table.getCartes();
         Carte[] selCartes = new Carte[] {cartes[selection[0]-1], cartes[selection[1]-1], cartes[selection[2]-1]};
 
-        if(estUnE3C(selCartes)) {
+        if(estUnExC(selCartes)) {
             Ut.afficherSL("C'est un E3C ! Vous gagnez 3 points.");
             this.score += 3;
         } else {
@@ -264,7 +320,7 @@ public class Jeu {
         Ut.sautLigne();
         Ut.afficherSL("L'ordinateur sélectionne 3 cartes formant un E3C :");
 
-        int[] selection = this.chercherE3CSurTableOrdinateur();
+        int[] selection = this.chercherExCSurTableOrdinateur();
         if(selection == null) {
             Ut.afficherSL("L'ordinateur n'a pas trouvé de E3C ! Il perd 1 point.");
             selection = this.selectionAleatoireDeCartesOrdinateur();

@@ -1,5 +1,7 @@
 package E3CeteExt12345;
 
+import utils.Ut;
+
 public enum Texture {
 
     /**
@@ -8,7 +10,24 @@ public enum Texture {
 
     VIDE(' '),
     TIRET('-'),
-    RAYURE('/');
+    RAYURE('/'),
+    RAYURE_INVERSE('\\'),
+    POINTS_DIAGONAUX('⋱'),
+    POINTS_DIAGONAUX_INVERSE('⋰'),
+    POINTS_DOUBLE(':'),
+    POIS('•'),
+    LIGNES_CROISEES('┼'),
+    LIGNES_POINTILLEES_DIAGONALES('⧺'),
+    LIGNES_POINTILLEES('⋯'),
+    CROIX('+'),
+    TRAITS_CROISES('┬'),
+    VAGUES_LEGERES('〜'),
+    VAGUES_SINUSOIDALES('∿'),
+    ZIGZAG('≈'),
+    LIGNES_INTERCALAIRES('⣿'),
+    LIGNES_POINTS_CROISEES('╋'),
+    LIGNES_DOUBLE_HORIZONTAL_VERTICAL('═'),
+    LIGNES_DOUBLE_DIAGONALES('╳');
    
    
 
@@ -42,6 +61,28 @@ public enum Texture {
         Texture[] tabTextures = new Texture[end - begin];
         for (int i = begin; i < end; i++) {
             tabTextures[i - begin] = Texture.values()[i];
+        }
+        return tabTextures;
+    }
+
+
+    public static Texture[] randomValues(int nb) {
+        Texture[] tabTextures = new Texture[nb];
+        int index = 0;
+
+        Texture texture;
+        while (index < nb) {
+            texture = Texture.values()[Ut.randomMinMax(0, Texture.getNbEnumTotal()-1)];
+            int i = 0;
+            while (i < index && tabTextures[i] != texture) {
+                i++;
+            }
+
+            // Si i == index, alors la texture n'est pas dans le tableau
+            if (i == index) {
+                tabTextures[index] = texture;
+                index++;
+            }
         }
         return tabTextures;
     }
