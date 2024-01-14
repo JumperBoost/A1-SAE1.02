@@ -158,5 +158,25 @@ public class Test {
         System.out.print(Arrays.toString(Coordonnees.lettres) +"\n");
         System.out.println(Coordonnees.lettres.length);
 
+        Carte cardEx = new Carte(
+                Couleur.values()[0],
+                1,
+                Figure.values()[0],
+                Texture.values()[0]
+        );
+        System.out.println(cardEx);
+
+        for (int i = 0; i <20 ; i++) {
+            Carte cardTest = new Carte(
+                    Couleur.values()[i],
+                    1,
+                    Figure.values()[19],
+                    Texture.values()[16]
+            );
+            System.out.println(cardTest);
+
+        }
+
+
     }
 }

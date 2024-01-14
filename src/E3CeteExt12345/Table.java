@@ -156,21 +156,30 @@ public class Table {
      * @return Le champ de texte représentant les cartes de la table correspondantes aux numéros de cartes contenus dans selection
      */
     private String recupererSelection(int[] selection) {
+        String bg = Couleur.getReset();
+        if (selection.length == this.hauteur * this.largeur) {
+            bg = "\033[41m";
+        }
+
         int curLigne = 0;
         int curCol = 0;
         String lastLetter = Coordonnees.lettres[Coordonnees.lettres.length - 1];
         String[][] affichageLigne = new String[this.hauteur][Carte.getHauteur()];
         for(int i = 0; i < this.hauteur; i++)
             for(int j = 0; j < Carte.getHauteur(); j++) {
-                if (j == Carte.getHauteur()/2
-                        && this.hauteur <= Coordonnees.lettres.length
-                        && selection.length == this.hauteur * this.largeur) {
-                    affichageLigne[i][j] = "\033[40m" + " ".repeat(lastLetter.length())
-                            + Coordonnees.lettres[i] + " ".repeat(lastLetter.length() - Coordonnees.lettres[i].length())
-                            + " ".repeat(lastLetter.length())
-                            + Couleur.getReset() +" " ;
+                if (selection.length == this.hauteur * this.largeur) {
+                    if (j == Carte.getHauteur() / 2
+                            && this.hauteur <= Coordonnees.lettres.length
+                            && selection.length == this.hauteur * this.largeur) {
+                        affichageLigne[i][j] = " " + "\033[43m" + Couleur.JAUNE_BRIGHT.getCouleurText() + " ".repeat(lastLetter.length())
+                                + Coordonnees.lettres[i] + " ".repeat(lastLetter.length() - Coordonnees.lettres[i].length())
+                                + " ".repeat(lastLetter.length())
+                                + bg + " ";
+                    } else {
+                        affichageLigne[i][j] = " ".repeat(2 + 3 * Coordonnees.lettres[Coordonnees.lettres.length - 1].length());
+                    }
                 }
-                else {affichageLigne[i][j] = " ".repeat(1+3*Coordonnees.lettres[Coordonnees.lettres.length - 1].length());}
+                else {affichageLigne[i][j] = "";}
             }
 
         // Insérer l'affichage de chaque carte dans la matrice d'une table
@@ -184,7 +193,9 @@ public class Table {
             }
 
             for(int i = 0; i < Carte.getHauteur(); i++)
-                affichageLigne[curLigne][i] += (curCol != 0 ? " ".repeat(5) : "") + lignesCarte[i];
+                affichageLigne[curLigne][i] += (curCol != 0 ?
+                        bg + " ".repeat(3) : "")
+                        + Couleur.getReset() + lignesCarte[i];
 
             // Vérifier si la largeur max de la table est atteint, afin de sauter à la ligne suivante
             if(curCol == this.largeur-1) {
@@ -194,18 +205,34 @@ public class Table {
         }
 
         // Formatter l'affichage final
-        String affichage = " ";
-        for(int ligne = 1; ligne <= this.largeur; ligne++) {
-            affichage += " ".repeat(3*lastLetter.length());
-            affichage += "-".repeat(Carte.getLargeur()/2) + ligne + "-".repeat(Carte.getLargeur()/2 - ligne/10);
+        String affichage = "";
+        affichage = bg + " ".repeat(2 + 3 * lastLetter.length());
+        if (selection.length == this.hauteur * this.largeur) {
+            for (int ligne = 1; ligne <= this.largeur; ligne++) {
+                affichage += Couleur.JAUNE_BRIGHT.getCouleurText() +
+                        "-".repeat(Carte.getLargeur() / 2) + ligne + "-".repeat(Carte.getLargeur() / 2 - String.valueOf(ligne).length() + 1);
+                affichage += " ".repeat(3);
+            }
         }
-        affichage += "\n";
+        else {
+            affichage += " ".repeat(this.largeur * Carte.getLargeur() + 3*this.largeur);
+        }
+        affichage += Couleur.getReset() + "\n";
+
         for(int ligne = 0; ligne < affichageLigne.length; ligne++) {
             String[] lignesCartes = affichageLigne[ligne];
             for(String ligneCartes : lignesCartes)
                 if(ligneCartes != "")
-                    affichage += ligneCartes + "\n";
-            affichage += "\n";
+                    affichage += bg + ligneCartes + bg
+                            + " ".repeat(3) + Couleur.getReset() +"\n";
+
+            if (selection.length == this.hauteur * this.largeur) {
+                affichage += bg
+                        + " ".repeat(2 + this.largeur * Carte.getLargeur() + 3 * this.largeur + lastLetter.length() * 3)
+                        + Couleur.getReset();
+            }
+            if (ligne <= selection.length/this.hauteur)
+                affichage += "\n";
         }
         return affichage;
     }

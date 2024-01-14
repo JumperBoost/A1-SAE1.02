@@ -10,26 +10,26 @@ public enum Couleur {
      * cette enumération doit permettre à la méthode toString d'une Carte de réaliser un affichage en couleur.
      */
 
-    VIOLET("Purple", "\033[0;35m"),
+    GRIS_FONCE("Dark Grey", "\u001b[38;5;243m"),
+    MARRON("Brown", "\u001b[38;5;94m"),
+    POURPRE("Dark Red", "\u001b[38;5;52m"),
     ROUGE("Red", "\033[0;31m"),
-    VERT("Green", "\033[0;32m"),
-    JAUNE("Yellow", "\033[0;33m"),
-    ORANGE("Orange", "\033[0;33m"),
-    BLEU("Blue", "\033[0;34m"),
-    CYAN("Cyan", "\033[0;36m"),
-    BLANC("White", "\033[0;37m"),
-    ROSE("Pink", "\033[0;95m"),
-    GRIS("Gray", "\033[0;90m"),
     ROUGE_CLAIR("Light Red", "\033[0;91m"),
-    VERT_CLAIR("Light Green", "\033[0;92m"),
-    JAUNE_CLAIR("Light Yellow", "\033[0;93m"),
-    BLEU_CLAIR("Light Blue", "\033[0;94m"),
-    MAGENTA_CLAIR("Light Magenta", "\033[0;95m"),
-    CYAN_CLAIR("Light Cyan", "\033[0;96m"),
+    ROSE("Pink", "\033[0;95m"),
+    FUSHIA("Fushia", "\u001b[38;5;218m"),
+    JAUNE_BRIGHT("Yellow Bright", "\u001b[38;5;226m"),
+    JAUNE("Yellow", "\033[0;33m"),
     BLANC_CLAIR("Light White", "\033[0;97m"),
-    BLEU_MARINE("Navy Blue", "\033[0;34m"),
-    JAUNE_OLIVE("Olive Yellow", "\033[0;93m"),
-    TURQUOISE("Turquoise", "\033[0;36m");
+    VERT_CLAIR("Light Green", "\033[0;92m"),
+    VERT_KAKI("Green Kaki", "\u001b[38;5;106m"),
+    VERT("Green", "\033[0;32m"),
+    CYAN("Cyan", "\033[0;36m"),
+    CYAN_CLAIR("Light Cyan", "\033[0;96m"),
+    BLEU_CLAIR("Light Blue", "\033[0;94m"),
+    BLEU("Blue", "\033[0;34m"),
+    BLEU_FONCE("Dark Blue", "\u001b[38;5;20m"),
+    VIOLET("Purple", "\033[0;35m"),
+    VIOLET_FONCE("Dark Purple", "\u001b[38;5;57m");
 
 
     private String traduction;
