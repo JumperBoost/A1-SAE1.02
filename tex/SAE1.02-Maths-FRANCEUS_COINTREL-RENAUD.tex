@@ -118,7 +118,7 @@ stringstyle=\color{mymauve},     % string literal style
 
 \section{Fonctions de tris et comptage du nombre d'opérations}
 
-\qquad Afin d'étudier la performance des 3 méthodes de tris, nous devons compter approximativement le nombre d'opération élémentaire effectués lors d'un tel tri. Pour cela, nous utilisons une variable de \textit{Class} (globale) $nbOpApprox$ que nous initialisons à 0 au début de chaque tri. Nous incrémentons cette valeur de 1 pour chaque opérations élémentaire réalisé lors du tri (affectation, condition, lecture...). Nous décidons d'omettre les opérations liés à l'incrémentation de $nbOpApprox$. Cela importe peu puisque ce qui nous intéresse est l'ordre de grandeur de la valeur $nbOpApprox$.
+\qquad Afin d'étudier la performance des 3 méthodes de tris, nous devons compter approximativement le nombre d'opération élémentaire effectués lors d'un tel tri. Pour cela, nous utilisons une variable de \textit{Class} (globale) $nbOpApprox$ que nous initialisons à 0 au début de chaque tri. Nous incrémentons cette valeur de 1 pour chaque opération élémentaire réalisé lors du tri (affectation, condition, lecture...). Nous décidons d'omettre les opérations liées à l'incrémentation de $nbOpApprox$. Cela importe peu puisque ce qui nous intéresse est l'ordre de grandeur de la valeur $nbOpApprox$.
 
 \subsection{Tri par sélection}
 
@@ -193,7 +193,7 @@ public Paquet trierInsertion() {
 
 \subsection{Définition des variables}
 
-L'objectif de cette expérience est d'évaluer la performance de chacun des tris. Pour cela nous devons réaliser chacun des tris en variant le nombre de cartes $N$ contenus dans le Paquet. Pour cette expérience les paquets triés seront toujours pleins, et le nombre de cartes $N$ contenus est déterminé par les cardinalités des caractéristiques possibles. En principe nous fixons les cardinalités associés aux couleurs/figures/textures pour ne seulement varier le nombres de répétition des figures. Ainsi $N$ est défini tel que : 
+L'objectif de cette expérience est d'évaluer la performance de chacun des tris. Pour cela nous devons réaliser chacun des tris en variant le nombre de cartes $N$ contenus dans le Paquet. Pour cette expérience les paquets triés seront toujours pleins, et le nombre de cartes $N$ contenus est déterminé par les cardinalités des caractéristiques possibles. En principe nous fixons les cardinalités associés aux couleurs/figures/textures pour ne seulement varier le nombres de répétition des figures. Ainsi le nombre de cartes $N$ est défini tel que : 
 
 \begin{equation*}
 	N = cardCouleurs \times cardFigures \times cardTextures \times cardRepetFigures
@@ -201,7 +201,7 @@ L'objectif de cette expérience est d'évaluer la performance de chacun des tris
 
 \bigskip
 
-\noindent Pour chacun des méthodes de tris nous calculons le nombre d'opération $nOpApprox$ et son temps d'éxecution (en ms) $tempsExec$. Ainsi, en répétant les tris $nbRepetTest$ nombre de fois pour $N$ fixé, nous en déduisions les valeurs moyennes ainsi que leurs incertitudes (écartype) telles que :
+\noindent Pour chacune des méthodes de tris nous calculons le nombre d'opération $nOpApprox$ et son temps d'éxecution (en ms) $tempsExec$. Ainsi, en répétant les tris $nbRepetTest$ nombre de fois pour $N$ fixé, nous en déduisions les valeurs moyennes ainsi que leurs incertitudes (écartype) telles que :
 
 \boldmath
 \begin{equation} \label{eq:1}
@@ -347,7 +347,7 @@ Specificités de l'appareil utilisés :
 
 \subsection{Analyse graphique}
 
-\qquad Nous stockons les données des tests sous forme de fichier .csv, grâce à une fonction de conversion. Le fichier contient les informations dess 3 tris, i.e. toutes les valeurs de $N$, $nbOpMoy$, $u\_nbOp$, $tempsExec$, $u\_tempsExec$ pour chacune des méthodes de tri. 
+\qquad Nous stockons les données des tests sous forme de fichier .csv, grâce à une fonction de conversion. Le fichier contient les informations des 3 tris, i.e. toutes les valeurs de $N$, $nbOpMoy$, $u\_nbOp$, $tempsExec$, $u\_tempsExec$ pour chacune des méthodes de tri. 
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{../graphe/csvEx.png}
@@ -358,7 +358,7 @@ Specificités de l'appareil utilisés :
 	\item[\fcolorbox{black}{black}{\textbf{\textcolor{white}{3}}}] 
 	Nous choisissons de réaliser le graphique de $nbOpMoy=f(\,N)\,$ et de $tempsExecMoy=f(\,N)\,$ à l'aide du logiciel \href{https://regressi.fr/WordPress/}{\it \underline{Regressi}}. Etant donées que ces 3 fonctions de tris utilisent chacune une double boucle imbriquée, nous nous attendons à une complexité quadratique $O(\,n^2\,)$.
 \end{enumerate}
-Commentaire : nous observons bien sur les graphiques ci-dessous une compléxité quadratique, puisque les courbes s'apparentent à des paraboles. Quant à la performance de cest 3 tris en place, le Tri à bulles est le moins performant et le moins stable (incertitudes qui augmentent avec $N$) ; ce qui est cohérent puisque ce-dernier compare répétitivement les cartes "consécutifs" du Paquet, et les permutent si "non triées". Ainsi, pour un paquet désordonné il réalise beaucoup de permutations de cartes. Ensuite, le Tri par sélection semble être le plus stable. Ceci s'explique du fait qu'il réalise toujours le même nombre d'opération et permutations quelque soit l'arrangement du Paquet. Finalement, le tri par Insertion est celui qui est le plus rapide (du moins pour $N<500$). En effet, ce dernier est efficace lorsque le Paquet est partiellement trié, puisque pour chacune des cartes, il consiste à le placer au bon endroit dans le tableau parmi toutes les cartes précédentes qui sont déjà ordonnées. D'ailleurs, nous observons que pour N plus importants (Test n°2) le tri par séléction l'emporte sur  le tri par insertion au niveau du temps d'éxecution. Nous avons choisi de réaliser un deuxième test pour N plus élevés pour avoir des valeurs plus significatifs concernant le temps d'éxécution.
+\qquad Nous observons bien sur les graphiques ci-dessous une compléxité quadratique, puisque les courbes s'apparentent à des paraboles. Quant à la performance de ces 3 tris en place, le Tri à bulles est le moins performant et le moins stable (incertitudes qui augmentent avec $N$) ; ce qui est cohérent puisque ce-dernier compare répétitivement les cartes "consécutifs" du Paquet, et les permutent si "non triées". Ainsi, pour un paquet désordonné il réalise beaucoup de permutations de cartes. Ensuite, le Tri par sélection semble être le plus stable. Ceci s'explique du fait que pour un même $N$, il réalise toujours le même nombre d'opération et permutations quelque soit l'arrangement du Paquet. Finalement, le tri par Insertion est celui qui est le plus rapide (du moins pour $N<500$). En effet, ce dernier est efficace lorsque le Paquet est partiellement trié, puisque pour chacune des cartes, il consiste à le placer au bon endroit dans le tableau parmi toutes les cartes précédentes qui sont déjà ordonnées. D'ailleurs, nous observons que pour $N$ plus importants (Test n°2) le tri par séléction l'emporte sur  le tri par insertion au niveau du temps d'éxecution. Nous avons choisi de réaliser un deuxième test pour $N$ plus élevés pour avoir des valeurs plus significatifs concernant le temps d'éxécution.
 
 \subsection{Graphiques : Test 1}
 
@@ -370,7 +370,7 @@ Commentaire : nous observons bien sur les graphiques ci-dessous une compléxité
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{../graphe/tExecAvecU.jpg}
 	\label{tExec1}
-	\caption{Graphique de $tempsExecMoy=f(\,N)\,$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
+	\caption{Graphique de $tempsExecMoy=f(\,N)\,$ avec les barres d'incertitudes sur $tempsExecMoy$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
 \end{figure}
 
 \subsection{Graphiques : Test 2}
@@ -383,7 +383,7 @@ Commentaire : nous observons bien sur les graphiques ci-dessous une compléxité
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{../graphe/tExec10a10k.jpg}
 	\label{tExec1k}
-	\caption{Graphique de $tempsExecMoy=f(\,N)\,$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
+	\caption{Graphique de $tempsExecMoy=f(\,N)\,$ avec les barres d'incertitudes sur $tempsExecMoy$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
 \end{figure}
 
 
