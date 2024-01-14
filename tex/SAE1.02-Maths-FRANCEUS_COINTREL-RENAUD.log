@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.6)  13 JAN 2024 18:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.12) (preloaded format=pdflatex 2024.1.6)  14 JAN 2024 19:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1228,6 +1228,20 @@ Package: physics
 e.sty
 Package: xparse 2023-10-10 L3 Experimental document command parser
 ))
+(C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\pifont.sty
+Package: pifont 2020/03/25 PSNFSS-v9.3 Pi font support (SPQR) 
+LaTeX Font Info:    Trying to load font information for U+pzd on input line 63.
+
+
+(C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+LaTeX Font Info:    Trying to load font information for U+psy on input line 64.
+
+
+(C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\upsy.fd
+File: upsy.fd 2001/06/04 font definitions for U/psy.
+))
 (C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
@@ -1284,32 +1298,32 @@ Package: titlesec 2023/10/27 v2.16 Sectioning titles
 (SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.aux)
 \openout1 = `SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 89.
-LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 8
-9.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 90.
+LaTeX Font Info:    ... okay on input line 90.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 90.
+LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 9
+0.
 
 (C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/cbfonts-fd\lgrcmr.fd
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
-LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    ... okay on input line 90.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1371,7 +1385,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 fg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 89.
+Package hyperref Info: Link coloring OFF on input line 90.
  (SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.out)
 (SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.out)
 \@outlinefile=\write5
@@ -1381,13 +1395,13 @@ Package hyperref Info: Link coloring OFF on input line 89.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 92.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 93.
 
 
 (C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 92.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 93.
 
 
 (C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
@@ -1405,131 +1419,164 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.94 \chapter
+l.95 \chapter
              *{Introduction} [1
 
-] [2
-
 ]
+<../graphe/carte.png, id=203, 60.225pt x 103.05167pt>
+File: ../graphe/carte.png Graphic file (type png)
+<use ../graphe/carte.png>
+Package pdftex.def Info: ../graphe/carte.png  used on input line 101.
+(pdftex.def)             Requested size: 60.22484pt x 103.0514pt.
+<../graphe/table.png, id=205, 240.9pt x 366.36874pt>
+File: ../graphe/table.png Graphic file (type png)
+<use ../graphe/table.png>
+Package pdftex.def Info: ../graphe/table.png  used on input line 110.
+(pdftex.def)             Requested size: 144.5411pt x 219.82294pt.
+ [2
+
+ <../graphe/carte.png> <../graphe/table.png>]
 Chapitre 1.
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 111.
+nput line 125.
 LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 1
-12.
+26.
 (C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
 File: omscmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 112.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 126.
 LaTeX Font Info:    Trying to load font information for OML+cmr on input line 1
-16.
+30.
 
 (C:\Users\julie\AppData\Local\Programs\MiKTeX\tex/latex/base\omlcmr.fd
 File: omlcmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 116.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 130.
 
 [3
 
 ] [4] [5] [6] [7]
-<../graphe/csvEx.png, id=394, 576.48708pt x 64.57458pt>
+<../graphe/csvEx.png, id=410, 576.48708pt x 64.57458pt>
 File: ../graphe/csvEx.png Graphic file (type png)
 <use ../graphe/csvEx.png>
-Package pdftex.def Info: ../graphe/csvEx.png  used on input line 334.
+Package pdftex.def Info: ../graphe/csvEx.png  used on input line 353.
 (pdftex.def)             Requested size: 452.96826pt x 50.73943pt.
-<../graphe/nbOp.jpg, id=397, 803.0pt x 451.6875pt>
+<../graphe/nbOp.jpg, id=412, 803.0pt x 451.6875pt>
 File: ../graphe/nbOp.jpg Graphic file (type jpg)
 <use ../graphe/nbOp.jpg>
-Package pdftex.def Info: ../graphe/nbOp.jpg  used on input line 346.
+Package pdftex.def Info: ../graphe/nbOp.jpg  used on input line 366.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
-<../graphe/tExecSansU.jpg, id=398, 803.0pt x 451.6875pt>
-File: ../graphe/tExecSansU.jpg Graphic file (type jpg)
-<use ../graphe/tExecSansU.jpg>
-Package pdftex.def Info: ../graphe/tExecSansU.jpg  used on input line 351.
+<../graphe/tExecAvecU.jpg, id=413, 803.0pt x 451.6875pt>
+File: ../graphe/tExecAvecU.jpg Graphic file (type jpg)
+<use ../graphe/tExecAvecU.jpg>
+Package pdftex.def Info: ../graphe/tExecAvecU.jpg  used on input line 371.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
- [8 <../graphe/csvEx.png>] [9 <../graphe/nbOp.jpg> <../graphe/tExecSansU.jpg>]
+ [8 <../graphe/csvEx.png>]
+<../graphe/nbOP10a10k.jpg, id=424, 803.0pt x 451.6875pt>
+File: ../graphe/nbOP10a10k.jpg Graphic file (type jpg)
+<use ../graphe/nbOP10a10k.jpg>
+Package pdftex.def Info: ../graphe/nbOP10a10k.jpg  used on input line 379.
+(pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
+<../graphe/tExec10a10k.jpg, id=425, 803.0pt x 451.6875pt>
+File: ../graphe/tExec10a10k.jpg Graphic file (type jpg)
+<use ../graphe/tExec10a10k.jpg>
+Package pdftex.def Info: ../graphe/tExec10a10k.jpg  used on input line 384.
+(pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
+ [9 <../graphe/nbOp.jpg> <../graphe/tExecAvecU.jpg>] [10 <../graphe/nbOP10a10k.
+jpg> <../graphe/tExec10a10k.jpg>]
 Chapitre 2.
-[10
+[11
 
-] [11] [12]
-<../graphe/Freq(n).jpg, id=508, 803.0pt x 451.6875pt>
+] [12] [13]
+<../graphe/Freq(n).jpg, id=533, 803.0pt x 451.6875pt>
 File: ../graphe/Freq(n).jpg Graphic file (type jpg)
 <use ../graphe/Freq(n).jpg>
-Package pdftex.def Info: ../graphe/Freq(n).jpg  used on input line 502.
+Package pdftex.def Info: ../graphe/Freq(n).jpg  used on input line 536.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
- [13 <../graphe/Freq(n).jpg>]
-<../graphe/ValdeP.png, id=524, 161.60374pt x 270.00874pt>
+ [14 <../graphe/Freq(n).jpg>]
+<../graphe/ValdeP.png, id=549, 161.60374pt x 270.00874pt>
 File: ../graphe/ValdeP.png Graphic file (type png)
 <use ../graphe/ValdeP.png>
-Package pdftex.def Info: ../graphe/ValdeP.png  used on input line 517.
+Package pdftex.def Info: ../graphe/ValdeP.png  used on input line 551.
 (pdftex.def)             Requested size: 80.80167pt x 135.00403pt.
-<../graphe/Erreur(n).jpg, id=525, 803.0pt x 451.6875pt>
+<../graphe/Erreur(n).jpg, id=550, 803.0pt x 451.6875pt>
 File: ../graphe/Erreur(n).jpg Graphic file (type jpg)
 <use ../graphe/Erreur(n).jpg>
-Package pdftex.def Info: ../graphe/Erreur(n).jpg  used on input line 524.
+Package pdftex.def Info: ../graphe/Erreur(n).jpg  used on input line 558.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
-<../graphe/P(n).jpg, id=526, 803.0pt x 451.6875pt>
+<../graphe/P(n).jpg, id=551, 803.0pt x 451.6875pt>
 File: ../graphe/P(n).jpg Graphic file (type jpg)
 <use ../graphe/P(n).jpg>
-Package pdftex.def Info: ../graphe/P(n).jpg  used on input line 529.
+Package pdftex.def Info: ../graphe/P(n).jpg  used on input line 563.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
- [14 <../graphe/ValdeP.png> <../graphe/Erreur(n).jpg>] [15 <../graphe/P(n).jpg>
-] [16]
-<../graphe/valDeP3CR2L.png, id=578, 171.64125pt x 263.31708pt>
+ [15 <../graphe/ValdeP.png> <../graphe/Erreur(n).jpg>] [16 <../graphe/P(n).jpg>
+] [17]
+<../graphe/valDeP3CR2L.png, id=603, 171.64125pt x 263.31708pt>
 File: ../graphe/valDeP3CR2L.png Graphic file (type png)
 <use ../graphe/valDeP3CR2L.png>
-Package pdftex.def Info: ../graphe/valDeP3CR2L.png  used on input line 621.
+Package pdftex.def Info: ../graphe/valDeP3CR2L.png  used on input line 655.
 (pdftex.def)             Requested size: 85.8204pt x 131.6582pt.
-<../graphe/Freq3CR2L(n).jpg, id=579, 803.0pt x 451.6875pt>
+<../graphe/Freq3CR2L(n).jpg, id=604, 803.0pt x 451.6875pt>
 File: ../graphe/Freq3CR2L(n).jpg Graphic file (type jpg)
 <use ../graphe/Freq3CR2L(n).jpg>
-Package pdftex.def Info: ../graphe/Freq3CR2L(n).jpg  used on input line 626.
+Package pdftex.def Info: ../graphe/Freq3CR2L(n).jpg  used on input line 660.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
-<../graphe/Erreur3CR2L(n).jpg, id=580, 803.0pt x 451.6875pt>
+<../graphe/Erreur3CR2L(n).jpg, id=605, 803.0pt x 451.6875pt>
 File: ../graphe/Erreur3CR2L(n).jpg Graphic file (type jpg)
 <use ../graphe/Erreur3CR2L(n).jpg>
-Package pdftex.def Info: ../graphe/Erreur3CR2L(n).jpg  used on input line 631.
+Package pdftex.def Info: ../graphe/Erreur3CR2L(n).jpg  used on input line 665.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
- [17 <../graphe/valDeP3CR2L.png> <../graphe/Freq3CR2L(n).jpg>]
-<../graphe/P3CR2L(n).jpg, id=589, 803.0pt x 451.6875pt>
+ [18 <../graphe/valDeP3CR2L.png> <../graphe/Freq3CR2L(n).jpg>]
+<../graphe/P3CR2L(n).jpg, id=615, 803.0pt x 451.6875pt>
 File: ../graphe/P3CR2L(n).jpg Graphic file (type jpg)
 <use ../graphe/P3CR2L(n).jpg>
-Package pdftex.def Info: ../graphe/P3CR2L(n).jpg  used on input line 636.
+Package pdftex.def Info: ../graphe/P3CR2L(n).jpg  used on input line 670.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
- [18 <../graphe/Erreur3CR2L(n).jpg> <../graphe/P3CR2L(n).jpg>] [19]
-<../graphe/valDePE3C.png, id=646, 163.94583pt x 249.93375pt>
+ [19 <../graphe/Erreur3CR2L(n).jpg> <../graphe/P3CR2L(n).jpg>] [20]
+<../graphe/valDePE3C.png, id=671, 163.94583pt x 249.93375pt>
 File: ../graphe/valDePE3C.png Graphic file (type png)
 <use ../graphe/valDePE3C.png>
-Package pdftex.def Info: ../graphe/valDePE3C.png  used on input line 701.
+Package pdftex.def Info: ../graphe/valDePE3C.png  used on input line 735.
 (pdftex.def)             Requested size: 81.9727pt x 124.96657pt.
-<../graphe/FreqE3C(n).jpg, id=647, 803.0pt x 451.6875pt>
+<../graphe/FreqE3C(n).jpg, id=672, 803.0pt x 451.6875pt>
 File: ../graphe/FreqE3C(n).jpg Graphic file (type jpg)
 <use ../graphe/FreqE3C(n).jpg>
-Package pdftex.def Info: ../graphe/FreqE3C(n).jpg  used on input line 706.
+Package pdftex.def Info: ../graphe/FreqE3C(n).jpg  used on input line 740.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
-<../graphe/PE3C(n).jpg, id=648, 803.0pt x 451.6875pt>
+<../graphe/PE3C(n).jpg, id=673, 803.0pt x 451.6875pt>
 File: ../graphe/PE3C(n).jpg Graphic file (type jpg)
 <use ../graphe/PE3C(n).jpg>
-Package pdftex.def Info: ../graphe/PE3C(n).jpg  used on input line 711.
+Package pdftex.def Info: ../graphe/PE3C(n).jpg  used on input line 745.
 (pdftex.def)             Requested size: 452.96826pt x 254.79727pt.
- [20 <../graphe/valDePE3C.png> <../graphe/FreqE3C(n).jpg>]
-[21 <../graphe/PE3C(n).jpg>]
+ [21 <../graphe/valDePE3C.png> <../graphe/FreqE3C(n).jpg>]
+[22 <../graphe/PE3C(n).jpg>]
 Annexe A.
-<../graphe/Vscode.png, id=663, 2055.68pt x 2055.68pt>
-File: ../graphe/Vscode.png Graphic file (type png)
-<use ../graphe/Vscode.png>
-Package pdftex.def Info: ../graphe/Vscode.png  used on input line 741.
-(pdftex.def)             Requested size: 142.26378pt x 142.24985pt.
-<../graphe/java.png, id=664, 552.0625pt x 1027.84pt>
+<../graphe/java.png, id=688, 552.0625pt x 1027.84pt>
 File: ../graphe/java.png Graphic file (type png)
 <use ../graphe/java.png>
-Package pdftex.def Info: ../graphe/java.png  used on input line 743.
-(pdftex.def)             Requested size: 142.26378pt x 264.86388pt.
-[22
+Package pdftex.def Info: ../graphe/java.png  used on input line 775.
+(pdftex.def)             Requested size: 53.4826pt x 99.58464pt.
+<../graphe/Vscode.png, id=689, 2055.68pt x 2055.68pt>
+File: ../graphe/Vscode.png Graphic file (type png)
+<use ../graphe/Vscode.png>
+Package pdftex.def Info: ../graphe/Vscode.png  used on input line 776.
+(pdftex.def)             Requested size: 99.5592pt x 99.58464pt.
+<../graphe/idea.png, id=690, 513.92pt x 513.92pt>
+File: ../graphe/idea.png Graphic file (type png)
+<use ../graphe/idea.png>
+Package pdftex.def Info: ../graphe/idea.png  used on input line 777.
+(pdftex.def)             Requested size: 99.58272pt x 99.58464pt.
+<../graphe/regressi.jpg, id=691, 167.62625pt x 132.495pt>
+File: ../graphe/regressi.jpg Graphic file (type jpg)
+<use ../graphe/regressi.jpg>
+Package pdftex.def Info: ../graphe/regressi.jpg  used on input line 778.
+(pdftex.def)             Requested size: 125.99048pt x 99.58464pt.
+[23
 
- <../graphe/Vscode.png> <../graphe/java.png>]
-
+ <../graphe/java.png> <../graphe/Vscode.png> <../graphe/idea.png> <../graphe/re
+gressi.jpg>] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.aux)
  ***********
@@ -1538,47 +1585,47 @@ L3 programming layer <2023-12-11>
  ***********
 Package rerunfilecheck Info: File `SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.out' 
 has not changed.
-(rerunfilecheck)             Checksum: 62716EC1F9E00D954F27654BEFB6A3DA;5246.
+(rerunfilecheck)             Checksum: 2FFB5360EC68CCD8C2E5B94367056BB1;5587.
  ) 
 Here is how much of TeX's memory you used:
- 33317 strings out of 474495
- 658501 string characters out of 5743936
+ 33427 strings out of 474495
+ 661000 string characters out of 5743936
  2419460 words of memory out of 5000000
- 54675 multiletter control sequences out of 15000+600000
- 571965 words of font info for 86 fonts, out of 8000000 for 9000
+ 54767 multiletter control sequences out of 15000+600000
+ 572314 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 93i,12n,99p,975b,2017s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\julie\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcbx
-1440.pk> <C:\Users\julie\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\tcrm0800.pk> <C:\Users\julie\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\tcrm1000.pk><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/p
-ublic/amsfonts/cm/cmbsy10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fon
-ts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/julie/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/julie/AppData/Local/P
-rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Users/julie/AppData
-/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/ju
-lie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:
-/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi1
-0.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts
-/cm/cmmi7.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/
-amsfonts/cm/cmmi8.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmmib10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/f
-onts/type1/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/julie/AppData/Local/Pro
-grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/julie/AppData/L
-ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/julie/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/
-julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:
-/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.
-pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmsy7.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/
-public/amsfonts/cm/cmsy8.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/font
-s/type1/public/amsfonts/cm/cmti10.pfb><C:/Users/julie/AppData/Local/Programs/Mi
-KTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.pdf (23 pages, 2064016
+ 93i,12n,99p,1400b,2018s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\julie\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
+1000.pk> <C:\Users\julie\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
+0\tcrm0800.pk><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/
+amsfonts/cm/cmbsy10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmbx10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/julie/AppData/Local/Program
+s/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx7.pfb><C:/Users/julie/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><C:/Users/julie/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users
+/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+<C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cm
+mi7.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmmi8.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmmib10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/t
+ype1/public/amsfonts/cmextra/cmmib7.pfb><C:/Users/julie/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/julie/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/julie/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/julie/
+AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users
+/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C
+:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
+s/cm/cmsy7.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type1/public
+/amsfonts/cm/cmsy8.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/fonts/type
+1/public/amsfonts/cm/cmti10.pfb><C:/Users/julie/AppData/Local/Programs/MiKTeX/f
+onts/type1/public/amsfonts/cm/cmti12.pfb><C:/Users/julie/AppData/Local/Programs
+/MiKTeX/fonts/type1/urw/zapfding/uzdr.pfb>
+Output written on SAE1.02-Maths-FRANCEUS_COINTREL-RENAUD.pdf (24 pages, 2342539
  bytes).
 PDF statistics:
- 850 PDF objects out of 1000 (max. 8388607)
- 374 named destinations out of 1000 (max. 500000)
- 453 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 879 PDF objects out of 1000 (max. 8388607)
+ 381 named destinations out of 1000 (max. 500000)
+ 499 words of extra memory for PDF output out of 10000 (max. 10000000)
 

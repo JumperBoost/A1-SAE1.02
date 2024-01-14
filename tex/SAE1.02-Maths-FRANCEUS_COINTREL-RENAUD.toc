@@ -7,21 +7,23 @@
 \contentsline {subsection}{\numberline {1.2.1}Définition des variables}{5}{subsection.1.2.1}%
 \contentsline {subsection}{\numberline {1.2.2}Protocole expérimental}{5}{subsection.1.2.2}%
 \contentsline {subsection}{\numberline {1.2.3}Code associé au protocole}{6}{subsection.1.2.3}%
-\contentsline {section}{\numberline {1.3}Test n°1}{8}{section.1.3}%
+\contentsline {section}{\numberline {1.3}Tests}{8}{section.1.3}%
 \contentsline {subsection}{\numberline {1.3.1}Initialisation et spécificités}{8}{subsection.1.3.1}%
 \contentsline {subsection}{\numberline {1.3.2}Analyse graphique}{8}{subsection.1.3.2}%
-\contentsline {chapter}{\numberline {2}Théorie}{10}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Représentation mathématique de la Class \it Table}{10}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Démarche expérimental}{10}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Etude du cas 3CR}{12}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Calculs théoriques}{12}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Fonction \textit {proba3CR}}{12}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Traitements de données et analyse graphique}{13}{subsection.2.3.3}%
-\contentsline {section}{\numberline {2.4}Etude du cas 3CR\&2CL}{15}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Caluls théoriques}{15}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Fonction \textit {proba3CR\&2CL}}{16}{subsection.2.4.2}%
-\contentsline {subsection}{\numberline {2.4.3}Traitements de données et analyse graphique}{17}{subsection.2.4.3}%
-\contentsline {section}{\numberline {2.5}Etude du cas E3C}{19}{section.2.5}%
-\contentsline {subsection}{\numberline {2.5.1}Fonctions \textit {probaE3C} et \textit {trouverE3C}}{19}{subsection.2.5.1}%
-\contentsline {subsection}{\numberline {2.5.2}Traitements de données et analyse graphique}{20}{subsection.2.5.2}%
-\contentsline {chapter}{\numberline {A}Langages et éditeurs utilisés}{22}{appendix.A}%
+\contentsline {subsection}{\numberline {1.3.3}Graphiques : Test 1}{9}{subsection.1.3.3}%
+\contentsline {subsection}{\numberline {1.3.4}Graphiques : Test 2}{10}{subsection.1.3.4}%
+\contentsline {chapter}{\numberline {2}Théorie}{11}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Représentation mathématique de la Class \it Table}{11}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Démarche expérimental}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Etude du cas 3CR}{13}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Calculs théoriques}{13}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Fonction \textit {proba3CR}}{13}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Traitements de données et analyse graphique}{14}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Etude du cas 3CR\&2CL}{16}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Caluls théoriques}{16}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Fonction \textit {proba3CR\&2CL}}{17}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Traitements de données et analyse graphique}{18}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Etude du cas E3C}{20}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Fonctions \textit {probaE3C} et \textit {trouverE3C}}{20}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Traitements de données et analyse graphique}{21}{subsection.2.5.2}%
+\contentsline {chapter}{\numberline {A}Langages, IDE et logiciels utilisés}{23}{appendix.A}%

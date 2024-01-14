@@ -13,6 +13,7 @@
 \usepackage{caption, float}
 \usepackage[most]{tcolorbox}
 \usepackage{physics}
+\usepackage{pifont}
 
 \captionsetup[lstlisting]{skip=7pt}
 \renewcommand\lstlistingname{Code}
@@ -93,9 +94,22 @@ stringstyle=\color{mymauve},     % string literal style
 
 \chapter*{Introduction}
 
-\qquad Dans cette SAE nous étudions...
+\qquad Dans cette SAE 1.02 nous étudions les \textit{Paquet} de \textit{Carte}. Un \textit{Paquet} est une collection de \textit{Carte} tous distincts. Une \textit{Carte} est définie par ses caractéristiques possibles, ici : \textit{Couleur}, \textit{nbFiguresMax}, \textit{Figure} et \textit{Texture}. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{../graphe/carte.png}
+\caption{Affichage d'une carte \textit{ROUGE} ayant \textit{1} \textit{CARRE} et une texture \textit{LIGNES\_CROISEES}}
+\end{figure}
 
 
+\noindent En utilisant des outils informatiques, nous étudions des concepts mathématiques via la génération, le calcul, le stockage, le traitement, et l'affichage de données expérimentales ; pour les analyser et les comparer dans la mesure du possible aux valeurs théoriques. D'une part, nous nous intéressons au tri d'un \textit{Paquet} mélangé ; et d'autre part aux probabilités. Nous nous focaliserons en particulier sur 3 algorithmes de tris en place : le tri par séléction, le tri par insertion et le tri à bulles. Nous étudions également les probabilités de 3 événements particuliers : 3CR, 3CR\&2CL et E3C. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.6]{../graphe/table.png}
+\caption{Affichage d'une \textit{Table} 3x3 de \textit{Carte} de notre jeu E3C (paramètres par default)}
+\end{figure}
 
 
 \chapter{Analyse et comparaison des 3 méthodes de tris}
@@ -312,17 +326,22 @@ private static double[][][] testTrisVarN(int nStart, int nEnd, int nStep) {
 
 
 \newpage
-\section{Test n°1}
+\section{Tests}
 \subsection{Initialisation et spécificités}
 Les variables :
 \begin{itemize}
 	\item int $nbRepetTest = 1000$
-	\item int $cardCouleurs = 1$
-	\item int $cardFigures = 1$
-	\item int $cardTextures = 1$
-	\item int $cardRepetFigures \in [\, 10-500 ]\, $
+	\item int $cardCouleurs = 1$ ; int $cardFigures = 1$ ; int $cardTextures = 1$
+	\item Test 1 : int $cardRepetFigures \in [\, 10-500 ]\, $ ; step = 1
+	\item Test 2 : int $cardRepetFigures \in [\, 1000-10 000 ]\, $ ; step = 1000
+	
 \end{itemize}
-Specificités de l'appareil utilisés : ...........
+Specificités de l'appareil utilisés :
+\begin{itemize}
+	\item[\ding{228}] CPU : 12th Gen Intel(R) Core(TM) i5-1240P   1.70 GHz
+	\item[\ding{228}] RAM : 16.0 GB
+	\item[\ding{228}] OS  : Windows 11
+\end{itemize}
 
 
 
@@ -339,8 +358,9 @@ Specificités de l'appareil utilisés : ...........
 	\item[\fcolorbox{black}{black}{\textbf{\textcolor{white}{3}}}] 
 	Nous choisissons de réaliser le graphique de $nbOpMoy=f(\,N)\,$ et de $tempsExecMoy=f(\,N)\,$ à l'aide du logiciel \href{https://regressi.fr/WordPress/}{\it \underline{Regressi}}. Etant donées que ces 3 fonctions de tris utilisent chacune une double boucle imbriquée, nous nous attendons à une complexité quadratique $O(\,n^2\,)$.
 \end{enumerate}
+Commentaire : nous observons bien sur les graphiques ci-dessous une compléxité quadratique, puisque les courbes s'apparentent à des paraboles. Quant à la performance de cest 3 tris en place, le Tri à bulles est le moins performant et le moins stable (incertitudes qui augmentent avec $N$) ; ce qui est cohérent puisque ce-dernier compare répétitivement les cartes "consécutifs" du Paquet, et les permutent si "non triées". Ainsi, pour un paquet désordonné il réalise beaucoup de permutations de cartes. Ensuite, le Tri par sélection semble être le plus stable. Ceci s'explique du fait qu'il réalise toujours le même nombre d'opération et permutations quelque soit l'arrangement du Paquet. Finalement, le tri par Insertion est celui qui est le plus rapide (du moins pour $N<500$). En effet, ce dernier est efficace lorsque le Paquet est partiellement trié, puisque pour chacune des cartes, il consiste à le placer au bon endroit dans le tableau parmi toutes les cartes précédentes qui sont déjà ordonnées. D'ailleurs, nous observons que pour N plus importants (Test n°2) le tri par séléction l'emporte sur  le tri par insertion au niveau du temps d'éxecution. Nous avons choisi de réaliser un deuxième test pour N plus élevés pour avoir des valeurs plus significatifs concernant le temps d'éxécution.
 
-
+\subsection{Graphiques : Test 1}
 
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{../graphe/nbOp.jpg}
@@ -348,16 +368,30 @@ Specificités de l'appareil utilisés : ...........
 	\caption{Graphique de $nbOpMoy=f(\,N)\,$ avec les barres d'incertitudes sur $nbOpMoy$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
 \end{figure}
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{../graphe/tExecSansU.jpg}
+	\includegraphics[width=\textwidth]{../graphe/tExecAvecU.jpg}
 	\label{tExec1}
 	\caption{Graphique de $tempsExecMoy=f(\,N)\,$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
 \end{figure}
 
-Commentaire : ........................................................................
+\subsection{Graphiques : Test 2}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{../graphe/nbOP10a10k.jpg}
+	\label{nbOP1k}
+	\caption{Graphique de $nbOpMoy=f(\,N)\,$ avec les barres d'incertitudes sur $nbOpMoy$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
+\end{figure}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{../graphe/tExec10a10k.jpg}
+	\label{tExec1k}
+	\caption{Graphique de $tempsExecMoy=f(\,N)\,$ pour les 3 méthodes de tris : en noir le tri à bulles, en bleu le tri sélection et en rouge le tri insértion.}
+\end{figure}
 
 
 
 
+
+
+\newpage
 \chapter{Théorie}
 
 \section{Représentation mathématique de la Class \it Table}
@@ -735,12 +769,13 @@ $$P_{E3C}exp = 0.70280 \pm 0.00011$$
 
 
 \appendix
-\chapter{Langages et éditeurs utilisés}
+\chapter{Langages, IDE et logiciels utilisés}
 
 \centering
-  \includegraphics[width=5cm]{../graphe/Vscode.png}\\
-  \bigskip
-  \includegraphics[width=5cm]{../graphe/java.png}
+  \includegraphics[height=3.5cm]{../graphe/java.png}\qquad
+  \includegraphics[height=3.5cm]{../graphe/Vscode.png}\qquad
+  \includegraphics[height=3.5cm]{../graphe/idea.png} \qquad
+  \includegraphics[height=3.5cm]{../graphe/regressi.jpg}
 \centering
 
 \end{document}
