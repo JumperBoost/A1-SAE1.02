@@ -158,8 +158,9 @@ public class Table {
         String bg = "\033[41m";
         int curLigne = 0;
         int curCol = 0;
-        String[][] affichageLigne = new String[selection.length / this.largeur][Carte.getHauteur()];
-        for(int i = 0; i < selection.length / this.largeur; i++)
+        int lenHauteur = (int) Math.ceil((double) selection.length / this.largeur);
+        String[][] affichageLigne = new String[lenHauteur][Carte.getHauteur()];
+        for(int i = 0; i < lenHauteur; i++)
             for(int j = 0; j < Carte.getHauteur(); j++) {
                 // Vérifier si on affiche toute la table ou seulement la sélection
                 if (selection.length == this.hauteur * this.largeur) {
@@ -211,9 +212,12 @@ public class Table {
         for(int ligne = 0; ligne < affichageLigne.length; ligne++) {
             String[] lignesCartes = affichageLigne[ligne];
             for(String ligneCartes : lignesCartes)
-                if(ligneCartes != "")
-                    affichage += bg + ligneCartes + bg
+                if (ligneCartes != "") {
+                    int lenPlainLigne = ligneCartes.replaceAll("\u001B\\[[;\\d]*m", "").length();
+                    int nbCartesRestante = (this.largeur - lenPlainLigne / (Carte.getLargeur() + 3));
+                    affichage += bg + ligneCartes + bg + " ".repeat(3 * nbCartesRestante + Carte.getLargeur() * nbCartesRestante)
                             + " ".repeat(3) + Couleur.getReset() + "\n";
+                } else affichage += bg + " ".repeat(3 + Carte.getLargeur()) + Couleur.getReset() + "\n";
             affichage += bg + " ".repeat((selection.length == this.hauteur * this.largeur ? 4 : 3) + Carte.getLargeur() * this.largeur + 3 * this.largeur) + Couleur.getReset() + "\n";
         }
         return affichage;

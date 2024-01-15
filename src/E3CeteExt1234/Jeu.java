@@ -277,7 +277,10 @@ public class Jeu {
         Ut.afficherSL("Vous avez sélectionné les cartes suivantes :");
         this.table.afficherSelection(selection);
         Carte[] cartes = this.table.getCartes();
-        Carte[] selCartes = new Carte[] {cartes[selection[0]-1], cartes[selection[1]-1], cartes[selection[2]-1]};
+        Carte[] selCartes = new Carte[selection.length];
+        for(int i = 0; i < selection.length; i++) {
+            selCartes[i] = cartes[selection[i]-1];
+        }
 
         if(estUnExC(selCartes)) {
             Ut.afficherSL("C'est un E" + this.xSousEnsemble + "C ! Vous gagnez 3 points.");
